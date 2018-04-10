@@ -1,0 +1,51 @@
+{
+  "name": "CodeFightClub",
+  "version": "1.0.0",
+  "description": "Greenfield Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "jest --watch",
+    "server-dev": "nodemon server/index.js",
+    "react-dev": "nodemon server/index.js --exec babel-node --presets es2015,stage-2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeFightClub/CodeFightClub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeFightClub/CodeFightClub/issues"
+  },
+  "homepage": "https://github.com/codeFightClub/CodeFightClub#readme",
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.5.0",
+    "jest": "^22.4.3"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "jest": {
+    "coverageDirectory": "./coverage",
+    "collectCoverage": true
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.17.0",
+    "express": "^4.15.0",
+    "jquery": "^3.1.1",
+    "mongoose": "^4.13.12",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.2",
+    "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0"
+  }
+}
