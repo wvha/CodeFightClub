@@ -86,10 +86,10 @@ Server_Side
     private socket stream for the clients in a running game
 
   Manage GET/POST requests
-    POST for running sandbox code when user submits solution
-    GET for retrieving data specific for user (/user)
-    GET for retrieving things stored in Database
-    GET for homepage (/)
+    POST for running sandbox code when user submits solution => 
+    GET for retrieving data specific for user (/user) =>
+    GET for retrieving things stored in Database =>
+    GET for homepage (/) => 
 
   Manage User authentication
     bcrypt
@@ -138,6 +138,6 @@ DATABASE
 
   Setup Schemas
 
-    User Schemas
-    challenge schema?
+    User Schemas => | username | password | email | wins | losses | score |
+    challenge schema => | title | prompt | functionName | tests | 
     leaderboard schema?
