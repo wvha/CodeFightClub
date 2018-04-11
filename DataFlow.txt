@@ -1,0 +1,112 @@
+//////////////////////////////////////////////
+CLIENT
+//////////////////////////////////////////////
+
+
+
+
+
+
+Client_Side
+
+  Signup page
+
+    Option to create an account?
+    Option to sign up with google/facebook/github?
+
+  Login page
+
+    Username/email:
+    Password:
+
+  Dashboard
+
+    Current-rank
+    Wins?
+    Losses?
+    Win/loss ratio?
+    leaderboards?
+    submit challenge?
+    user stats?
+    friends?
+
+  Queuing page
+
+    Matchmaking... Please Wait..
+    OR
+    You are now in queue for CodeFightClub (displayed somewhere on dashboard instead of a loading page)
+      Server will automatically redirect the client to the match?
+
+  Live-Game page
+
+    Countdown timer till game start
+    Coding challenge prompt displayed on the top of the page
+    Example expected inputs/outputs for the prompt
+    A code editor/sandbox type thing in a split column representing each user's code editor
+    Various buttons for testing code? running code? submitting code? Forfeiting?
+    Stopwatch displaying elapsed time since game started
+
+  Match-Results page
+
+    Statistics for the game that has just ended
+    Winner:
+    Loser:
+    solution character length:
+    Match time:
+
+  Leaderboard page
+
+    Top players in Database
+    Search for specific user
+    Render list based on fastest time for a specified problem in the Database
+    render list based on other sorting factors...
+    Link to that users bio for adding as a friend or contacting for employment?
+
+
+
+
+
+
+
+//////////////////////////////////////////////
+SERVER
+//////////////////////////////////////////////
+
+
+
+
+
+
+
+Server_Side
+
+  Manage sockets
+    socket connections
+    socket disconnections
+    private socket stream for the clients in a running game
+
+  Manage GET/POST requests
+    POST for running sandbox code when user submits solution
+    GET for retrieving data specific for user (/user)
+    GET for retrieving things stored in Database
+    GET for homepage (/)
+
+  Manage User authentication
+    bcrypt
+    passport
+    cookies
+    session
+
+
+  Manage routes
+    TBD...
+
+
+  Manage Database operations
+    When user signs up, add user to the Database
+    When user submits a coding challengs, add it to the Database
+      this can be checked by whoever maintains the site for correctness and they manually add it?
+    When match ends on client side, update both users stats in Database
+
+
+
