@@ -1,0 +1,1 @@
+Please check out the airbnb style guide at their  [github](https://github.com/airbnb/javascript/blob/master/README.md).
