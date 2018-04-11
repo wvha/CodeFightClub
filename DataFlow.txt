@@ -110,34 +110,3 @@ Server_Side
 
 
 
-
-
-
-
-
-
-//////////////////////////////////////////////
-Helpers
-//////////////////////////////////////////////
-
-
-Helper Module
-
-  functionality to run code using a sandbox
-    example: runCode(<code here>, (output) => {output of the code})
-    this can be exported for use in other places where we need to run submitted code from clients
-
-  Database query's?
-
-
-
-//////////////////////////////////////////////
-DATABASE
-//////////////////////////////////////////////
-
-
-  Setup Schemas
-
-    User Schemas
-    challenge schema?
-    leaderboard schema?
