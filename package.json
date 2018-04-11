@@ -24,6 +24,7 @@
     "babel-cli": "^6.6.5",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.26.0",
     "jest": "^22.4.3"
   },
   "babel": {
