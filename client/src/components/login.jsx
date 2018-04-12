@@ -14,7 +14,7 @@ class Login extends Component {
   openModalLogin () {
     this.setState({ showModalLogin: true });
   }
-  
+
   submitLogin () {
     this.setState({ showModalLogin: false });
   }
@@ -23,16 +23,16 @@ class Login extends Component {
     return (
       <div>
         <button onClick={this.openModalLogin}>Login</button>
-        <Modal 
+        <Modal
            isOpen={this.state.showModalLogin}
            contentLabel="SignUp Modal"
         >
         <div>
           <h1>Login</h1>
           <form>
-            Username:  
+            Username:
             <br/><input type="text" name="username"/><br/>
-            Password: 
+            Password:
             <br/><input type="text" name="password"/><br/>
           </form>
         </div>

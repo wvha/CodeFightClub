@@ -29,11 +29,11 @@ class SignUp extends Component {
   firstnameChange (e) {
     this.setState({ firstname: e.target.value });
   }
-  
+
   lastnameChange (e) {
     this.setState({ lastname: e.target.value });
   }
-  
+
   usernameChange (e) {
     this.setState({ username: e.target.value });
   }
@@ -42,18 +42,18 @@ class SignUp extends Component {
     return (
       <div>
         <button onClick={this.openModalSignUp}>Sign Up</button>
-        <Modal 
+        <Modal
             isOpen={this.state.showModalSignUp}
             contentLabel="SignUp Modal"
         >
         <div>
             <h1>create your account</h1>
             <form>
-            First name: 
+            First name:
             <br/><input type="text" name="firstname" value={this.state.firstname} onChange={this.firstnameChange}/><br/>
-            Last name: 
+            Last name:
             <br/><input type="text" name="lastname" value={this.state.lastname} onChange={this.lastnameChange}/><br/>
-            Username: 
+            Username:
             <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
             </form>
         </div>
