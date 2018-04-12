@@ -121,6 +121,12 @@ Helpers
 //////////////////////////////////////////////
 
 
+
+
+
+
+
+
 Helper Module
 
   functionality to run code using a sandbox
@@ -131,13 +137,36 @@ Helper Module
 
 
 
+
+
+
+
+
 //////////////////////////////////////////////
 DATABASE
 //////////////////////////////////////////////
 
 
+
+
+
+
+
+
   Setup Schemas
 
+
     User Schemas
-    challenge schema?
+      username:
+      email:
+      password:
+
+
+    challenge schema
+      title:
+      prompt:
+      functionName:
+      tests: []
+
+
     leaderboard schema?
