@@ -1,6 +1,7 @@
-import { mongo } from 'mongoose'; // ! What the fuck is this?
+// //import { mongo } from 'mongoose'; // ! What the fuck is this?
 
 const mongoose = require('mongoose');
+const helpers = require('../helpers/databaseHelpers.js');
 
 
 mongoose.connect('mongodb://localhost/test');
@@ -27,7 +28,7 @@ db.once('open', () => {
     tests: [TestSchema]
   });
   
-  // ? Should we create a test validation method directly on the ToyProblem model or do we want to do it externally?
+  // * Create helper functions in 'helpers' import file and assign to methods
 
   const TestSchema = new mongoose.Schema({
     // Todo: Needs to be updated when we know test format
