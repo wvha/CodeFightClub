@@ -36,9 +36,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Might need to initialize a variable for middleWareOptions
-app.use(expressValidator(middleWareOptions))
+// app.use(expressValidator(middleWareOptions))
 
-app.use(flash());
+// app.use(flash());
 
 app.use(function(req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
