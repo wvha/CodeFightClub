@@ -7,21 +7,22 @@ var LocalStrategy = require('passport-local').Strategy;
 
 // SIGNUP
 router.get('/signup', function(req, res) {
-  res.render('signup');
+  //Render sign-in page?
 });
 
 // LOGIN
 router.get('/login', function(req, res) {
-  res.render('login');
+  // render login page?
 });
 
 // SIGNUP USER
 router.post('/signup', function(req, res) {
-  var name = req.body.name;
+  var username = req.body.username;
   var email = req.body.email;
   var password = req.body.password;
+
   // VALIDATION
-  req.checkBody('name', 'Name is required').notEmpty();
+  req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
   req.checkBody('password', 'Password is required').notEmpty();
@@ -29,12 +30,10 @@ router.post('/signup', function(req, res) {
   var errors = req.validationErrors();
 
   if (errors) {
-    res.render('/signup', {
-      errors: errors
-    });
+    console.log(errors);
   } else {
     var newUser = new User({
-      name: name,
+      username: username,
       email: email,
       password: password
     });
@@ -47,10 +46,7 @@ router.post('/signup', function(req, res) {
       console.log(user);
     });
 
-    //only way to show this is to check for 'success_msg' in the view
-    req.flash('success_msg', 'You are registered and can now login');
-
-    res.redirect('/users/login');
+    res.redirect('/login');
 
   }
 });
@@ -91,9 +87,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login', failureFlash: true}), function(req, res) {
-  res.redirect('/');
-});
+router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login', session: true}));
 
 router.get('/logout', function(req, res) {
   req.logout();

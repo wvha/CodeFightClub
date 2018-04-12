@@ -35,23 +35,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Might need to initialize a variable for middleWareOptions
-// app.use(expressValidator(middleWareOptions))
-
-// app.use(flash());
-
-app.use(function(req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  //this is for rendering different nav links depending on
-  //whether or not the user is logged in or not
-  res.locals.user = req.user || null;
-  next();
-});
-
-
-
 app.use('/', routes);
 app.use('/users', users);
 
