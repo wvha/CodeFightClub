@@ -86,10 +86,10 @@ Server_Side
     private socket stream for the clients in a running game
 
   Manage GET/POST requests
-    POST for running sandbox code when user submits solution => 
+    POST for running sandbox code when user submits solution =>
     GET for retrieving data specific for user (/user) =>
     GET for retrieving things stored in Database =>
-    GET for homepage (/) => 
+    GET for homepage (/) =>
 
   Manage User authentication
     bcrypt
@@ -121,6 +121,12 @@ Helpers
 //////////////////////////////////////////////
 
 
+
+
+
+
+
+
 Helper Module
 
   functionality to run code using a sandbox
@@ -131,13 +137,24 @@ Helper Module
 
 
 
+
+
+
+
+
 //////////////////////////////////////////////
 DATABASE
 //////////////////////////////////////////////
 
 
+
+
+
+
+
+
   Setup Schemas
 
     UserSchema => | username | password | email | wins | losses | score |
-    ToyProblemSchema => | title | prompt | functionName | tests | 
+    ToyProblemSchema => | title | prompt | functionName | tests |
     leaderboard schema?
