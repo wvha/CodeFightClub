@@ -1,5 +1,3 @@
-// //import { mongo } from 'mongoose'; // ! What the fuck is this?
-
 const mongoose = require('mongoose');
 const helpers = require('../helpers/databaseHelpers.js');
 
