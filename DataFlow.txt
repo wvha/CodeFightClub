@@ -138,6 +138,6 @@ DATABASE
 
   Setup Schemas
 
-    User Schemas => | username | password | email | wins | losses | score |
-    challenge schema => | title | prompt | functionName | tests | 
+    UserSchema => | username | password | email | wins | losses | score |
+    ToyProblemSchema => | title | prompt | functionName | tests | 
     leaderboard schema?
