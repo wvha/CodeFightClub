@@ -25,6 +25,7 @@ class SignUp extends Component {
   submitSignUp () {
     this.setState({ showModalSignUp: false });
     console.log(this.state.username, this.state.email, this.state.password);
+<<<<<<< HEAD
     let sendParam = JSON.stringify(this.state);
     $.ajax({
       method: 'POST',
@@ -32,13 +33,26 @@ class SignUp extends Component {
       data: this.state
     }).done((data) => {
       console.log(data);
+=======
+    $.post('/signup', this.state)
+    .done((data) => {
+      console.log(data);
+      console.log('the post was successful');
+    })
+    .fail(() => {
+      console.log('the post was a failure');
+>>>>>>> 1113847d21553d41731df3812a3aacbf6f6b011f
     });
   }
 
   usernameChange (e) {
     this.setState({ username: e.target.value });
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 1113847d21553d41731df3812a3aacbf6f6b011f
   emailChange (e) {
     this.setState({ email: e.target.value });
   }
@@ -58,7 +72,11 @@ class SignUp extends Component {
         <div>
             <h1>create your account</h1>
             <form>
+<<<<<<< HEAD
             Username:
+=======
+            Username: 
+>>>>>>> 1113847d21553d41731df3812a3aacbf6f6b011f
             <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
             Email:
             <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
