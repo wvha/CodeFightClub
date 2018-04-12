@@ -11,6 +11,7 @@ function ensureAuthenticated(req, res, next) {
     return next();
   } else {
     // req.flash('error_msg', 'You are not logged in');
+    // ! determine if modal can be used as endpoint
     res.redirect('/user/login');
   }
 }
