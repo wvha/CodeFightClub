@@ -25,9 +25,9 @@ class SignUp extends Component {
   submitSignUp () {
     this.setState({ showModalSignUp: false });
     console.log(this.state.username, this.state.email, this.state.password);
-    let sendParam = JSON.stringify(this.state);
-    $.post('/signup', sendParam)
-    .done(() => {
+    $.post('/signup', this.state)
+    .done((data) => {
+      console.log(data);
       console.log('the post was successful');
     })
     .fail(() => {
@@ -38,7 +38,6 @@ class SignUp extends Component {
   usernameChange (e) {
     this.setState({ username: e.target.value });
   }
-<<<<<<< HEAD
   
   emailChange (e) {
     this.setState({ email: e.target.value });
@@ -46,15 +45,6 @@ class SignUp extends Component {
   
   passwordChange (e) {
     this.setState({ password: e.target.value });
-=======
-
-  lastnameChange (e) {
-    this.setState({ lastname: e.target.value });
-  }
-
-  usernameChange (e) {
-    this.setState({ username: e.target.value });
->>>>>>> 33006b2a2ed6a364891c73bd33d2cba3063421c1
   }
 
   render () {
@@ -68,15 +58,7 @@ class SignUp extends Component {
         <div>
             <h1>create your account</h1>
             <form>
-<<<<<<< HEAD
             Username: 
-=======
-            First name:
-            <br/><input type="text" name="firstname" value={this.state.firstname} onChange={this.firstnameChange}/><br/>
-            Last name:
-            <br/><input type="text" name="lastname" value={this.state.lastname} onChange={this.lastnameChange}/><br/>
-            Username:
->>>>>>> 33006b2a2ed6a364891c73bd33d2cba3063421c1
             <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
             Email: 
             <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>

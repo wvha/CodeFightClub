@@ -6,7 +6,7 @@ var passportRoutes = function(app, passport) {
 
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/signupSuccess',
-    failureRedirect: 'signupFailure'
+    failureRedirect: '/signupFailure'
   }));
   app.get('/signupSuccess', function(req, res) {
     res.send('successful signup');
