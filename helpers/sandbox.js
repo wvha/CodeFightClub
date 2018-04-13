@@ -1,9 +1,9 @@
 const Sandbox = require('sandbox');
 const box = new Sandbox();
 
-var execute = function(code, tests) {
+var execute = function(code) {
   return new Promise((resolve) => {
-    box.run(`${code} ${tests};`, (output) => {
+    box.run(`${code}`, (output) => {
       console.log('output of running code: ' + output.result);
       resolve(output.result);
     });
@@ -11,21 +11,15 @@ var execute = function(code, tests) {
 };
 
 var run = function(code, tests) {
+  console.log('inside run...');
+  console.log('code:  ' + code);
   tests.forEach((test) => {
-    box.run(`${code} ${test};`, (output) => {
+    box.run(`${code} ${test}`, (output) => {
       console.log(output.result);
     });
   })
 }
 
-run(`function fib(a) {
-  if (a === 0) {
-    return 0;
-  }  else if (a === 1) {
-    return 1;
-  } else if (a > 1) {
-    return fib(a-1) + fib(a-2);
-  }
-}`, ['fib(4)', 'fib(6)']);
 
 module.exports.run = run;
+module.exports.execute = execute;
