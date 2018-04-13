@@ -6,6 +6,7 @@ import 'brace/theme/cobalt';
 import 'brace/mode/javascript';
 import SignUp from './components/signup.jsx';
 import Login from './components/login.jsx';
+import $ from 'jquery';
 
 Modal.setAppElement('#app');
 
@@ -16,7 +17,7 @@ class App extends Component {
       solution: ""
     };
     this.clickHandler = this.clickHandler.bind(this);
-  } 
+  }
 
   onChange (val) {
     this.setState({ solution: val });
@@ -24,6 +25,15 @@ class App extends Component {
 
   clickHandler (e) {
     console.log(this.state.solution);
+    $.ajax({
+      method: 'POST',
+      url: '/challenge',
+      data: {
+        solution: this.state.solution
+      }
+    }).done((res) => {
+      console.log(res);
+    });
   }
 
   render () {
@@ -31,7 +41,7 @@ class App extends Component {
       <div>
         <SignUp/>
         <Login/>
-        <AceEditor 
+        <AceEditor
           mode="javascript"
           theme={"cobalt"}
           width="50%" height="50vh"
