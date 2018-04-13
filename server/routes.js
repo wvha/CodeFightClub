@@ -1,4 +1,5 @@
 var User = require('../database/index.js').User;
+var execute = require('../helpers/sandbox.js').execute;
 
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
@@ -45,7 +46,18 @@ var passportRoutes = function(app, passport) {
       res.send(false);
     }
   });
+};
+
+var challengeRoutes = function(app) {
+
+  app.post('/challenge', function(req, res) {
+    execute(req.body.code, req.body.tests)
+      .then((data) => {
+        console.log(data);
+      });
+  });
 
 };
 
 module.exports.passportRoutes = passportRoutes;
+module.exports.challengeRoutes = challengeRoutes;
