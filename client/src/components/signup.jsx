@@ -38,11 +38,11 @@ class SignUp extends Component {
   usernameChange (e) {
     this.setState({ username: e.target.value });
   }
-  
+
   emailChange (e) {
     this.setState({ email: e.target.value });
   }
-  
+
   passwordChange (e) {
     this.setState({ password: e.target.value });
   }
@@ -58,11 +58,11 @@ class SignUp extends Component {
         <div>
             <h1>create your account</h1>
             <form>
-            Username: 
+            Username:
             <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
-            Email: 
+            Email:
             <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
-            Password: 
+            Password:
             <br/><input type="text" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
             </form>
         </div>
