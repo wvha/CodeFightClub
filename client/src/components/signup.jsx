@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
+import ReactModal from 'react-modal';
 import $ from 'jquery';
 
 class SignUp extends Component {
@@ -49,24 +49,26 @@ class SignUp extends Component {
   render () {
     return (
       <span>
-        <button id="signup" onClick={this.openModalSignUp}>Sign Up</button>
-        <Modal
+        { this.props.loggedIn ? null : <button id="signup" onClick={this.openModalSignUp}>Sign Up</button>}
+        <ReactModal
             isOpen={this.state.showModalSignUp}
             contentLabel="SignUp Modal"
+            className="Modal container"
+            overlayClassName="Overlay"
         >
-        <div>
+        <div className="modal container">
             <h1>create your account</h1>
-            <form autoComplete="off">
-            Username: 
-            <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
-            Email:
-            <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
-            Password: 
-            <br/><input type="password" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
+            <form autoComplete="off" className="container">
+              Username: 
+              <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
+              Email:
+              <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
+              Password: 
+              <br/><input type="password" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
+              <button onClick={this.submitSignUp}>Submit</button>
             </form>
         </div>
-            <button onClick={this.submitSignUp}>Submit</button>
-        </Modal>
+        </ReactModal>
      </span>
     )
   }

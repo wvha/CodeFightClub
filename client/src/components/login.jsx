@@ -41,19 +41,21 @@ class Login extends Component {
       <span>
         { this.props.loggedIn ? null : <button id="login" onClick={this.openModalLogin}>Login</button> }
         <Modal
-           isOpen={this.state.showModalLogin}
-           contentLabel="SignUp Modal"
+          isOpen={this.state.showModalLogin}
+          contentLabel="Login Modal"
+          className="Modal container"
+          overlayClassName="Overlay"
         >
-        <div>
+        <div className="modal container">
           <h1>Login</h1>
-          <form autoComplete="off">
+          <form autoComplete="off" className="container">
             Username:
             <br/><input type="text" name="username" onChange={this.onChangeUsername}/><br/>
             Password:
             <br/><input type="password" name="password" onChange={this.onChangePassword}/><br/>
+            <button onClick={this.submitLogin}>Submit</button>
           </form>
         </div>
-          <button onClick={this.submitLogin}>Submit</button>
         </Modal>
       </span>
     )

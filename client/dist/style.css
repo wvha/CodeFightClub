@@ -132,3 +132,50 @@ button {
   background-color: #030303;
   margin-top: 15px;
 }
+
+
+/***********************/
+/***     Modals      ***/
+/***********************/
+
+.Modal {
+  position: absolute;
+  top: calc((100vh - 400px) / 2);
+  left: calc((100vw - 400px) / 2);
+  height: 400px;
+  width: 400px;
+  background-color: #010101;
+  align-content: center;
+  justify-content: center;
+}
+
+.Overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #03030399;
+}
+
+.modal {
+  width: 360px;
+  height: 360px;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.modal form {
+  width: 400px;
+  height: 400px;
+  flex-direction: column;
+  /* align-content: center; */
+  justify-content: center;
+}
+
+.modal form button {
+  width: 25%;
+  height: 2rem;
+}
