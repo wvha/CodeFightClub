@@ -24,7 +24,7 @@ class Login extends Component {
     this.setState({ showModalLogin: false });
     $.post('/login', this.state)
     .done((data) => {
-      console.log('this login was... ', data);
+      console.log('this login was a', data);
     });
   }
 
@@ -38,24 +38,24 @@ class Login extends Component {
 
   render () {
     return (
-      <div>
-        <button onClick={this.openModalLogin}>Login</button>
+      <span>
+        { this.props.loggedIn ? null : <button onClick={this.openModalLogin}>Login</button> }
         <Modal
            isOpen={this.state.showModalLogin}
            contentLabel="SignUp Modal"
         >
         <div>
           <h1>Login</h1>
-          <form>
+          <form autoComplete="off">
             Username:
             <br/><input type="text" name="username" onChange={this.onChangeUsername}/><br/>
             Password:
-            <br/><input type="text" name="password" onChange={this.onChangePassword}/><br/>
+            <br/><input type="password" name="password" onChange={this.onChangePassword}/><br/>
           </form>
         </div>
           <button onClick={this.submitLogin}>Submit</button>
         </Modal>
-      </div>
+      </span>
     )
   }
 };
