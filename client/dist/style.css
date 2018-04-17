@@ -17,6 +17,10 @@ html, body {
   font-family: Michroma;
 }
 
+strong {
+  font-size: 1.5em;
+}
+
 /***********************/
 /***  Body and Grid  ***/
 /***********************/

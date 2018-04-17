@@ -39,7 +39,7 @@ class Login extends Component {
   render () {
     return (
       <span>
-        { this.props.loggedIn ? null : <button id="login" onClick={this.openModalLogin}>Login</button> }
+        <button id="login" onClick={this.openModalLogin}>Login</button>
         <Modal
           isOpen={this.state.showModalLogin}
           contentLabel="Login Modal"
