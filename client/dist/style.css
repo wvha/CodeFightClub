@@ -49,6 +49,15 @@ html, body {
   flex-direction: column;
 }
 
+button {
+  background-color: #005DAA;
+  border-color: #005DAA;
+  border-radius: 5px;
+  box-shadow: 1px 1px #ffffff30;
+  color: whitesmoke;
+  font-family: Michroma;
+}
+
 
 /***********************/
 /***     Header      ***/
@@ -74,17 +83,10 @@ html, body {
 #user {
   justify-content: flex-end;
 }
-
 #user button {
-  background-color: #005DAA;
   height: 50px;
   width: 50px;
   margin: auto 10px;
-  border-color: #005DAA;
-  border-radius: 5px;
-  box-shadow: 1px 1px #ffffff30;
-  color: whitesmoke;
-  font-family: Michroma;
 }
 
 /***********************/
@@ -95,8 +97,30 @@ html, body {
   height: calc(100% - 150px - 30px);
   width: 100%;
   background-color: #030303;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
+.body {
+  width: 45%;
+  height: 95%;
+  flex-direction: column;
+}
+
+.body h1 {
+  margin: 10px;
+}
+
+.submit {
+  width: 100%;
+  flex-grow: 2;
+}
+
+.submit button {
+  height: 50px;
+  width: 50%;
+  margin: 10px;
+}
 
 /***********************/
 /***     Footer      ***/
