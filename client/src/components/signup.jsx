@@ -24,11 +24,10 @@ class SignUp extends Component {
 
   submitSignUp () {
     this.setState({ showModalSignUp: false });
-    console.log(this.state.username, this.state.email, this.state.password);
     $.post('/signup', this.state)
     .done((data) => {
-      console.log(data);
       console.log('the post was successful');
+      this.props.setUsername(this.state.username);
     })
     .fail(() => {
       console.log('the post was a failure');
@@ -49,7 +48,7 @@ class SignUp extends Component {
 
   render () {
     return (
-      <div>
+      <span>
         <button onClick={this.openModalSignUp}>Sign Up</button>
         <Modal
             isOpen={this.state.showModalSignUp}
@@ -57,18 +56,18 @@ class SignUp extends Component {
         >
         <div>
             <h1>create your account</h1>
-            <form>
+            <form autoComplete="off">
             Username: 
             <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
             Email: 
             <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
             Password: 
-            <br/><input type="text" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
+            <br/><input type="password" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
             </form>
         </div>
             <button onClick={this.submitSignUp}>Submit</button>
         </Modal>
-     </div>
+     </span>
     )
   }
 };
