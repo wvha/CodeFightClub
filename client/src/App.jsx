@@ -7,7 +7,11 @@ import 'brace/theme/cobalt';
 import 'brace/mode/javascript';
 import SignUp from './components/signup.jsx';
 import Login from './components/login.jsx';
+<<<<<<< HEAD
 import Challenge from './components/Challenge.jsx';
+=======
+import $ from 'jquery';
+>>>>>>> e3c7ec78443877a4f27e3d79b2f8964620035acd
 
 Modal.setAppElement('#app');
 
@@ -30,6 +34,15 @@ class App extends Component {
 
   clickHandler (e) {
     console.log(this.state.solution);
+    $.ajax({
+      method: 'POST',
+      url: '/challenge',
+      data: {
+        solution: this.state.solution
+      }
+    }).done((res) => {
+      console.log(res);
+    });
   }
 
   setUsername(user) {

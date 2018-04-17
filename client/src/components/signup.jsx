@@ -37,11 +37,11 @@ class SignUp extends Component {
   usernameChange (e) {
     this.setState({ username: e.target.value });
   }
-  
+
   emailChange (e) {
     this.setState({ email: e.target.value });
   }
-  
+
   passwordChange (e) {
     this.setState({ password: e.target.value });
   }
@@ -56,13 +56,23 @@ class SignUp extends Component {
         >
         <div>
             <h1>create your account</h1>
+<<<<<<< HEAD
             <form autoComplete="off">
             Username: 
+=======
+            <form>
+            Username:
+>>>>>>> e3c7ec78443877a4f27e3d79b2f8964620035acd
             <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
-            Email: 
+            Email:
             <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
+<<<<<<< HEAD
             Password: 
             <br/><input type="password" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
+=======
+            Password:
+            <br/><input type="text" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
+>>>>>>> e3c7ec78443877a4f27e3d79b2f8964620035acd
             </form>
         </div>
             <button onClick={this.submitSignUp}>Submit</button>

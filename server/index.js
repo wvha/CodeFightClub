@@ -39,5 +39,6 @@ app.listen(app.get('port'), function() {
 });
 
 require('./routes.js').passportRoutes(app, passport);
+require('./routes.js').challengeRoutes(app);
 
 module.exports = app;
