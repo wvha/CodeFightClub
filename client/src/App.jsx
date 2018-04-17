@@ -15,17 +15,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      solution: "",
-      username: null
+      user: {}
     };
     this.clickHandler = this.clickHandler.bind(this);
-    this.setUsername = this.setUsername.bind(this);
-    this.clickHandler = this.clickHandler.bind(this);
-    this.onChange = this.onChange.bind(this);
-  } 
-
-  onChange (val) {
-    this.setState({ solution: val });
+    this.setUser = this.setUser.bind(this);
   }
 
   clickHandler (e) {
@@ -41,22 +34,16 @@ class App extends Component {
     });
   }
 
-  setUsername(user) {
-    this.setState({ username: user });
+  setUser(user) {
+    this.setState({ user: user });
   }
 
   render () {
     return (
       <div className="container" id="main">
-        {/* <h1>Code Fight Club</h1> */}
-        <Header username={this.state.username} />
+        <Header username={this.state.user} />
         <Body change={this.onChange} />
         <Footer />
-        {/* {this.state.username ? this.state.username : <h2><SignUp setUsername={this.setUsername}/> <Login/></h2>} */}
-        {/* <Challenge solution={this.state.solution} change={this.onChange}/>
-        <button onClick={this.clickHandler}>Submit</button> */}
-        {/* <br/><br/>
-        <h3>We have one rule... don't talk about code fight club</h3> */}
       </div>
     );
   }
