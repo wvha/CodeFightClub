@@ -1,3 +1,7 @@
+/***********************/
+/***     Set Up      ***/
+/***********************/
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,12 +14,21 @@ html, body {
   background-color: #010101;
   background-image: url(technology1.png);
   color: whitesmoke;
+  font-family: Michroma;
 }
+
+/***********************/
+/***  Body and Grid  ***/
+/***********************/
 
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+}
+
+.row {
+  flex-direction: row;
 }
 
 #background {
@@ -24,21 +37,73 @@ html, body {
   background-color: #01010190;   
 }
 
-#main {
+#app {
   max-width: 1200px;
   width: 90%;
   height: 100%;
+}
+
+#main {
+  height:100%;
+  width: 100%;
   flex-direction: column;
 }
 
-#app {
+
+/***********************/
+/***     Header      ***/
+/***********************/
+
+#header {
+  height: 100px;
   width: 100%;
+  background-color: #030303;
+  margin-bottom: 15px;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+#user, #header-filler {
+  width: 50%;
+}
+
+#logo, #user {
+  line-height: 1em;
+}
+
+#user {
+  justify-content: flex-end;
+}
+
+#user button {
+  background-color: #005DAA;
+  height: 50px;
+  width: 50px;
+  margin: auto 10px;
+  border-color: #005DAA;
+  border-radius: 5px;
+  box-shadow: 1px 1px #ffffff30;
+  color: whitesmoke;
+  font-family: Michroma;
+}
+
+/***********************/
+/***       App       ***/
+/***********************/
+
+#body {
   height: calc(100% - 150px - 30px);
+  width: 100%;
   background-color: #030303;
 }
 
-#footer, #header {
-  height: 75px;
+
+/***********************/
+/***     Footer      ***/
+/***********************/
+
+#footer {
+  height: 50px;
   width: 100%;
   background-color: #030303;
   margin-top: 15px;
