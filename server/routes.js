@@ -52,12 +52,23 @@ var passportRoutes = function(app, passport) {
 var challengeRoutes = function(app) {
 
   app.post('/challenge', function(req, res) {
-    console.log(req.body.solution);
-    execute(req.body.solution)
-    .then((result) => {
-      console.log(result);
-      res.send('results of running code:  ' + result);
-    });
+    //console.log('req.body:  ' + req.body);
+    let status = 'success';
+    const runResult = execute(req.body.solution, req.body.tests)
+    .then((data) => {
+      console.log('Data : ', data);
+      const testArr = JSON.parse(data);
+      for (let i = 0; i < testArr.length; i++) {
+        if (testArr[i] === false) {
+          status = 'failure';
+          break;
+        }
+      }
+      //console.log(testArr, status);
+      var endMsg = JSON.stringify({ testArr, status });
+      res.end(endMsg);
+    })
+    .catch(err => console.log('error in challenge', err));
   });
 
 };
