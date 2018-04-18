@@ -21,6 +21,18 @@ class App extends Component {
     };
   }
 
+  // componentDidUpdate () {
+  //   $.get('loggedIn')
+  //   .done((data) => {
+  //     if (this.state.user.username !== data) {
+  //       this.setState
+  //     }
+  //   })
+  //   .fail((err) => {
+  //     console.log('this is an error', err)
+  //   });
+  // }
+
   setUser(user) {
     this.setState({ user: user });
   }
@@ -29,7 +41,7 @@ class App extends Component {
     return (
       <div className="container" id="main">
         <Header user={this.state.user} updateUser={this.setUser.bind(this)} />
-        <Body change={this.onChange} />
+        <Body />
         <Footer />
       </div>
     );
