@@ -10,9 +10,9 @@ const Header = function(props) {
       <div id="logo">
         <img src="BrandonStinks.png" alt="BrandonStinks" height="90px" width="180px" />
       </div> 
-        { props.user
+        { props.user.username !== null
           ? <div className="container row" id="user"><User user={props.user} /></div>
-          : <div className="container row" id="user"><SignUp setUsername={props.setUser}/> <Login/></div> }
+          : <div className="container row" id="user"><SignUp setUsername={props.updateUser} /> <Login setUsername={props.updateUser} /></div> }
     </header>
   );
 }

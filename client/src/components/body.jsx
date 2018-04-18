@@ -28,12 +28,25 @@ class Body extends React.Component {
     );
   }
 
-  clickHandler () {
+  clickHandler (e) {
     if (this.state.isPrompt) {
-      // TODO: send a post request to the server for testing
+      testSolution(e);
     } else {
       // TODO: send a get request to the server for a prompt
     }
+  }
+
+  testSolution (e) {
+    console.log(this.state.solution);
+    $.ajax({
+      method: 'POST',
+      url: '/challenge',
+      data: {
+        solution: this.state.solution
+      }
+    }).done((res) => {
+      console.log(res);
+    });
   }
 
   updateSolution () {

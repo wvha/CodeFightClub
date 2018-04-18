@@ -13,9 +13,6 @@ class SignUp extends Component {
     }
     this.openModalSignUp = this.openModalSignUp.bind(this);
     this.submitSignUp = this.submitSignUp.bind(this);
-    this.usernameChange = this.usernameChange.bind(this);
-    this.emailChange = this.emailChange.bind(this);
-    this.passwordChange = this.passwordChange.bind(this);
   }
 
   openModalSignUp () {
@@ -23,9 +20,9 @@ class SignUp extends Component {
   }
 
   submitSignUp () {
-    this.setState({ showModalSignUp: false });
     $.post('/signup', this.state)
     .done((data) => {
+      this.setState({ showModalSignUp: false });
       console.log('the post was successful');
       this.props.setUsername(this.state.username);
     })
@@ -34,16 +31,24 @@ class SignUp extends Component {
     });
   }
 
-  usernameChange (e) {
-    this.setState({ username: e.target.value });
-  }
+  //// usernameChange (e) {
+  ////   this.setState({ username: e.target.value });
+  //// }
 
-  emailChange (e) {
-    this.setState({ email: e.target.value });
-  }
+  //// emailChange (e) {
+  ////   this.setState({ email: e.target.value });
+  //// }
 
-  passwordChange (e) {
-    this.setState({ password: e.target.value });
+  //// passwordChange (e) {
+  ////   this.setState({ password: e.target.value });
+  //// }
+
+  updateState (prop) {
+    return (e) => {
+      let state = {};
+      state[prop] = e.target.value;
+      this.setState(state);
+    }
   }
 
   render () {
@@ -60,11 +65,11 @@ class SignUp extends Component {
             <h1>create your account</h1>
             <form autoComplete="off" className="container">
               Username: 
-              <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
+              <br/><input type="text" name="username" value={this.state.username} onChange={this.updateState('username')}/><br/>
               Email:
-              <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
+              <br/><input type="text" name="email" value={this.state.email} onChange={this.updateState('email')}/><br/>
               Password: 
-              <br/><input type="password" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
+              <br/><input type="password" name="password" value={this.state.password} onChange={this.updateState('password')}/><br/>
               <button onClick={this.submitSignUp}>Submit</button>
             </form>
         </div>
