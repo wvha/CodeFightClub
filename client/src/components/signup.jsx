@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
+import ReactModal from 'react-modal';
 import $ from 'jquery';
 
 class SignUp extends Component {
@@ -13,9 +13,6 @@ class SignUp extends Component {
     }
     this.openModalSignUp = this.openModalSignUp.bind(this);
     this.submitSignUp = this.submitSignUp.bind(this);
-    this.usernameChange = this.usernameChange.bind(this);
-    this.emailChange = this.emailChange.bind(this);
-    this.passwordChange = this.passwordChange.bind(this);
   }
 
   openModalSignUp () {
@@ -23,52 +20,61 @@ class SignUp extends Component {
   }
 
   submitSignUp () {
-    this.setState({ showModalSignUp: false });
-    console.log(this.state.username, this.state.email, this.state.password);
     $.post('/signup', this.state)
     .done((data) => {
-      console.log(data);
+      this.setState({ showModalSignUp: false });
       console.log('the post was successful');
+      this.props.setUsername(this.state.username);
     })
     .fail(() => {
       console.log('the post was a failure');
     });
   }
 
-  usernameChange (e) {
-    this.setState({ username: e.target.value });
-  }
+  //// usernameChange (e) {
+  ////   this.setState({ username: e.target.value });
+  //// }
 
-  emailChange (e) {
-    this.setState({ email: e.target.value });
-  }
+  //// emailChange (e) {
+  ////   this.setState({ email: e.target.value });
+  //// }
 
-  passwordChange (e) {
-    this.setState({ password: e.target.value });
+  //// passwordChange (e) {
+  ////   this.setState({ password: e.target.value });
+  //// }
+
+  updateState (prop) {
+    return (e) => {
+      let state = {};
+      state[prop] = e.target.value;
+      this.setState(state);
+    }
   }
 
   render () {
     return (
-      <div>
-        <button onClick={this.openModalSignUp}>Sign Up</button>
-        <Modal
+      <span>
+        { this.props.loggedIn ? null : <button id="signup" onClick={this.openModalSignUp}>Sign Up</button>}
+        <ReactModal
             isOpen={this.state.showModalSignUp}
             contentLabel="SignUp Modal"
+            className="Modal container"
+            overlayClassName="Overlay"
         >
-        <div>
+        <div className="modal container">
             <h1>create your account</h1>
-            <form>
-            Username:
-            <br/><input type="text" name="username" value={this.state.username} onChange={this.usernameChange}/><br/>
-            Email:
-            <br/><input type="text" name="email" value={this.state.email} onChange={this.emailChange}/><br/>
-            Password:
-            <br/><input type="text" name="password" value={this.state.password} onChange={this.passwordChange}/><br/>
+            <form autoComplete="off" className="container">
+              Username: 
+              <br/><input type="text" name="username" value={this.state.username} onChange={this.updateState('username')}/><br/>
+              Email:
+              <br/><input type="text" name="email" value={this.state.email} onChange={this.updateState('email')}/><br/>
+              Password: 
+              <br/><input type="password" name="password" value={this.state.password} onChange={this.updateState('password')}/><br/>
+              <button onClick={this.submitSignUp}>Submit</button>
             </form>
         </div>
-            <button onClick={this.submitSignUp}>Submit</button>
-        </Modal>
-     </div>
+        </ReactModal>
+     </span>
     )
   }
 };

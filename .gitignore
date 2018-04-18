@@ -1,5 +1,11 @@
 node_modules/
+
+
 bower_components/
 *.log
 
 build/
+
+client/dist/bundle.jsx
+bundle.jsx
+coverage/
