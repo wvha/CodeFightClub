@@ -52,26 +52,37 @@ var passportRoutes = function(app, passport) {
 var challengeRoutes = function(app) {
 
   app.post('/challenge', function(req, res) {
-    //console.log('req.body:  ' + req.body);
-    let status = 'success';
-    const runResult = execute(req.body.solution, req.body.tests)
-    .then((data) => {
-      console.log('Data : ', data);
-      const testArr = JSON.parse(data);
-      for (let i = 0; i < testArr.length; i++) {
-        if (testArr[i] === false) {
-          status = 'failure';
-          break;
+    // console.log('req.body:  ' + req.body.tests);
+    let funcName = req.body.funcName;
+    let solution = req.body.solution;
+    let tests = req.body.tests; //[ { input: '5, 6', expected: '11'}, { input: '3, 4', expected: '7'} ]
+    let status;
+    let testRes = [];
+    tests.forEach((test) => {
+      execute(`${solution} ${funcName}(${test.input})`)
+      .then((data) => {
+        console.log(data);
+        if (data !== test.expected) {
+          status = 'fail';
+        } else {
+          status = 'pass';
         }
-      }
-      //console.log(testArr, status);
-      var endMsg = JSON.stringify({ testArr, status });
-      res.end(endMsg);
-    })
-    .catch(err => console.log('error in challenge', err));
+        testRes.push({input: test.input, expected: test.expected, actual: data, status: status});
+      });
+    });
+    res.end(testRes);
   });
 
 };
 
+var databaseRoutes = function(app) {
+  app.get('/challenge', function(req, res) {
+    //Get data for challenge from database
+    //Send response with title, funcName, initialCode, tests
+  });
+}
+
+
 module.exports.passportRoutes = passportRoutes;
 module.exports.challengeRoutes = challengeRoutes;
+module.exports.databaseRoutes = databaseRoutes;
