@@ -21,21 +21,15 @@ const UserSchema = new mongoose.Schema({
   score: Number
 });
 
-// const ToyProblemSchema = new mongoose.Schema({
-//   title: String,
-//   prompt: String,
-//   functionName: String,
-//   tests: [TestSchema]
-// });
+const ToyProblemSchema = new mongoose.Schema({
+  title: { type: String, unique: true },
+  prompt: String,
+  initialCode: String,
+  tests: String
+});
 
-// * Create helper functions in 'helpers' import file and assign to methods
 
-// const TestSchema = new mongoose.Schema({
-//   // Todo: Needs to be updated when we know test format
-// })
-
-// const ToyProblem = mongoose.Model('ToyProblem', ToyProblemSchema);
-
+const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
 const User = mongoose.model('User', UserSchema);
 
 //User collection functions
@@ -49,6 +43,9 @@ module.exports.db = db;
 
 //User collection export
 module.exports.User = User;
+
+// Toy problem export
+module.exports.ToyProblem = ToyProblem;
 
 //User functions
 module.exports.getUserById = getUserById;

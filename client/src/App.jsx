@@ -14,7 +14,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      solution: ""
+      solution: "",
+      tests: "[typeof add === 'function', add(1,2) === 3, add(3,3) === 6]"
     };
     this.clickHandler = this.clickHandler.bind(this);
   }
@@ -29,10 +30,14 @@ class App extends Component {
       method: 'POST',
       url: '/challenge',
       data: {
-        solution: this.state.solution
-      }
-    }).done((res) => {
-      console.log(res);
+        solution: this.state.solution,
+        tests: this.state.tests
+      },
+      success: data => {
+        var results = JSON.parse(data);
+        console.log('success', results);
+      },
+      error: err => console.log(err)
     });
   }
 
