@@ -24,4 +24,17 @@ var run = function(code, tests) {
 module.exports.run = run;
 module.exports.execute = execute;
 
-// [ { input: '5, 6', actual: '30', expected: '11'}, { input: '3, 4', actual: '12', expected: '7'} ]
+/* 
+  {
+    funcName: 'add',
+    solution: 'const add = (a, b) => a + b',
+    tests: [ { input: '5, 6', expected: '11'}, { input: '3, 4', expected: '7'} ]
+  }
+
+  forEach (test => run(`${solution} ${funcName}(${tests[test].input}))
+
+  {
+    tests: [ {input: '', expected: '', actual: 'result of running code', status: 'pass/fail'}]
+  }
+
+*/

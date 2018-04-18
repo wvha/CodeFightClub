@@ -25,6 +25,7 @@ const ToyProblemSchema = new mongoose.Schema({
   title: { type: String, unique: true },
   prompt: String,
   initialCode: String,
+  funcName: String,
   tests: String
 });
 

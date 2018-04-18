@@ -1,6 +1,7 @@
 import React from 'react';
 import Prompt from './prompt.jsx';
 import Challenge from './Challenge.jsx';
+import $ from 'jquery';
 
 
 class Body extends React.Component {
@@ -11,55 +12,57 @@ class Body extends React.Component {
       prompt: {
         title: "Compete Against Hackers Around the World!",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
-        solution: "var iAmAwesome = function() {\n\n};"
+        code: "var iAmAwesome = function() {\n\n};",
+        tests: ["typeof iAmAwesome"]
       }
     };
   }
 
-  joinQueue () {
-    return (
-      <button onClick={this.clickHandler}><strong>Join In!</strong></button>
-    );
+  getPrompt () {
+    $.get('/challenges')
+      .done(data => console.log(Object.keys(data)))
+      .fail(err => console.log(`You suck: ${err}` ));
   }
 
-  runCode () {
-    return (
-      <button onClick={this.clickHandler}><strong>Submit</strong></button>
-    );
+  updateCode (e) {
+    const prompt = this.state.prompt;
+    prompt.code = e;
+    this.setState(prompt);
   }
-
-  clickHandler (e) {
-    if (this.state.isPrompt) {
-      testSolution(e);
-    } else {
-      // TODO: send a get request to the server for a prompt
-    }
-  }
-
-  testSolution (e) {
-    console.log(this.state.solution);
+  
+  testCode (e) {
+    const prompt = this.state.prompt;
     $.ajax({
       method: 'POST',
       url: '/challenge',
       data: {
-        solution: this.state.solution
+        solution: prompt.code,
+        tests: prompt.tests
       }
     }).done((res) => {
       console.log(res);
     });
   }
+  
+  renderJoinButton () {
+    return (
+      <button onClick={this.getPrompt.bind(this)}><strong>Join In!</strong></button>
+    );
+  }
 
-  updateSolution () {
-    // TODO: update solution 
+  renderRunButton () {
+    return (
+      <button onClick={this.testCode.bind(this)}><strong>Run Code</strong></button>
+    );
   }
 
   render () {
     return (
       <div className="container row" id="body">
         <div className="body container">
-          <Challenge solution={this.state.prompt.solution} solve={this.updateSolution} />
+          <Challenge solution={this.state.prompt.code} solve={this.updateCode.bind(this)} />
           <div className="container submit">
-            { this.state.isPrompt ? this.runCode() : this.joinQueue() }
+            { this.state.isPrompt ? this.renderRunButton() : this.renderJoinButton() }
           </div>
         </div>
         <div></div>
