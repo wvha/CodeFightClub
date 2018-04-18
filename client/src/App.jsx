@@ -15,23 +15,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
-    };
-    this.clickHandler = this.clickHandler.bind(this);
-    this.setUser = this.setUser.bind(this);
-  }
-
-  clickHandler (e) {
-    console.log(this.state.solution);
-    $.ajax({
-      method: 'POST',
-      url: '/challenge',
-      data: {
-        solution: this.state.solution
+      user: {
+        username: null
       }
-    }).done((res) => {
-      console.log(res);
-    });
+    };
   }
 
   setUser(user) {
@@ -41,7 +28,7 @@ class App extends Component {
   render () {
     return (
       <div className="container" id="main">
-        <Header username={this.state.user} />
+        <Header user={this.state.user} updateUser={this.setUser.bind(this)} />
         <Body change={this.onChange} />
         <Footer />
       </div>
