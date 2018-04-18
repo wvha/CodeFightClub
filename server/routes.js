@@ -25,7 +25,7 @@ var passportRoutes = function(app, passport) {
     failureRedirect: '/loginFailure'
   }));
   app.get('/loginSuccess', function(req, res) {
-    res.statusCode = 302;
+    res.statusCode = 200;
     res.send('successful login');
   });
   app.get('/loginFailure', function(req, res) {

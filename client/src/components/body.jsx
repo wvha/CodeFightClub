@@ -1,18 +1,20 @@
 import React from 'react';
 import Prompt from './prompt.jsx';
 import Challenge from './Challenge.jsx';
+import $ from 'jquery';
 
 
 class Body extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      isPrompt: false,
+      isPrompt: true,
       prompt: {
         title: "Compete Against Hackers Around the World!",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
-        solution: "var iAmAwesome = function() {\n\n};"
-      }
+        code: "var iAmAwesome = function() {\n\n};"
+      },
+      tests: '[typeof iAmAwesome === "function"]'
     };
   }
 
@@ -24,40 +26,46 @@ class Body extends React.Component {
 
   runCode () {
     return (
-      <button onClick={this.clickHandler}><strong>Submit</strong></button>
+      <button onClick={this.clickHandler.bind(this)}><strong>Submit</strong></button>
     );
   }
 
   clickHandler (e) {
     if (this.state.isPrompt) {
-      testSolution(e);
+      this.testSolution(e);
     } else {
       // TODO: send a get request to the server for a prompt
+      this.testSolution(e);
     }
   }
 
   testSolution (e) {
-    console.log(this.state.solution);
     $.ajax({
       method: 'POST',
       url: '/challenge',
       data: {
-        solution: this.state.solution
+        solution: this.state.prompt.code,
+        tests: this.state.tests
       }
     }).done((res) => {
       console.log(res);
     });
   }
 
-  updateSolution () {
-    // TODO: update solution 
+  updateSolution (e) {
+    let prompt = this.state.prompt;
+    prompt.code = e;
+    this.setState(prompt);
   }
 
   render () {
     return (
       <div className="container row" id="body">
         <div className="body container">
-          <Challenge solution={this.state.prompt.solution} solve={this.updateSolution} />
+          <Challenge 
+          solution={this.state.prompt.code} 
+          solve={this.updateSolution.bind(this)} 
+          />
           <div className="container submit">
             { this.state.isPrompt ? this.runCode() : this.joinQueue() }
           </div>

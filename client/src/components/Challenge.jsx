@@ -4,7 +4,7 @@ import brace from 'brace';
 import 'brace/theme/solarized_dark';
 import 'brace/mode/javascript';
 
-const Challenge = ({solution, change}) => (
+const Challenge = ({solution, solve}) => (
   <AceEditor
     mode="javascript"
     theme="solarized_dark"
@@ -23,7 +23,7 @@ const Challenge = ({solution, change}) => (
     }}
     height="90%"
     width="100%"
-    onChange={(event)=>(change(event))}
+    onChange={solve}
     value={solution}
   />
 )
