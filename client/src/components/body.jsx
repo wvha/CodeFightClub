@@ -8,7 +8,7 @@ class Body extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      isPrompt: false,
+      isPrompt: true,
       prompt: {
         title: "Compete Against Hackers Around the World!",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,

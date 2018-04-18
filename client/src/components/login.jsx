@@ -25,6 +25,7 @@ class Login extends Component {
     $.post('/login', this.state)
     .done((data) => {
       console.log('this login was a', data);
+      this.props.setUsername({ username: this.state.username });
     });
   }
 
