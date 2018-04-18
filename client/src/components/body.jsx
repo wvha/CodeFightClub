@@ -14,7 +14,7 @@ class Body extends React.Component {
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
         code: "var iAmAwesome = function() {\n\n};"
       },
-      tests: '[typeof iAmAwesome === "function"]'
+      tests: '[typeof iAmAwesome === "function", iAmAwesome(2,3) === 5]'
     };
   }
 
@@ -62,9 +62,9 @@ class Body extends React.Component {
     return (
       <div className="container row" id="body">
         <div className="body container">
-          <Challenge 
-          solution={this.state.prompt.code} 
-          solve={this.updateSolution.bind(this)} 
+          <Challenge
+          solution={this.state.prompt.code}
+          solve={this.updateSolution.bind(this)}
           />
           <div className="container submit">
             { this.state.isPrompt ? this.runCode() : this.joinQueue() }
