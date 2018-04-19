@@ -16,32 +16,41 @@ class App extends Component {
     super(props);
     this.state = {
       user: {
-        username: null
-      }
+        username: '',
+        isAdmin: true
+      },
+      view: 'prompt'
     };
   }
 
-  // componentDidUpdate () {
-  //   $.get('loggedIn')
-  //   .done((data) => {
-  //     if (this.state.user.username !== data) {
-  //       this.setState
-  //     }
-  //   })
-  //   .fail((err) => {
-  //     console.log('this is an error', err)
-  //   });
-  // }
-
-  setUser(user) {
+  setUser (user) {
     this.setState({ user: user });
+  }
+
+  componentDidUpdate () {
+    console.log(this.state);
+  }
+  
+  renderAdmin () {
+    this.setState({ view: 'admin' }) //admin renders... click admin again to change state of view back to prompt
+  }
+
+  logout () {
+    $.get('/logout')
+    .done((data) => {
+      console.log(data);
+      this.setUser('');
+    })
+    .fail((err) => {
+      console.log(err);
+    });
   }
 
   render () {
     return (
       <div className="container" id="main">
-        <Header user={this.state.user} updateUser={this.setUser.bind(this)} />
-        <Body />
+        <Header user={this.state.user} updateUser={this.setUser.bind(this)} logout={this.logout.bind(this)} renderAdmin={this.renderAdmin.bind(this)}/>
+        <Body isLoggedIn={!!this.state.user.username} view={this.state.view} />
         <Footer />
       </div>
     );

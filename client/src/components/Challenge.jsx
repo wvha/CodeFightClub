@@ -28,4 +28,4 @@ const Challenge = ({solution, solve}) => (
   />
 )
 
-export default Challenge
+export default Challenge;

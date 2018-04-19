@@ -76,7 +76,6 @@ var challengeRoutes = function(app) {
       res.data = data;
       res.end(JSON.stringify(data));
     });
-
   });
 
 };
