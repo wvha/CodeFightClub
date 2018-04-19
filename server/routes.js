@@ -1,4 +1,5 @@
 var User = require('../database/index.js').User;
+var ToyProblem = require('../database/index.js').ToyProblem;
 var run = require('../helpers/sandbox.js').run;
 var execute = require('../helpers/sandbox.js').execute;
 const Promise = require('bluebird');
@@ -83,11 +84,16 @@ var challengeRoutes = function(app) {
 };
 
 var databaseRoutes = function(app) {
-  app.get('/challenge', function(req, res) {
-    //Get data for challenge from database
-    //Send response with title, funcName, initialCode, tests
+  app.get('/randomChallenge', function(req, res) {
+    ToyProblem.count().exec(function(err, count) {
+      var random = Math.floor(Math.random() * count);
+      ToyProblem.findOne().skip(random).exec(function(err, result) {
+        res.end(JSON.stringify(result));
+      });
+    });
+    //res.end();
   });
-}
+};
 
 
 module.exports.passportRoutes = passportRoutes;
@@ -97,3 +103,4 @@ module.exports.databaseRoutes = databaseRoutes;
 //todo: create route to update scores and win/loss stats (patch requests)
 //todo: bcrypt auth and admin functionality
 //todo: helpers for getting data from toy problem schemas
+//todo: adding toy problems to database
