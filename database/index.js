@@ -13,7 +13,7 @@ db.once('open', () => {
 });
 
 const UserSchema = new mongoose.Schema({
-  username: String,
+  username: { type: String, unique: true },
   password: String,
   email: String,
   wins: Number,
@@ -32,28 +32,6 @@ const ToyProblemSchema = new mongoose.Schema({
     }
   ]
 });
-
-// title: "Compete Against Hackers Around the World!",
-// funcName: "iAmAwesome",
-// code: "var iAmAwesome = function() {\n\n};",
-// tests: [ {input: '5, 6', expected: '11'}, {input: '3, 4', expected: '7'}, {input: '30, 30', expected: '60'} ]
-
-// db.toyproblems.insert({
-//   "title": "Divide numbers",
-//   "funcName": "div",
-//   "initialCode": "function div(a, b) {\n\n}",
-//   "tests": [
-//     {
-//       "input": "10, 2",
-//       "expected": "5"
-//     },
-//     {
-//       "input": "8, 4",
-//       "expected": "2"
-//     }
-//   ]
-// })
-
 
 const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
 
