@@ -23,8 +23,16 @@ h1 {
   font-size: 2rem;
 }
 
+h5 {
+  font-size: 1rem;
+}
+
 strong {
   font-size: 1.5em;
+}
+
+textarea, input {
+  border-radius: 2px;
 }
 
 /***********************/
@@ -206,3 +214,69 @@ button {
 /***********************/
 /***      Admin      ***/
 /***********************/
+
+#admin {
+  height: 100%;
+  width: 100%;
+}
+
+#admin-buttons {
+  width: 15%;
+  height: 100%;
+  align-items: flex-start;
+}
+
+#admin-body {
+  height: 100%;
+  width: 85%;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#admin-buttons button {
+  width: 90%;
+  height: 2rem;
+  margin: 10px 0px;
+}
+
+#admin-title {
+  width: calc(100% - 30px);
+  height: 10%;
+  text-align: center;
+  line-height: 3.5rem;
+}
+
+#admin-content {
+  width: calc(100% - 30px);
+  height: 90%;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+#newToyProblem, #toyProblemForm {
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+#toyProblemForm div textarea {
+  width: 100%;
+  height: calc(100% - 1.5rem);
+  resize: none;
+}
+
+#toyProblemForm div {
+  width: 100%;
+}
+
+#toyProblemForm #newPrompt {
+  height: calc((100%/8*4) - 30px);
+}
+
+#toyProblemForm #newTests {
+  height: calc((100%/8*2) - 30px);
+}
+
+#toyProblemForm div input {
+  width: 50%;
+}

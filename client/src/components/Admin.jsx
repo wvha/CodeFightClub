@@ -5,7 +5,7 @@ class Admin extends React.Component {
     constructor(props) {
       super(props);
       this.state ={
-        view: 'default'
+        view: ''
       }
     }
    
@@ -14,9 +14,9 @@ class Admin extends React.Component {
     }
 
     renderView() {
-      if (this.state.view === 'addToyProblem') {
+      if (this.state.view === 'Add Toy Problem') {
           return <AddToyProblem />
-      } else if (this.state.view === 'default') {
+      } else if (this.state.view === '') {
           return null;
       }
     }
@@ -25,10 +25,15 @@ class Admin extends React.Component {
         return (
           <div className="container row" id="admin">
             <div className="container" id="admin-buttons">
-                <button onClick={()=>this.viewSetter('addToyProblem')}>Add Toy Problems</button>
+                <button onClick={()=>this.viewSetter('Add Toy Problem')}>Add Toy Problems</button>
             </div>
             <div className="container" id="admin-body">
-              {this.renderView()}
+              <div id="admin-title">
+                <h1>{this.state.view}</h1>
+              </div>
+              <div id="admin-content" className="container">
+                {this.renderView()}
+              </div>
             </div>
           </div>
         )
