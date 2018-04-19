@@ -6,7 +6,7 @@ class Prompt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPrompt: true,
+      isPrompt: false,
       prompt: {
         title: "Compete Against Hackers Around the World!",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
@@ -18,26 +18,17 @@ class Prompt extends React.Component {
 
   joinQueue () {
     return (
-      <button onClick={this.clickHandler}><strong>Join In!</strong></button>
+      <button onClick={this.getPrompt.bind(this)}><strong>Join In!</strong></button>
     );
   }
 
   runCode () {
     return (
-      <button onClick={this.clickHandler.bind(this)}><strong>Submit</strong></button>
+      <button onClick={this.testUserSolution.bind(this)}><strong>Submit</strong></button>
     );
   }
 
-  clickHandler (e) {
-    if (this.state.isPrompt) {
-      this.testSolution(e);
-    } else {
-      // TODO: send a get request to the server for a prompt
-      this.testSolution(e);
-    }
-  }
-
-  testSolution (e) {
+  testUserSolution (e) {
     $.ajax({
       method: 'POST',
       url: '/challenge',
@@ -50,7 +41,18 @@ class Prompt extends React.Component {
     });
   }
 
-  updateSolution (e) {
+  getPrompt () {
+    $.get('/randomChallenge')
+      .done( prompt => {
+        this.setState({ isPrompt: true })
+        console.log(prompt);
+      })
+      .fail( err => {
+        console.error(err);
+      })
+  }
+
+  updateUserSolution (e) {
     let prompt = this.state.prompt;
     prompt.code = e;
     this.setState(prompt);
@@ -62,7 +64,7 @@ class Prompt extends React.Component {
         <div className="body container">
           <Challenge
           solution={this.state.prompt.code}
-          solve={this.updateSolution.bind(this)}
+          solve={this.updateUserSolution.bind(this)}
           />
           <div className="container submit">
             { this.state.isPrompt && this.props.isLoggedIn ? this.runCode() : this.joinQueue() }

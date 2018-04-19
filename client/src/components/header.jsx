@@ -12,7 +12,7 @@ const Header = function(props) {
         <img src="BrandonStinks.png" alt="BrandonStinks" height="90px" width="180px" />
       </div> 
         { !!props.user.username
-          ? <div className="container row" id="user"><User user={props.user} logout={props.logout} renderAdmin={props.renderAdmin} /></div>
+          ? <div className="container row" id="user"><User user={props.user} logout={props.logout} view={props.view} renderAdmin={props.renderAdmin} /></div>
           : <div className="container row" id="user"><SignUp setUsername={props.updateUser} /> <Login setUsername={props.updateUser} /></div> } 
     </header>
   );
