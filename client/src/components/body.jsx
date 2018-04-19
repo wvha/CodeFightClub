@@ -22,11 +22,9 @@ class Body extends React.Component {
   componentWillMount() {
     $.ajax({
       method: 'GET',
-      url: '/randomChallenge',
+      url: '/challenge:add',
       success: data => {
-        //console.log(JSON.parse(data));
         let problem = JSON.parse(data);
-        //console.log(problem.tests);
         let prompt = this.state.prompt;
         prompt.funcName = problem.funcName;
         prompt.code = problem.initialCode;
