@@ -23,9 +23,9 @@ const Challenge = ({solution, solve}) => (
     }}
     height="90%"
     width="100%"
-    onChange={(event)=>solve(event)}
+    onChange={(e) => solve(e)}
     value={solution}
   />
 )
 
-export default Challenge
+export default Challenge;

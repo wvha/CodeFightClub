@@ -32,7 +32,9 @@ class App extends Component {
   }
   
   renderAdmin () {
-    this.setState({ view: 'admin' }) //admin renders... click admin again to change state of view back to prompt
+    this.state.view === 'admin'
+      ? this.setState({ view: 'prompt' })
+      : this.setState({ view: 'admin' }) //admin renders... click admin again to change state of view back to prompt
   }
 
   logout () {
@@ -49,9 +51,19 @@ class App extends Component {
   render () {
     return (
       <div className="container" id="main">
-        <Header user={this.state.user} updateUser={this.setUser.bind(this)} logout={this.logout.bind(this)} renderAdmin={this.renderAdmin.bind(this)}/>
-        <Body isLoggedIn={!!this.state.user.username} view={this.state.view} />
-        <Footer />
+        <Header
+          user={this.state.user}
+          updateUser={this.setUser.bind(this)}
+          logout={this.logout.bind(this)}
+          renderAdmin={this.renderAdmin.bind(this)}
+          view={this.state.view}
+        />
+        <Body
+          isLoggedIn={!!this.state.user.username}
+          view={this.state.view}
+        />
+        <Footer 
+        />
       </div>
     );
   }

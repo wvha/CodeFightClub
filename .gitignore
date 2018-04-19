@@ -9,3 +9,7 @@ build/
 client/dist/bundle.jsx
 bundle.jsx
 coverage/
+
+
+#design
+*.gvdesign
