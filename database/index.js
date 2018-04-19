@@ -23,13 +23,40 @@ const UserSchema = new mongoose.Schema({
 
 const ToyProblemSchema = new mongoose.Schema({
   title: { type: String, unique: true },
-  prompt: String,
+  funcName: String,
   initialCode: String,
-  tests: String
+  tests: [
+    {
+      input: String,
+      expected: String
+    }
+  ]
 });
+
+// title: "Compete Against Hackers Around the World!",
+// funcName: "iAmAwesome",
+// code: "var iAmAwesome = function() {\n\n};",
+// tests: [ {input: '5, 6', expected: '11'}, {input: '3, 4', expected: '7'}, {input: '30, 30', expected: '60'} ]
+
+// db.toyproblems.insert({
+//   "title": "Divide numbers",
+//   "funcName": "div",
+//   "initialCode": "function div(a, b) {\n\n}",
+//   "tests": [
+//     {
+//       "input": "10, 2",
+//       "expected": "5"
+//     },
+//     {
+//       "input": "8, 4",
+//       "expected": "2"
+//     }
+//   ]
+// })
 
 
 const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
+
 const User = mongoose.model('User', UserSchema);
 
 //User collection functions

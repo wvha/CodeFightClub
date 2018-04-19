@@ -14,9 +14,29 @@ class Body extends React.Component {
         funcName: "iAmAwesome",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
         code: "var iAmAwesome = function() {\n\n};",
-        tests: [ {input: '5, 6', expected: '11'}, {input: '3, 4', expected: '7'} ]
+        tests: [ {input: '5, 6', expected: '11'}, {input: '3, 4', expected: '7'}, {input: '30, 30', expected: '60'} ]
       }
     };
+  }
+
+  componentWillMount() {
+    $.ajax({
+      method: 'GET',
+      url: '/randomChallenge',
+      success: data => {
+        //console.log(JSON.parse(data));
+        let problem = JSON.parse(data);
+        //console.log(problem.tests);
+        let prompt = this.state.prompt;
+        prompt.funcName = problem.funcName;
+        prompt.code = problem.initialCode;
+        prompt.tests = problem.tests;
+        this.setState(prompt);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   joinQueue () {
