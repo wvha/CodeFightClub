@@ -8,8 +8,7 @@ const Challenge = ({solution, solve}) => (
   <AceEditor
     mode="javascript"
     theme="solarized_dark"
-    name="blah2"
-    fontSize={16}
+    name="Editor"
     showPrintMargin={true}
     showGutter={true}
     highlightActiveLine={true}
@@ -21,8 +20,6 @@ const Challenge = ({solution, solve}) => (
       tabSize: 2,
       blockScrolling: Infinity
     }}
-    height="90%"
-    width="100%"
     onChange={(e) => solve(e)}
     value={solution}
   />
