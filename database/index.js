@@ -13,7 +13,7 @@ db.once('open', () => {
 });
 
 const UserSchema = new mongoose.Schema({
-  username: String,
+  username: { type: String, unique: true },
   password: String,
   email: String,
   wins: Number,
@@ -23,14 +23,18 @@ const UserSchema = new mongoose.Schema({
 
 const ToyProblemSchema = new mongoose.Schema({
   title: { type: String, unique: true },
-  prompt: String,
-  initialCode: String,
   funcName: String,
-  tests: String
+  initialCode: String,
+  tests: [
+    {
+      input: String,
+      expected: String
+    }
+  ]
 });
 
-
 const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
+
 const User = mongoose.model('User', UserSchema);
 
 //User collection functions

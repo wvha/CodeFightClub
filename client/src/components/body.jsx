@@ -11,6 +11,7 @@ class Body extends React.Component {
       isPrompt: true,
       prompt: {
         title: "Compete Against Hackers Around the World!",
+        funcName: "iAmAwesome",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
         code: "var iAmAwesome = function() {\n\n};",
         tests: ["typeof iAmAwesome"]
@@ -18,10 +19,28 @@ class Body extends React.Component {
     };
   }
 
-  getPrompt () {
-    $.get('/challenges')
-      .done(data => console.log(Object.keys(data)))
-      .fail(err => console.log(`You suck: ${err}` ));
+  componentWillMount() {
+    $.ajax({
+      method: 'GET',
+      url: '/randomChallenge',
+      success: data => {
+        let problem = JSON.parse(data);
+        let prompt = this.state.prompt;
+        prompt.funcName = problem.funcName;
+        prompt.code = problem.initialCode;
+        prompt.tests = problem.tests;
+        this.setState(prompt);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
+
+  joinQueue () {
+    return (
+      <button onClick={this.clickHandler}><strong>Join In!</strong></button>
+    );
   }
 
   updateCode (e) {
@@ -36,11 +55,12 @@ class Body extends React.Component {
       method: 'POST',
       url: '/challenge',
       data: {
-        solution: prompt.code,
-        tests: prompt.tests
+        solution: this.state.prompt.code,
+        tests: this.state.prompt.tests,
+        funcName: this.state.prompt.funcName
       }
     }).done((res) => {
-      console.log(res);
+      console.log(JSON.parse(res));
     });
   }
   
