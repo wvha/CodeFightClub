@@ -70,7 +70,7 @@ var challengeRoutes = function(app) {
         testRes.push({input: test.input, expected: test.expected, actual: data, status: status});
       });
     });
-    res.end(testRes);
+    res.end()
   });
 
 };
