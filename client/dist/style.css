@@ -6,6 +6,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 1rem;
 }
 
 html, body {
@@ -15,6 +16,11 @@ html, body {
   background-image: url(technology1.png);
   color: whitesmoke;
   font-family: Michroma;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 2rem;
 }
 
 strong {
@@ -60,6 +66,7 @@ button {
   box-shadow: 1px 1px #ffffff30;
   color: whitesmoke;
   font-family: Michroma;
+  font-size: .75rem;
 }
 
 
@@ -88,8 +95,8 @@ button {
   justify-content: flex-end;
 }
 #user button {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   margin: auto 10px;
 }
 
@@ -103,6 +110,13 @@ button {
   background-color: #030303;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+#Editor {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  flex-grow: 9;
 }
 
 .body {
@@ -122,7 +136,7 @@ button {
 
 .submit {
   width: 100%;
-  flex-grow: 2;
+  flex-grow: 1;
 }
 
 .submit button {
@@ -188,3 +202,7 @@ button {
   width: 25%;
   height: 2rem;
 }
+
+/***********************/
+/***      Admin      ***/
+/***********************/
