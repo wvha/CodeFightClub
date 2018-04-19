@@ -9,9 +9,10 @@ class Prompt extends React.Component {
       isPrompt: false,
       prompt: {
         title: "Compete Against Hackers Around the World!",
+        funcName: "",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
         code: "var iAmAwesome = function() {\n\n};",
-        tests: '[typeof iAmAwesome === "function", iAmAwesome(2,3) === 5]'
+        tests: ''
       },
     }
   }
@@ -34,18 +35,27 @@ class Prompt extends React.Component {
       url: '/challenge',
       data: {
         solution: this.state.prompt.code,
-        tests: this.state.prompts.tests
+        funcName: this.state.funcName,
+        tests: this.state.prompt.tests
       }
     }).done((res) => {
-      console.log(res);
+      console.log(JSON.parse(res));
     });
   }
 
   getPrompt () {
     $.get('/randomChallenge')
-      .done( prompt => {
-        this.setState({ isPrompt: true })
-        console.log(prompt);
+      .done( data => {
+        let challenge = JSON.parse(data);
+        let prompt = this.state.prompt;
+        prompt.title = challenge.title;
+        prompt.body = challenge.body;
+        prompt.funcName = challenge.funcName;
+        prompt.code = challenge.initialCode;
+        prompt.tests = challenge.tests;
+        this.setState({ isPrompt: true });
+        this.setState(prompt);
+        //console.log(JSON.parse(data));
       })
       .fail( err => {
         console.error(err);
