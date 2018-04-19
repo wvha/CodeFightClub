@@ -104,6 +104,15 @@ var databaseRoutes = function(app) {
     });
   });
 
+  app.get('/users:name', (req, res) => {
+    var name = req.params.name.slice(1);
+    User.update({"username": name}, {$inc: {"score": 10}}, function(err, result) {
+      if (err) console.log(err);
+      console.log(result);
+    });
+    res.end('updated?');
+  });
+
 };
 
 
@@ -113,5 +122,4 @@ module.exports.databaseRoutes = databaseRoutes;
 
 //todo: create route to update scores and win/loss stats (patch requests)
 //todo: bcrypt auth and admin functionality
-//todo: helpers for getting data from toy problem schemas
 //todo: adding toy problems to database
