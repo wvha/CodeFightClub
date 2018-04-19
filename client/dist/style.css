@@ -6,6 +6,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 1rem;
 }
 
 html, body {
@@ -15,6 +16,10 @@ html, body {
   background-image: url(technology1.png);
   color: whitesmoke;
   font-family: Michroma;
+}
+
+h1 {
+  font-size: 2rem;
 }
 
 strong {
@@ -60,6 +65,7 @@ button {
   box-shadow: 1px 1px #ffffff30;
   color: whitesmoke;
   font-family: Michroma;
+  font-size: .75rem;
 }
 
 
@@ -88,8 +94,8 @@ button {
   justify-content: flex-end;
 }
 #user button {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   margin: auto 10px;
 }
 

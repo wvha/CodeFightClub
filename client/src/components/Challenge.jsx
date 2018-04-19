@@ -9,7 +9,7 @@ const Challenge = ({solution, solve}) => (
     mode="javascript"
     theme="solarized_dark"
     name="blah2"
-    fontSize={20}
+    fontSize={16}
     showPrintMargin={true}
     showGutter={true}
     highlightActiveLine={true}
