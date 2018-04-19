@@ -1,6 +1,7 @@
 var User = require('../database/index.js').User;
 var run = require('../helpers/sandbox.js').run;
 var execute = require('../helpers/sandbox.js').execute;
+const Promise = require('bluebird');
 
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
@@ -52,25 +53,31 @@ var passportRoutes = function(app, passport) {
 var challengeRoutes = function(app) {
 
   app.post('/challenge', function(req, res) {
-    // console.log('req.body:  ' + req.body.tests);
+    //console.log('req.body:  ' + req.body.tests);
     let funcName = req.body.funcName;
     let solution = req.body.solution;
     let tests = req.body.tests; //[ { input: '5, 6', expected: '11'}, { input: '3, 4', expected: '7'} ]
     let status;
-    let testRes = [];
-    tests.forEach((test) => {
-      execute(`${solution} ${funcName}(${test.input})`)
+    var testRes = [];
+
+    Promise.map(tests, function(test) {
+      return execute(`${solution} ${funcName}(${test.input})`)
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         if (data !== test.expected) {
           status = 'fail';
         } else {
           status = 'pass';
         }
-        testRes.push({input: test.input, expected: test.expected, actual: data, status: status});
+        return { input: test.input, actual: data, expected: test.expected, status: status};
       });
+    }).then((data) => {
+      console.log(data);
+      res.status(200);
+      res.data = data;
+      res.end(JSON.stringify(data));
     });
-    res.end(testRes);
+
   });
 
 };
@@ -86,3 +93,7 @@ var databaseRoutes = function(app) {
 module.exports.passportRoutes = passportRoutes;
 module.exports.challengeRoutes = challengeRoutes;
 module.exports.databaseRoutes = databaseRoutes;
+
+//todo: create route to update scores and win/loss stats (patch requests)
+//todo: bcrypt auth and admin functionality
+//todo: helpers for getting data from toy problem schemas

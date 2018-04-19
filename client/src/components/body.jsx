@@ -11,10 +11,11 @@ class Body extends React.Component {
       isPrompt: true,
       prompt: {
         title: "Compete Against Hackers Around the World!",
+        funcName: "iAmAwesome",
         body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
-        code: "var iAmAwesome = function() {\n\n};"
-      },
-      tests: '[typeof iAmAwesome === "function", iAmAwesome(2,3) === 5]'
+        code: "var iAmAwesome = function() {\n\n};",
+        tests: [ {input: '5, 6', expected: '11'}, {input: '3, 4', expected: '7'} ]
+      }
     };
   }
 
@@ -45,10 +46,11 @@ class Body extends React.Component {
       url: '/challenge',
       data: {
         solution: this.state.prompt.code,
-        tests: this.state.tests
+        tests: this.state.prompt.tests,
+        funcName: this.state.prompt.funcName
       }
     }).done((res) => {
-      console.log(res);
+      console.log(JSON.parse(res));
     });
   }
 
