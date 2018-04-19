@@ -24,9 +24,7 @@ class Body extends React.Component {
       method: 'GET',
       url: '/randomChallenge',
       success: data => {
-        //console.log(JSON.parse(data));
         let problem = JSON.parse(data);
-        //console.log(problem.tests);
         let prompt = this.state.prompt;
         prompt.funcName = problem.funcName;
         prompt.code = problem.initialCode;

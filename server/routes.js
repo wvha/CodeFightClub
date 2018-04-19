@@ -54,17 +54,15 @@ var passportRoutes = function(app, passport) {
 var challengeRoutes = function(app) {
 
   app.post('/challenge', function(req, res) {
-    //console.log('req.body:  ' + req.body.tests);
     let funcName = req.body.funcName;
     let solution = req.body.solution;
-    let tests = req.body.tests; //[ { input: '5, 6', expected: '11'}, { input: '3, 4', expected: '7'} ]
+    let tests = req.body.tests;
     let status;
     var testRes = [];
 
     Promise.map(tests, function(test) {
       return execute(`${solution} ${funcName}(${test.input})`)
       .then((data) => {
-        //console.log(data);
         if (data !== test.expected) {
           status = 'fail';
         } else {
@@ -83,7 +81,11 @@ var challengeRoutes = function(app) {
 
 };
 
+
+//Routes that deal with databse actions
 var databaseRoutes = function(app) {
+
+  //Get a random toy problem from the database
   app.get('/randomChallenge', function(req, res) {
     ToyProblem.count().exec(function(err, count) {
       var random = Math.floor(Math.random() * count);
@@ -91,8 +93,17 @@ var databaseRoutes = function(app) {
         res.end(JSON.stringify(result));
       });
     });
-    //res.end();
   });
+
+  //Get a specific toy problem from the database, using the funcName as a query.
+  app.get('/challenge:name', (req, res) => {
+    var func = req.params.name.slice(1);
+    console.log(func);
+    ToyProblem.findOne({"funcName": func}).exec(function(err, result) {
+      res.end(JSON.stringify(result));
+    });
+  });
+
 };
 
 
