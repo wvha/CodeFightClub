@@ -10,7 +10,6 @@ module.exports = (passport) => {
   });
 
   passport.deserializeUser(function(id, done) {
-    //TODO: create this function in User model
     User.findById(id, function(err, user) {
       done(err, user);
     });
@@ -26,8 +25,14 @@ module.exports = (passport) => {
       console.log('within local-signup of passport:  ');
       process.nextTick(function() {
         User.findOne({'username': username}, function(err, user) {
-          if (err) return callback(err);
-          if (user) return callback(null, false, 'username taken');
+          if (err) {
+            console.log("Some error within local-signup...");
+            return callback(err);
+          }
+          if (user) {
+            console.log("Username taken...");
+            return callback(null, false, 'username taken');
+          }
 
           var newUser = new User();
           newUser.username = username;
@@ -35,6 +40,7 @@ module.exports = (passport) => {
           newUser.save(function(err) {
             if (err) console.log('error in newUser.save ' + err);
             console.log(newUser);
+            console.log("successful signup...");
             return callback(null, newUser, 'successful signup');
           });
         });
@@ -52,13 +58,24 @@ module.exports = (passport) => {
       console.log('Inside passport local strat for login');
       process.nextTick(function() {
         User.findOne({'username': username}, function(err, user) {
-          if (err) return callback(err);
-          if (!user) return callback(null, false, 'user not found');
-          if (user.password !== password) return callback(null, false, 'incorrect password');
+          if (err) {
+            console.log("Some error within local-login...");
+            return callback(err);
+          }
+          if (!user) {
+            console.log("Username not found...");
+            return callback(null, false, 'user not found');
+          }
+          if (user.password !== password) {
+            console.log(user);
+            console.log("incorrect password");
+            return callback(null, false, 'incorrect password');
+          }
+          console.log("successful login...");
           return callback(null, user, 'success login');
-        })
-      })
+        });
+      });
     }
-  ))
+  ));
 
 }

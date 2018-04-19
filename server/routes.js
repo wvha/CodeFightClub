@@ -1,6 +1,8 @@
 var User = require('../database/index.js').User;
+var ToyProblem = require('../database/index.js').ToyProblem;
 var run = require('../helpers/sandbox.js').run;
 var execute = require('../helpers/sandbox.js').execute;
+const Promise = require('bluebird');
 
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
@@ -52,37 +54,71 @@ var passportRoutes = function(app, passport) {
 var challengeRoutes = function(app) {
 
   app.post('/challenge', function(req, res) {
-    // console.log('req.body:  ' + req.body.tests);
     let funcName = req.body.funcName;
     let solution = req.body.solution;
-    let tests = req.body.tests; //[ { input: '5, 6', expected: '11'}, { input: '3, 4', expected: '7'} ]
+    let tests = req.body.tests;
     let status;
-    let testRes = [];
-    tests.forEach((test) => {
-      execute(`${solution} ${funcName}(${test.input})`)
+    var testRes = [];
+
+    Promise.map(tests, function(test) {
+      return execute(`${solution} ${funcName}(${test.input})`)
       .then((data) => {
-        console.log(data);
         if (data !== test.expected) {
           status = 'fail';
         } else {
           status = 'pass';
         }
-        testRes.push({input: test.input, expected: test.expected, actual: data, status: status});
+        return { input: test.input, actual: data, expected: test.expected, status: status};
       });
+    }).then((data) => {
+      console.log(data);
+      res.status(200);
+      res.data = data;
+      res.end(JSON.stringify(data));
     });
-    res.end()
   });
 
 };
 
+
+//Routes that deal with databse actions
 var databaseRoutes = function(app) {
-  app.get('/challenge', function(req, res) {
-    //Get data for challenge from database
-    //Send response with title, funcName, initialCode, tests
+
+  //Get a random toy problem from the database
+  app.get('/randomChallenge', function(req, res) {
+    ToyProblem.count().exec(function(err, count) {
+      var random = Math.floor(Math.random() * count);
+      ToyProblem.findOne().skip(random).exec(function(err, result) {
+        res.end(JSON.stringify(result));
+      });
+    });
   });
-}
+
+  //Get a specific toy problem from the database, using the funcName as a query.
+  app.get('/challenge:name', (req, res) => {
+    var func = req.params.name.slice(1);
+    console.log(func);
+    ToyProblem.findOne({"funcName": func}).exec(function(err, result) {
+      res.end(JSON.stringify(result));
+    });
+  });
+
+  app.get('/users:name', (req, res) => {
+    var name = req.params.name.slice(1);
+    User.update({"username": name}, {$inc: {"score": 10}}, function(err, result) {
+      if (err) console.log(err);
+      console.log(result);
+    });
+    res.end('updated?');
+  });
+
+};
 
 
 module.exports.passportRoutes = passportRoutes;
 module.exports.challengeRoutes = challengeRoutes;
 module.exports.databaseRoutes = databaseRoutes;
+
+//todo: create route to update scores and win/loss stats (patch requests)
+//todo: bcrypt auth and admin functionality
+//todo: adding toy problems to database
