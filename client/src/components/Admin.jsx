@@ -25,7 +25,7 @@ class Admin extends React.Component {
         return (
           <div className="container row" id="admin">
             <div className="container" id="admin-buttons">
-                <button onClick={()=>this.viewSetter('Add Toy Problem')}>Add Toy Problems</button>
+                <button type="button" onClick={()=>this.viewSetter('Add Toy Problem')}>Add Toy Problems</button>
             </div>
             <div className="container" id="admin-body">
               <div id="admin-title">
