@@ -8,6 +8,7 @@ class AddToyProblems extends React.Component {
           title: '',
           body: '',
           code: '',
+          initCode: '',
           tests: ''
         }
     }
@@ -17,9 +18,10 @@ class AddToyProblems extends React.Component {
             title: '',
             body: '',
             code: '',
+            initCode: '',
             tests: ''
           };
-      toyProblem.code = `function ${toyProblem.code} () {\n\n};`;
+      //toyProblem.code = `function ${toyProblem.code} () {\n\n};`;
       $.post('/admin/toyProblem', toyProblem)
       .done((data) => {
         console.log('success', data);
@@ -50,13 +52,17 @@ class AddToyProblems extends React.Component {
                     <h5>Function Name</h5>
                     <input placeholder="Expected function name" value={this.state.code} onChange={this.setter.call(this, 'code')}></input>
                 </div>
+                <div>
+                    <h5>Initial Code</h5>
+                    <input placeholder="Initial code stub" value={this.state.initCode} onChange={this.setter.call(this, 'initCode')}></input>
+                </div>
                 <div id="newPrompt">
-                    <h5>Prompt</h5> 
+                    <h5>Prompt</h5>
                     <textarea placeholder="Instructions for user" value={this.state.body} onChange={this.setter.call(this, 'body')}></textarea>
                 </div>
                 <div id="newTests">
-                    <h5>Tests</h5> 
-                    <textarea 
+                    <h5>Tests</h5>
+                    <textarea
                     placeholder="Create tests as `[{input: '2,3' , expected: '5'}, {input: '4, 4', expected: '8'}]`"
                     onChange={this.setter.call(this, 'tests')}
                     value={this.state.tests}

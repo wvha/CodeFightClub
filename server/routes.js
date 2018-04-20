@@ -112,6 +112,23 @@ var databaseRoutes = function(app) {
     res.end('updated?');
   });
 
+  //$.post('/admin/toyProblem', toyProblem)
+  app.post('/admin/toyProblem', (req, res) => {
+    var problem = {};
+    problem.title = req.body.title;
+    problem.body = req.body.body;
+    problem.funcName = req.body.code;
+    problem.initialCode = req.body.initCode;
+    problem.tests = []; //Ummmm... how do we save arrays to the database?
+    var dbProblem = new ToyProblem(problem);
+    dbProblem.save((err) => {
+      if (err) {
+        console.log(err);
+      }
+      //res.end('saved?');
+    });
+  });
+
 };
 
 
