@@ -64,11 +64,11 @@ class SignUp extends Component {
         <div className="modal container">
             <h1>create your account</h1>
             <form autoComplete="off" className="container">
-              Username: 
+              Username:
               <br/><input type="text" name="username" value={this.state.username} onChange={this.updateState('username')}/><br/>
               Email:
               <br/><input type="text" name="email" value={this.state.email} onChange={this.updateState('email')}/><br/>
-              Password: 
+              Password:
               <br/><input type="password" name="password" value={this.state.password} onChange={this.updateState('password')}/><br/>
               <button onClick={this.submitSignUp}>Submit</button>
             </form>

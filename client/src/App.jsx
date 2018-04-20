@@ -23,6 +23,27 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    $.get('/isLoggedIn', data => {
+      console.log(data);
+      if (data !== undefined) {
+        this.setState({
+          user: {
+            username: data,
+            isAdmin: true
+          }
+        });
+      } else {
+        this.setState({
+          user: {
+            username: '',
+            isAdmin: false
+          }
+        });
+      }
+    });
+  }
+
   setUser (user) {
     this.setState({ user: user });
   }
@@ -30,7 +51,7 @@ class App extends Component {
   componentDidUpdate () {
     console.log(this.state);
   }
-  
+
   renderAdmin () {
     this.state.view === 'admin'
       ? this.setState({ view: 'prompt' })
@@ -62,7 +83,7 @@ class App extends Component {
           isLoggedIn={!!this.state.user.username}
           view={this.state.view}
         />
-        <Footer 
+        <Footer
         />
       </div>
     );
