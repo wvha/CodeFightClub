@@ -63,7 +63,7 @@ class AddToyProblems extends React.Component {
                 <div id="newTests">
                     <h5>Tests</h5>
                     <textarea
-                    placeholder='Create tests as [{"input": "2,3" , expected: "5"}, {"input": "4, 4", "expected": "8"}]'
+                    placeholder='Create tests as [{"input": "2,3" , "expected": "5"}, {"input": "4, 4", "expected": "8"}]'
                     onChange={this.setter.call(this, 'tests')}
                     value={this.state.tests}
                     ></textarea>
