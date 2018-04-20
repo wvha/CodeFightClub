@@ -7,6 +7,13 @@
     <title>CodeFightClub</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
+    <script type="text/javascript">
+      var uri = window.location.toString();
+      if (uri.indexOf("?") > 0) {
+          var clean_uri = uri.substring(0, uri.indexOf("?"));
+          window.history.replaceState({}, document.title, clean_uri);
+      }
+    </script>
   </head>
   <body>
     <div class="container" id="background">

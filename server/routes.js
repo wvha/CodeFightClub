@@ -3,6 +3,7 @@ var ToyProblem = require('../database/index.js').ToyProblem;
 var run = require('../helpers/sandbox.js').run;
 var execute = require('../helpers/sandbox.js').execute;
 const Promise = require('bluebird');
+const path = require('path');
 
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
@@ -42,13 +43,6 @@ var passportRoutes = function(app, passport) {
     res.end('Logout was a success!');
   });
 
-  app.get('/loggedIn', function(req, res) {
-    if (req.user) {
-      res.send(true);
-    } else {
-      res.send(false);
-    }
-  });
 };
 
 var challengeRoutes = function(app) {
@@ -129,6 +123,20 @@ var databaseRoutes = function(app) {
       }
       //res.end('saved?');
     });
+  });
+
+  app.get('/isLoggedIn', function(req, res) {
+    if (req.user) {
+      var username = req.user.username;
+      User.find({username}).exec((err, data) => {
+        if (err) {
+          console.log(err);
+        }
+        res.send(data[0].username);
+      });
+    } else {
+      res.send(undefined);
+    }
   });
 
 };
