@@ -1,11 +1,11 @@
-var User = require('../database/index.js').User;
-var ToyProblem = require('../database/index.js').ToyProblem;
-var run = require('../helpers/sandbox.js').run;
-var execute = require('../helpers/sandbox.js').execute;
+const User = require('../database/index.js').User;
+const ToyProblem = require('../database/index.js').ToyProblem;
+const execute = require('../helpers/sandbox.js').execute;
 const Promise = require('bluebird');
 const path = require('path');
-var db = require('../database/index.js');
+const db = require('../database/index.js');
 
+// Routes for dealing with login and signup
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
 
@@ -48,6 +48,7 @@ var passportRoutes = function(app, passport) {
 
 var challengeRoutes = function(app) {
 
+  //Route for running tests on toyProblem
   app.post('/challenge', function(req, res) {
     let funcName = req.body.funcName;
     let solution = req.body.solution;
@@ -55,6 +56,8 @@ var challengeRoutes = function(app) {
     let status;
     var testRes = [];
 
+    //Because execute returns a promise, we need to map each test
+    //to the result of execute in order to properly send an array of test results
     Promise.map(tests, function(test) {
       return execute(`${solution} ${funcName}(${test.input})`)
       .then((data) => {
@@ -66,7 +69,6 @@ var challengeRoutes = function(app) {
         return { input: test.input, actual: data, expected: test.expected, status: status};
       });
     }).then((data) => {
-      console.log(data);
       res.status(200);
       res.data = data;
       res.end(JSON.stringify(data));
@@ -89,6 +91,7 @@ var databaseRoutes = function(app) {
     });
   });
 
+  //Get leaderboard of users in databse
   app.get('/leaderboard', function(req, res) {
     db.findLeaderboard((users) => {
       res.json(users);
@@ -96,24 +99,25 @@ var databaseRoutes = function(app) {
   });
 
   //Get a specific toy problem from the database, using the funcName as a query.
+  //NOTE: This isn't currently being used in the application.
   app.get('/challenge:name', (req, res) => {
     var func = req.params.name.slice(1);
-    console.log(func);
     ToyProblem.findOne({"funcName": func}).exec(function(err, result) {
       res.end(JSON.stringify(result));
     });
   });
 
+  //Update a user's score within the database
   app.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
     User.update({"username": name}, {$inc: {"score": 10}}, function(err, result) {
       if (err) console.log(err);
       console.log(result);
     });
-    res.end('updated?');
+    res.end('updated');
   });
 
-  //$.post('/admin/toyProblem', toyProblem)
+  //Add a toyProblem to the database
   app.post('/admin/toyProblem', (req, res) => {
     var problem = {};
     problem.title = req.body.title;
@@ -121,8 +125,6 @@ var databaseRoutes = function(app) {
     problem.funcName = req.body.code;
     problem.params = req.body.params;
     problem.tests = JSON.parse(req.body.tests);
-    console.log('---------------     ', typeof req.body.tests);
-    console.log(problem.tests); //Ummmm... how do we save arrays to the database?
     var dbProblem = new ToyProblem(problem);
     dbProblem.save((err) => {
       if (err) {
@@ -133,6 +135,7 @@ var databaseRoutes = function(app) {
     });
   });
 
+  //Check whether or not a user is logged in
   app.get('/isLoggedIn', function(req, res) {
     if (req.user) {
       var username = req.user.username;
@@ -153,7 +156,3 @@ var databaseRoutes = function(app) {
 module.exports.passportRoutes = passportRoutes;
 module.exports.challengeRoutes = challengeRoutes;
 module.exports.databaseRoutes = databaseRoutes;
-
-//todo: create route to update scores and win/loss stats (patch requests)
-//todo: bcrypt auth and admin functionality
-//todo: adding toy problems to database
