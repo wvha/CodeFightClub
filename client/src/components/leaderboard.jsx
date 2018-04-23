@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class Leaderboard extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class Leaderboard extends React.Component {
   } 
 
   componentDidMount () {
-    $.get("/leaderbord")
+    $.get("/leaderboard")
     .done((data) => this.setState({ leaderboard: data }))
   }
 
