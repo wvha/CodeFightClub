@@ -58,6 +58,12 @@ class App extends Component {
       : this.setState({ view: 'admin' }) //admin renders... click admin again to change state of view back to prompt
   }
 
+  renderAdmin () {
+    this.state.view === 'leaderboard'
+      ? this.setState({ view: 'prompt' })
+      : this.setState({ view: 'leaderboard' }) 
+  }
+
   logout () {
     $.get('/logout')
     .done((data) => {

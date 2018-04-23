@@ -2,12 +2,15 @@ import React from 'react';
 import SignUp from './signup.jsx';
 import Login from './login.jsx';
 import User from './user.jsx';
+import Leaderboard from './leaderboard.jsx'
 
 
 const Header = function(props) {
   return (
     <header id="header" className="container row">
-      <div id="header-filler"></div>
+      <div id="leaderboard">
+      <Leaderboard />
+      </div>
       <div id="logo">
         <img src="BrandonStinks.png" alt="BrandonStinks" height="90px" width="180px" />
       </div> 
