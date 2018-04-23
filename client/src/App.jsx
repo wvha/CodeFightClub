@@ -52,10 +52,10 @@ class App extends Component {
     console.log(this.state);
   }
 
-  renderAdmin () {
-    this.state.view === 'admin'
-      ? this.setState({ view: 'prompt' })
-      : this.setState({ view: 'admin' }) //admin renders... click admin again to change state of view back to prompt
+  changeView (state) {
+    return () => {
+      this.setState({ view: state});
+    }
   }
 
   logout () {
@@ -76,7 +76,7 @@ class App extends Component {
           user={this.state.user}
           updateUser={this.setUser.bind(this)}
           logout={this.logout.bind(this)}
-          renderAdmin={this.renderAdmin.bind(this)}
+          changeView={this.changeView.bind(this)}
           view={this.state.view}
         />
         <Body

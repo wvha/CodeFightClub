@@ -91,7 +91,12 @@ button {
   align-content: space-between;
 }
 
-#user, #header-filler {
+#leaderboard {
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+#user, #leaderboard {
   width: 50%;
 }
 
