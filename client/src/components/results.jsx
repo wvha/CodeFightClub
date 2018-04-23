@@ -17,13 +17,13 @@ const Results = ({results}) => {
 
 const Fail = ({results}) => (
   <div className="fail">
-    <h5>{`failed test with inptuts ${results.inputs}, expected ${results.expected}, but got ${results.actual}`}</h5>
+    <h5>{`failed test with inptuts ${results.input}, expected ${results.expected}, but got ${results.actual}`}</h5>
   </div>
 );
 
 const Pass = ({results}) => (
     <div className="pass">
-      <h5>{`Passed with ${results.inputs}`}</h5>
+      <h5>{`Passed with ${results.input}`}</h5>
     </div>
 );
 

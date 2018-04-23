@@ -4,9 +4,9 @@ import Admin from './Admin.jsx';
 
 
 
-const Body = ({ view, isLoggedIn }) => (
+const Body = ({ view, isLoggedIn, username }) => (
   <div className="container" id="body">
-    { view === 'prompt' ? <Prompt isLoggedIn={isLoggedIn} /> : <Admin /> }
+    { view === 'prompt' ? <Prompt username={username} isLoggedIn={isLoggedIn} /> : <Admin /> }
   </div>
 )
 
