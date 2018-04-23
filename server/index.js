@@ -9,6 +9,7 @@ const passport = require('passport');
 
 const app = express();
 
+// Setup middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -29,6 +30,7 @@ app.listen(app.get('port'), function() {
   console.log('Server started on port:' + app.get('port'));
 });
 
+//Here are the routes we use
 require('./routes.js').passportRoutes(app, passport);
 require('./routes.js').challengeRoutes(app);
 require('./routes.js').databaseRoutes(app);

@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const path = require('path');
 const db = require('../database/index.js');
 
+// Routes for dealing with login and signup
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
 
@@ -47,6 +48,7 @@ var passportRoutes = function(app, passport) {
 
 var challengeRoutes = function(app) {
 
+  //Route for running tests on toyProblem
   app.post('/challenge', function(req, res) {
     let funcName = req.body.funcName;
     let solution = req.body.solution;
@@ -54,6 +56,8 @@ var challengeRoutes = function(app) {
     let status;
     var testRes = [];
 
+    //Because execute returns a promise, we need to map each test
+    //to the result of execute in order to properly send an array of test results
     Promise.map(tests, function(test) {
       return execute(`${solution} ${funcName}(${test.input})`)
       .then((data) => {
@@ -87,6 +91,7 @@ var databaseRoutes = function(app) {
     });
   });
 
+  //Get leaderboard of users in databse
   app.get('/leaderboard', function(req, res) {
     db.findLeaderboard((users) => {
       res.json(users);
@@ -94,6 +99,7 @@ var databaseRoutes = function(app) {
   });
 
   //Get a specific toy problem from the database, using the funcName as a query.
+  //NOTE: This isn't currently being used in the application.
   app.get('/challenge:name', (req, res) => {
     var func = req.params.name.slice(1);
     ToyProblem.findOne({"funcName": func}).exec(function(err, result) {
@@ -101,6 +107,7 @@ var databaseRoutes = function(app) {
     });
   });
 
+  //Update a user's score within the database
   app.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
     User.update({"username": name}, {$inc: {"score": 10}}, function(err, result) {
@@ -110,6 +117,7 @@ var databaseRoutes = function(app) {
     res.end('updated');
   });
 
+  //Add a toyProblem to the database
   app.post('/admin/toyProblem', (req, res) => {
     var problem = {};
     problem.title = req.body.title;
@@ -127,6 +135,7 @@ var databaseRoutes = function(app) {
     });
   });
 
+  //Check whether or not a user is logged in
   app.get('/isLoggedIn', function(req, res) {
     if (req.user) {
       var username = req.user.username;
