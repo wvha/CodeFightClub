@@ -4,6 +4,7 @@ var run = require('../helpers/sandbox.js').run;
 var execute = require('../helpers/sandbox.js').execute;
 const Promise = require('bluebird');
 const path = require('path');
+var db = require('../database/index.js');
 
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
@@ -85,6 +86,12 @@ var databaseRoutes = function(app) {
       ToyProblem.findOne().skip(random).exec(function(err, result) {
         res.end(JSON.stringify(result));
       });
+    });
+  });
+
+  app.get('/leaderboard', function(req, res) {
+    db.findLeaderboard((users) => {
+      res.json(users);
     });
   });
 
