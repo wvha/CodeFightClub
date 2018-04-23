@@ -1,21 +1,13 @@
 
-var express = require('express');
-var session = require('express-session');
-var expressValidator = require('express-validator');
-var path = require('path');
-var mongo = require('mongodb');
-var mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var flash = require('connect-flash');
-var http = require('http');
-//var socketIO = require('socket.io');
-var db = require('../database/index.js');
-var User = require('../database/index.js').User;
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
-var app = express();
+
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

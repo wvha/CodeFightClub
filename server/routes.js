@@ -1,10 +1,9 @@
-var User = require('../database/index.js').User;
-var ToyProblem = require('../database/index.js').ToyProblem;
-var run = require('../helpers/sandbox.js').run;
-var execute = require('../helpers/sandbox.js').execute;
+const User = require('../database/index.js').User;
+const ToyProblem = require('../database/index.js').ToyProblem;
+const execute = require('../helpers/sandbox.js').execute;
 const Promise = require('bluebird');
 const path = require('path');
-var db = require('../database/index.js');
+const db = require('../database/index.js');
 
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
@@ -66,7 +65,6 @@ var challengeRoutes = function(app) {
         return { input: test.input, actual: data, expected: test.expected, status: status};
       });
     }).then((data) => {
-      console.log(data);
       res.status(200);
       res.data = data;
       res.end(JSON.stringify(data));
@@ -98,7 +96,6 @@ var databaseRoutes = function(app) {
   //Get a specific toy problem from the database, using the funcName as a query.
   app.get('/challenge:name', (req, res) => {
     var func = req.params.name.slice(1);
-    console.log(func);
     ToyProblem.findOne({"funcName": func}).exec(function(err, result) {
       res.end(JSON.stringify(result));
     });
@@ -110,10 +107,9 @@ var databaseRoutes = function(app) {
       if (err) console.log(err);
       console.log(result);
     });
-    res.end('updated?');
+    res.end('updated');
   });
 
-  //$.post('/admin/toyProblem', toyProblem)
   app.post('/admin/toyProblem', (req, res) => {
     var problem = {};
     problem.title = req.body.title;
@@ -121,8 +117,6 @@ var databaseRoutes = function(app) {
     problem.funcName = req.body.code;
     problem.params = req.body.params;
     problem.tests = JSON.parse(req.body.tests);
-    console.log('---------------     ', typeof req.body.tests);
-    console.log(problem.tests); //Ummmm... how do we save arrays to the database?
     var dbProblem = new ToyProblem(problem);
     dbProblem.save((err) => {
       if (err) {
@@ -153,7 +147,3 @@ var databaseRoutes = function(app) {
 module.exports.passportRoutes = passportRoutes;
 module.exports.challengeRoutes = challengeRoutes;
 module.exports.databaseRoutes = databaseRoutes;
-
-//todo: create route to update scores and win/loss stats (patch requests)
-//todo: bcrypt auth and admin functionality
-//todo: adding toy problems to database
