@@ -43,6 +43,17 @@ const getUserById = function(id, callback) {
   return User.findById(id, callback);
 };
 
+let findLeaderboard = (callback) => {
+  User.find((err, users) => {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(users);
+    }
+  })
+  .sort({'score': -1});
+}
+
 
 // Database export
 module.exports.db = db;
@@ -55,3 +66,4 @@ module.exports.ToyProblem = ToyProblem;
 
 //User functions
 module.exports.getUserById = getUserById;
+module.exports.findLeaderboard = findLeaderboard;
