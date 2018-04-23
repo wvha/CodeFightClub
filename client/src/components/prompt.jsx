@@ -91,7 +91,7 @@ class Prompt extends React.Component {
   renderButton() {
     if (this.state.view === 'prompt') {
       return (
-        <div className="body">
+        <div className="container" id="promptViewContent">
           <h1 id="prompt-title">{this.state.prompt.title}</h1>
           <p id="prompt-body">{this.state.prompt.body}</p>
         </div>
@@ -117,13 +117,13 @@ class Prompt extends React.Component {
         </div>
         <div></div>
         <div className="body container" id="promptView">
-          <div className="container row" id="promptViewButtons">
+          {this.state.results.length === 0 ? null : <div className="container row" id="promptViewButtons">
             <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
             <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
-          </div>
-          <div className="container" id="promptViewContent">
+          </div>}
+          {/* <div className="container" id="promptViewContent"> */}
             {this.renderButton()}
-          </div>
+          {/* </div> */}
         </div>
       </div>
     )

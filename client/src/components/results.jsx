@@ -2,7 +2,7 @@ import React from 'react';
 
 const Results = ({results}) => {
     return (
-      <div className="container" id="results">
+      <div className="container" id="promptViewContent">
         <h1>Results</h1>
         {results.map((val, key) => {
           if (val.status === 'pass') {
@@ -17,7 +17,7 @@ const Results = ({results}) => {
 
 const Fail = ({results}) => (
   <div className="fail">
-    <h5>{`failed test with inptuts ${results.input}, expected ${results.expected}, but got ${results.actual}`}</h5>
+    <h5>{`failed test with inputs ${results.input}, expected ${results.expected}, but got ${results.actual}`}</h5>
   </div>
 );
 
