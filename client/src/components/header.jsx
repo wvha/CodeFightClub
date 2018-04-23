@@ -2,7 +2,7 @@ import React from 'react';
 import SignUp from './signup.jsx';
 import Login from './login.jsx';
 import User from './user.jsx';
-import Leaderboard from './leaderboard.jsx'
+//direct child of App
 
 
 const Header = function(props) {

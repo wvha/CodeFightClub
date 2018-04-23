@@ -1,5 +1,6 @@
 import React from 'react';
-import AddToyProblem from './AddToyProblem.jsx';
+import AddToyProblem from './addToyProblem.jsx';
+//direct child of body
 
 class Admin extends React.Component {
     constructor(props) {

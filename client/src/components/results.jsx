@@ -1,4 +1,5 @@
 import React from 'react';
+//imported to prompt
 
 const Results = ({results}) => {
     return (
