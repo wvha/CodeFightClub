@@ -294,3 +294,17 @@ button {
   width: 100%;
   margin: 0 0 15px 0;
 }
+
+#results {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.fail {
+  color: red;
+}
+
+.pass {
+  color: green;
+}
