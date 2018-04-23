@@ -43,7 +43,7 @@ class Prompt extends React.Component {
       }
     }).done((res) => {
       this.setState({results: JSON.parse(res)});
-      console.log(JSON.parse(res));
+      console.log('this is the state', this.state.results);
     });
   }
 
