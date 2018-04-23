@@ -75,7 +75,7 @@ class Prompt extends React.Component {
         prompt.title = challenge.title;
         prompt.body = challenge.body;
         prompt.funcName = challenge.funcName;
-        prompt.code = `function ${challenge.funcName}(${challenge.params}) { \n\n }`;
+        prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
         prompt.tests = challenge.tests;
         this.setState({ isPrompt: true, isComplete: false, prompt: prompt, view: 'prompt', results: ''});
       })
