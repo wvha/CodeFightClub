@@ -18,7 +18,10 @@ const UserSchema = new mongoose.Schema({
   email: String,
   wins: Number,
   losses: Number,
-  score: Number
+  score: {
+    type: Number,
+    default: 0
+  }
 });
 
 const ToyProblemSchema = new mongoose.Schema({
