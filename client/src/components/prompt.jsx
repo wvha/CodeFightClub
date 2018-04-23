@@ -76,11 +76,11 @@ class Prompt extends React.Component {
         prompt.funcName = challenge.funcName;
         prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
         prompt.tests = challenge.tests;
-        this.setState({ 
+        this.setState({
           view: 'prompt',
           isComplete: false,
           prompt: prompt,
-          results: '' 
+          results: ''
         });
       })
       .fail( err => {
@@ -104,7 +104,7 @@ class Prompt extends React.Component {
       )
     } else if (this.state.view === 'results') {
       return (
-      <Results results={this.state.results}/>
+        <Results results={this.state.results}/>
       )
     }
   }
@@ -118,7 +118,7 @@ class Prompt extends React.Component {
           solve={this.updateUserSolution.bind(this)}
           />
           <div className="container submit">
-            { this.state.view === 'prompt' && this.props.isLoggedIn && !this.state.isComplete ? this.runCode() : this.joinQueue() }
+            { this.props.isLoggedIn && !this.state.isComplete && !!this.state.prompt.funcName ? this.runCode() : this.joinQueue() }
           </div>
         </div>
         <div></div>
