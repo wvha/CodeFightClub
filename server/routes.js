@@ -97,7 +97,7 @@ var databaseRoutes = function(app) {
     });
   });
 
-  app.get('/users:name', (req, res) => {
+  app.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
     User.update({"username": name}, {$inc: {"score": 10}}, function(err, result) {
       if (err) console.log(err);
