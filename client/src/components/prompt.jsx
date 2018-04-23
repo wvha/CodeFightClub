@@ -42,8 +42,24 @@ class Prompt extends React.Component {
         tests: this.state.prompt.tests
       }
     }).done((res) => {
-      this.setState({results: JSON.parse(res), view: 'results'});
-      console.log(JSON.parse(res));
+      this.setState({
+        results: JSON.parse(res),
+        view: "results"
+      });
+      console.log('this is the state', this.state.results);
+      var array = JSON.parse(res);
+      var passing = true;
+      array.forEach((test) => {
+        if (test.status === 'fail') {
+          passing = false;
+        }
+      });
+      if (passing) {
+        $.ajax({
+          method: 'PATCH',
+          url: `/users:${this.props.username}`
+        });
+      }
     });
   }
 

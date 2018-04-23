@@ -4,6 +4,7 @@ var run = require('../helpers/sandbox.js').run;
 var execute = require('../helpers/sandbox.js').execute;
 const Promise = require('bluebird');
 const path = require('path');
+var db = require('../database/index.js');
 
 var passportRoutes = function(app, passport) {
   require('../config/passport.js')(passport);
@@ -88,6 +89,12 @@ var databaseRoutes = function(app) {
     });
   });
 
+  app.get('/leaderboard', function(req, res) {
+    db.findLeaderboard((users) => {
+      res.json(users);
+    });
+  });
+
   //Get a specific toy problem from the database, using the funcName as a query.
   app.get('/challenge:name', (req, res) => {
     var func = req.params.name.slice(1);
@@ -97,7 +104,7 @@ var databaseRoutes = function(app) {
     });
   });
 
-  app.get('/users:name', (req, res) => {
+  app.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
     User.update({"username": name}, {$inc: {"score": 10}}, function(err, result) {
       if (err) console.log(err);
