@@ -102,6 +102,7 @@ button {
 #user {
   justify-content: flex-end;
 }
+
 #user button {
   height: 60px;
   width: 60px;
@@ -285,12 +286,28 @@ button {
 /***      Prompt     ***/
 /***********************/
 
+#promptView button {
+  font-size: 1rem;
+  padding: 5px;
+}
+
 #promptViewContent {
   flex-grow: 1;
   width: 100%;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-start;
 }
 
 #promptViewButtons {
   width: 100%;
   margin: 0 0 15px 0;
+}
+
+.pass {
+  color: green;
+}
+
+.fail {
+  color: red;
 }
