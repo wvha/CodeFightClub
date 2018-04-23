@@ -54,7 +54,7 @@ class AddToyProblems extends React.Component {
                 </div>
                 <div>
                     <h5>Initial Code</h5>
-                    <input placeholder="Initial code stub" value={this.state.initCode} onChange={this.setter.call(this, 'initCode')}></input>
+                    <input placeholder="Initial code stub (wrap with double quotes)" value={this.state.initCode} onChange={this.setter.call(this, 'initCode')}></input>
                 </div>
                 <div id="newPrompt">
                     <h5>Prompt</h5>
