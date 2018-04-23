@@ -45,7 +45,7 @@ class App extends Component {
   }
 
   setUser (user) {
-    this.setState({ user: user });
+    this.setState({ user: user});
   }
 
   componentDidUpdate () {
@@ -82,6 +82,7 @@ class App extends Component {
         <Body
           isLoggedIn={!!this.state.user.username}
           view={this.state.view}
+          username={this.state.user.username}
         />
         <Footer
         />
