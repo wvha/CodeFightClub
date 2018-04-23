@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+//direct child of Admin
 
 class AddToyProblems extends React.Component {
     constructor(props) {
@@ -13,15 +14,14 @@ class AddToyProblems extends React.Component {
         }
     }
 
-    submitToyProblem (toyProblem) {
-      let emptyState = {
+    submitToyProblem (toyProblem) { 
+      let emptyState = { // on success clears the state of the input fields
             title: '',
             body: '',
             code: '',
             tests: '',
             params: ''
           };
-      //toyProblem.code = `function ${toyProblem.code} () {\n\n};`;
       $.post('/admin/toyProblem', toyProblem)
       .done((data) => {
         console.log('success', data);
@@ -32,11 +32,11 @@ class AddToyProblems extends React.Component {
       });
     }
 
-    setter (state) {
+    setter (prop) { //@param prop - sets the state of each of the input fields
       return (e) => {
-        let newState = {};
-        newState[state] = e.target.value;
-        this.setState(newState);
+        let state = {};
+        newState[prop] = e.target.value;
+        this.setState(state);
       }
     }
 

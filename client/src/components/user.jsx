@@ -1,4 +1,5 @@
 import React from 'react';
+//direct child of header
 
 const User = function(props) {
   return (

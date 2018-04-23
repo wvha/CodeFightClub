@@ -1,4 +1,5 @@
 import React from 'react';
+//direct child of App
 
 
 const Footer = function(props) {

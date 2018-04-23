@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import $ from 'jquery';
+//direct child of header
+
 
 class SignUp extends Component {
   constructor(props) {
@@ -11,11 +13,9 @@ class SignUp extends Component {
       email: '',
       password: ''
     }
-    this.openModalSignUp = this.openModalSignUp.bind(this);
-    this.submitSignUp = this.submitSignUp.bind(this);
   }
 
-  openModalSignUp () {
+  openModalSignUp () { //opens modal when state is true
     this.setState({ showModalSignUp: true });
   }
 
@@ -23,27 +23,15 @@ class SignUp extends Component {
     $.post('/signup', this.state)
     .done((data) => {
       this.setState({ showModalSignUp: false });
-      console.log('the post was successful');
       this.props.setUsername(this.state.username);
+      console.log('the post was successful');
     })
     .fail(() => {
       console.log('the post was a failure');
     });
   }
 
-  //// usernameChange (e) {
-  ////   this.setState({ username: e.target.value });
-  //// }
-
-  //// emailChange (e) {
-  ////   this.setState({ email: e.target.value });
-  //// }
-
-  //// passwordChange (e) {
-  ////   this.setState({ password: e.target.value });
-  //// }
-
-  updateState (prop) {
+  updateState (prop) { //@param prop - onClick updates the state of any input field passed
     return (e) => {
       let state = {};
       state[prop] = e.target.value;
@@ -54,7 +42,7 @@ class SignUp extends Component {
   render () {
     return (
       <span>
-        { this.props.loggedIn ? null : <button id="signup" onClick={this.openModalSignUp}>Sign Up</button>}
+        { this.props.loggedIn ? null : <button id="signup" onClick={this.openModalSignUp.bind(this)}>Sign Up</button>}
         <ReactModal
             isOpen={this.state.showModalSignUp}
             contentLabel="SignUp Modal"
@@ -70,7 +58,7 @@ class SignUp extends Component {
               <br/><input type="text" name="email" value={this.state.email} onChange={this.updateState('email')}/><br/>
               Password:
               <br/><input type="password" name="password" value={this.state.password} onChange={this.updateState('password')}/><br/>
-              <button onClick={this.submitSignUp}>Submit</button>
+              <button onClick={this.submitSignUp.bind(this)}>Submit</button>
             </form>
         </div>
         </ReactModal>

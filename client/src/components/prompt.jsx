@@ -1,13 +1,13 @@
 import React from 'react';
-import Challenge from './Challenge.jsx';
+import Challenge from './challenge.jsx';
 import $ from 'jquery';
 import Results from './results.jsx';
+//direct child of body
 
 class Prompt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPrompt: false,
       isComplete: false,
       prompt: {
         title: "Compete Against Hackers Around the World!",
@@ -47,7 +47,6 @@ class Prompt extends React.Component {
         results: JSON.parse(res),
         view: "results"
       });
-      console.log('this is the state', this.state.results);
       var array = JSON.parse(res);
       var passing = true;
       array.forEach((test) => {
@@ -56,7 +55,7 @@ class Prompt extends React.Component {
         }
       });
       if (passing) {
-        this.setState({
+        this.setState({ //updates the score of the user if all tests pass
           isComplete: true
         });
         $.ajax({
@@ -75,16 +74,21 @@ class Prompt extends React.Component {
         prompt.title = challenge.title;
         prompt.body = challenge.body;
         prompt.funcName = challenge.funcName;
-        prompt.code = `function ${challenge.funcName}(${challenge.params}) { \n\n }`;
+        prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
         prompt.tests = challenge.tests;
-        this.setState({ isPrompt: true, isComplete: false, prompt: prompt, view: 'prompt', results: ''});
+        this.setState({ 
+          view: 'prompt',
+          isComplete: false,
+          prompt: prompt,
+          results: '' 
+        });
       })
       .fail( err => {
         console.error(err);
       })
   }
 
-  updateUserSolution (e) {
+  updateUserSolution (e) { //setting the property of the prompt object to setState
     let prompt = this.state.prompt;
     prompt.code = e;
     this.setState(prompt);
@@ -114,7 +118,7 @@ class Prompt extends React.Component {
           solve={this.updateUserSolution.bind(this)}
           />
           <div className="container submit">
-            { this.state.isPrompt && this.props.isLoggedIn && !this.state.isComplete ? this.runCode() : this.joinQueue() }
+            { this.state.view === 'prompt' && this.props.isLoggedIn && !this.state.isComplete ? this.runCode() : this.joinQueue() }
           </div>
         </div>
         <div></div>
@@ -123,9 +127,7 @@ class Prompt extends React.Component {
             <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
             <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
           </div>}
-          {/* <div className="container" id="promptViewContent"> */}
             {this.renderButton()}
-          {/* </div> */}
         </div>
       </div>
     )

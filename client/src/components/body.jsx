@@ -1,8 +1,8 @@
 import React from 'react';
 import Prompt from './prompt.jsx';
-import Admin from './Admin.jsx';
+import Admin from './admin.jsx';
 import Leaderboard from './leaderboard.jsx';
-
+//direct child of App
 
 const Body = ({ view, isLoggedIn, username }) => (
   <div className="container" id="body">
