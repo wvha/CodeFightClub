@@ -42,7 +42,10 @@ class Prompt extends React.Component {
         tests: this.state.prompt.tests
       }
     }).done((res) => {
-      this.setState({results: JSON.parse(res)});
+      this.setState({
+        results: JSON.parse(res),
+        view: "results"
+      });
       console.log('this is the state', this.state.results);
     });
   }
