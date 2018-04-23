@@ -8,7 +8,6 @@ class AddToyProblems extends React.Component {
           title: '',
           body: '',
           code: '',
-          initCode: '',
           tests: ''
         }
     }
@@ -18,7 +17,6 @@ class AddToyProblems extends React.Component {
             title: '',
             body: '',
             code: '',
-            initCode: '',
             tests: ''
           };
       //toyProblem.code = `function ${toyProblem.code} () {\n\n};`;
@@ -52,10 +50,6 @@ class AddToyProblems extends React.Component {
                     <h5>Function Name</h5>
                     <input placeholder="Expected function name" value={this.state.code} onChange={this.setter.call(this, 'code')}></input>
                 </div>
-                <div>
-                    <h5>Initial Code</h5>
-                    <input placeholder="Initial code stub (wrap with double quotes)" value={this.state.initCode} onChange={this.setter.call(this, 'initCode')}></input>
-                </div>
                 <div id="newPrompt">
                     <h5>Prompt</h5>
                     <textarea placeholder="Instructions for user" value={this.state.body} onChange={this.setter.call(this, 'body')}></textarea>
@@ -69,7 +63,7 @@ class AddToyProblems extends React.Component {
                     ></textarea>
                 </div>
                 <div className="container submit">
-                    <button type="button" onClick={() => this.submitToyProblem.call(this, this.state)}>Submit</button>
+                    <button type="Submit" onClick={() => this.submitToyProblem.call(this, this.state)}>Submit</button>
                 </div>
               </form>
             </div>
