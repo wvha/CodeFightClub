@@ -1,6 +1,7 @@
 import React from 'react';
 import Challenge from './Challenge.jsx';
 import $ from 'jquery';
+import Results from './results.jsx';
 
 class Prompt extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class Prompt extends React.Component {
         code: "var iAmAwesome = function() {\n\n};",
         tests: ''
       },
+      view: "prompt",
+      results: ""
     }
   }
 
@@ -39,6 +42,7 @@ class Prompt extends React.Component {
         tests: this.state.prompt.tests
       }
     }).done((res) => {
+      this.setState({results: JSON.parse(res)});
       console.log(JSON.parse(res));
     });
   }
@@ -68,6 +72,21 @@ class Prompt extends React.Component {
     this.setState(prompt);
   }
 
+  renderButton() {
+    if (this.state.view === 'prompt') {
+      return (
+        <div className="body">
+          <h1 id="prompt-title">{this.state.prompt.title}</h1>
+          <p id="prompt-body">{this.state.prompt.body}</p>
+        </div>
+      )
+    } else if (this.state.view === 'results') {
+      return (
+      <Results results={this.state.results}/>
+      )
+    }
+  }
+
   render() {
     return (
       <div className="container row" id="prompt">
@@ -81,9 +100,14 @@ class Prompt extends React.Component {
           </div>
         </div>
         <div></div>
-        <div className="body">
-          <h1 id="prompt-title">{this.state.prompt.title}</h1>
-          <p id="prompt-body">{this.state.prompt.body}</p>
+        <div className="body container" id="promptView">
+          <div className="container row" id="promptViewButtons">
+            <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
+            <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
+          </div>
+          <div className="container" id="promptViewContent">
+            {this.renderButton()}
+          </div>
         </div>
       </div>
     )
