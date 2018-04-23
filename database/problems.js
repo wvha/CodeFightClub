@@ -2,6 +2,7 @@ const ToyProblemSchema = ({
   title: { type: String, unique: true },
   funcName: String,
   initialCode: String,
+  params: String,
   tests: [
     {
       input: String,
