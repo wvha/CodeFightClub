@@ -31,7 +31,7 @@ class SignUp extends Component {
     });
   }
 
-  updateState (prop) { //onClick updates the state of any input field
+  updateState (prop) { //@param prop - onClick updates the state of any input field passed
     return (e) => {
       let state = {};
       state[prop] = e.target.value;

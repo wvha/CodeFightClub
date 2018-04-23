@@ -32,11 +32,11 @@ class AddToyProblems extends React.Component {
       });
     }
 
-    setter (state) { //sets the state of each of the input fields
+    setter (prop) { //@param prop - sets the state of each of the input fields
       return (e) => {
-        let newState = {};
-        newState[state] = e.target.value;
-        this.setState(newState);
+        let state = {};
+        newState[prop] = e.target.value;
+        this.setState(state);
       }
     }
 

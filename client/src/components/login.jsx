@@ -29,14 +29,14 @@ class Login extends Component {
     });
   }
 
-  onChangeUsername (e) {
-    this.setState({ username: e.target.value });
+  onChange (prop) { //@param prop - onClick set state if changes in input field
+    return (e) => {
+      let state = {};
+      this.state[prop] = e.target.value;
+      this.setState({ state });
+    }
   }
-
-  onChangePassword (e) {
-    this.setState({ password: e.target.value });
-  }
-
+ 
   render () {
     return (
       <span>
@@ -51,9 +51,9 @@ class Login extends Component {
           <h1>Login</h1>
           <form autoComplete="off" className="container">
             Username:
-            <br/><input type="text" name="username" onChange={this.onChangeUsername.bind(this)}/><br/>
+            <br/><input type="text" name="username" onChange={this.onChange.call(this, 'username')}/><br/>
             Password:
-            <br/><input type="password" name="password" onChange={this.onChangePassword.bind(this)}/><br/>
+            <br/><input type="password" name="password" onChange={this.onChange.call(this, 'password')}/><br/>
             <button onClick={this.submitLogin.bind(this)}>Submit</button>
           </form>
         </div>
