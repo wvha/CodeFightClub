@@ -3,9 +3,9 @@ Greenfield Project
 
 ## Team
 
-  - __Product Owner__: Kyle Shifflet
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: [Kyle Shifflet](https://github.com/kshifflet707)
+  - __Scrum Master__: [Tanner B. Hess Webber](https://github.com/Tbhesswebber)
+  - __Development Team Members__: [Brandon Villiados](https://github.com/brandon-villiados)
 
 ## Table of Contents
 
@@ -23,11 +23,10 @@ Greenfield Project
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- MongoDB 3.0.6
+- Express 4.15.0
+- React 15.4.2
+- Node 8.11.1
 
 ## Development
 
@@ -35,30 +34,11 @@ Greenfield Project
 
 From within the root directory:
 
-```sh
-sudo npm install -g bower
-npm install
-bower install
 ```
-
-### Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+npm install
+```
 
 
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
-
-
-
-
-
-
-
-
-
-
-
-
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/Tbhesswebber/CodeFightClub.svg?columns=all)](https://waffle.io/Tbhesswebber/CodeFightClub)
