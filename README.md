@@ -34,7 +34,8 @@ From within the root directory:
 ```
 npm install
 ```
-
+### Tasks
+We are still working on creating a socket-supported competetive experience in which users compete to complete toyproblems first.
 
 ## Contributing
 
