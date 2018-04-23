@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import $ from 'jquery';
+//direct child of header
 
 class Login extends Component {
   constructor(props) {
@@ -10,10 +11,6 @@ class Login extends Component {
         username: '',
         password: ''
     };
-    this.openModalLogin = this.openModalLogin.bind(this);
-    this.submitLogin = this.submitLogin.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
   }
 
   openModalLogin () {
@@ -43,7 +40,7 @@ class Login extends Component {
   render () {
     return (
       <span>
-        <button id="login" onClick={this.openModalLogin}>Login</button>
+        <button id="login" onClick={this.openModalLogin.bind(this)}>Login</button>
         <Modal
           isOpen={this.state.showModalLogin}
           contentLabel="Login Modal"
@@ -54,10 +51,10 @@ class Login extends Component {
           <h1>Login</h1>
           <form autoComplete="off" className="container">
             Username:
-            <br/><input type="text" name="username" onChange={this.onChangeUsername}/><br/>
+            <br/><input type="text" name="username" onChange={this.onChangeUsername.bind(this)}/><br/>
             Password:
-            <br/><input type="password" name="password" onChange={this.onChangePassword}/><br/>
-            <button onClick={this.submitLogin}>Submit</button>
+            <br/><input type="password" name="password" onChange={this.onChangePassword.bind(this)}/><br/>
+            <button onClick={this.submitLogin.bind(this)}>Submit</button>
           </form>
         </div>
         </Modal>

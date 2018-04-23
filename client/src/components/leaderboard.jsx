@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+//direct child of body
 
 class Leaderboard extends React.Component {
   constructor(props) {
