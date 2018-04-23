@@ -13,7 +13,7 @@ html, body {
   height: 100vh;
   width: 100vw;
   background-color: #010101;
-  background-image: url(technology1.png);
+  /* background: url(technology1.png); */
   color: whitesmoke;
   font-family: Michroma;
   font-size: 16px;
@@ -50,9 +50,35 @@ textarea, input {
 }
 
 #background {
-  height: 100vh;
-  width: 100vw;
-  background-color: #01010190;   
+  height: 100%;
+  width: 100%;
+  background-color: #010101;
+  background-image: url(code2.jpg);
+  background-size: contain;
+  -webkit-animation: animatebackground 40s linear infinite;
+  animation: animatebackground 40s linear infinite;
+  -ms-animation: animatebackground 40s linear infinite;
+  -moz-animation: animatebackground 40s linear infinite;
+}
+@keyframes animatebackground
+{
+ from {background-position: 0 0;}
+ to {background-position: -1000px 0;}
+}
+@-webkit-keyframes animatebackground
+{
+ from {background-position: 0 0;}
+ to {background-position: -1000px 0;}
+}
+@-ms-keyframes animatebackground
+{
+ from {background-position: 0 0;}
+ to {background-position: -1000px 0;}
+}
+@-moz-keyframes animatebackground
+{
+ from {background-position: 0 0;}
+ to {background-position: -1000px 0;}
 }
 
 #app {
@@ -139,7 +165,7 @@ button {
 
 #prompt {
   width: 100%;
-  height: 100%; 
+  height: 100%;
 }
 
 .submit {

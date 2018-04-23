@@ -112,7 +112,7 @@ var databaseRoutes = function(app) {
     problem.title = req.body.title;
     problem.body = req.body.body;
     problem.funcName = req.body.code;
-    problem.initialCode = req.body.initCode;
+    problem.initialCode = JSON.parse(req.body.initCode);
     problem.tests = JSON.parse(req.body.tests);
     console.log('---------------     ', typeof req.body.tests);
     console.log(problem.tests); //Ummmm... how do we save arrays to the database?
@@ -120,8 +120,9 @@ var databaseRoutes = function(app) {
     dbProblem.save((err) => {
       if (err) {
         console.log(err);
+        res.end("error saving db");
       }
-      //res.end('saved?');
+      res.end('saved to db');
     });
   });
 

@@ -23,8 +23,8 @@ const UserSchema = new mongoose.Schema({
 
 const ToyProblemSchema = new mongoose.Schema({
   title: { type: String, unique: true },
+  body: String,
   funcName: String,
-  initialCode: String,
   tests: [
     {
       input: String,
