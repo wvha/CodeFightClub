@@ -22,7 +22,8 @@ class App extends Component {
       view: 'prompt'
     };
   }
-
+  
+  //sets the state of the username when a user is logged in
   componentDidMount() {
     $.get('/isLoggedIn', data => {
       console.log(data);
@@ -44,14 +45,11 @@ class App extends Component {
     });
   }
 
+  //passed down into body and is setting state of user when user logs in or signs up
   setUser (user) {
     this.setState({ user: user});
   }
-
-  componentDidUpdate () {
-    console.log(this.state);
-  }
-
+  
   changeView (state) {
     return () => {
       this.setState({ view: state});

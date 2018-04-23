@@ -3,6 +3,7 @@ import AceEditor from 'react-ace';
 import brace from 'brace';
 import 'brace/theme/solarized_dark';
 import 'brace/mode/javascript';
+//direct child of Prompt
 
 const Challenge = ({solution, solve}) => (
   <AceEditor
