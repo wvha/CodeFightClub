@@ -8,6 +8,7 @@ class Prompt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isComplete: false,
       prompt: {
         title: "Compete Against Hackers Around the World!",
         funcName: "",
@@ -22,7 +23,7 @@ class Prompt extends React.Component {
 
   joinQueue () {
     return (
-      <button onClick={this.getPrompt.bind(this)}><strong>Join In!</strong></button>
+      <button onClick={this.getPrompt.bind(this)}><strong>{this.state.isComplete ? "Play Again" : "Join In!"}</strong></button>
     );
   }
 
@@ -53,7 +54,10 @@ class Prompt extends React.Component {
           passing = false;
         }
       });
-      if (passing) { //updates the score of the user if all tests pass
+      if (passing) {
+        this.setState({ //updates the score of the user if all tests pass
+          isComplete: true
+        });
         $.ajax({
           method: 'PATCH',
           url: `/users:${this.props.username}`
@@ -72,8 +76,12 @@ class Prompt extends React.Component {
         prompt.funcName = challenge.funcName;
         prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
         prompt.tests = challenge.tests;
-        this.setState({ view: 'prompt' });
-        this.setState(prompt);
+        this.setState({ 
+          view: 'prompt',
+          isComplete: false,
+          prompt: prompt,
+          results: '' 
+        });
       })
       .fail( err => {
         console.error(err);
@@ -110,7 +118,7 @@ class Prompt extends React.Component {
           solve={this.updateUserSolution.bind(this)}
           />
           <div className="container submit">
-            { this.state.view === 'prompt' && this.props.isLoggedIn ? this.runCode() : this.joinQueue() }
+            { this.state.view === 'prompt' && this.props.isLoggedIn && !this.state.isComplete ? this.runCode() : this.joinQueue() }
           </div>
         </div>
         <div></div>

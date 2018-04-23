@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const helpers = require('../helpers/databaseHelpers.js');
 
 
 mongoose.connect('mongodb://localhost/test');
@@ -18,7 +17,10 @@ const UserSchema = new mongoose.Schema({
   email: String,
   wins: Number,
   losses: Number,
-  score: Number
+  score: {
+    type: Number,
+    default: 0
+  }
 });
 
 const ToyProblemSchema = new mongoose.Schema({
@@ -35,14 +37,9 @@ const ToyProblemSchema = new mongoose.Schema({
 });
 
 const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
-
 const User = mongoose.model('User', UserSchema);
 
-//User collection functions
-const getUserById = function(id, callback) {
-  return User.findById(id, callback);
-};
-
+//Gets the top users based on score
 let findLeaderboard = (callback) => {
   User.find((err, users) => {
     if (err) {
@@ -65,5 +62,4 @@ module.exports.User = User;
 module.exports.ToyProblem = ToyProblem;
 
 //User functions
-module.exports.getUserById = getUserById;
 module.exports.findLeaderboard = findLeaderboard;
