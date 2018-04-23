@@ -1,4 +1,4 @@
-# Project Name #
+# Code FightClub #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -15,30 +15,31 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
- 
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+
+Code FightClub is putting the "fun" back in functional programming.  Get your brain working and your blood pumping with our real-time, head-to-head competitions!  Track your score, solve toy problems, and beat your opponent!
 
 ## Problem ##
-  > Describe the problem your product solves.
+
+Modern toy problem websites are great for practicing slow, methodical interview-style white-boarding, but they often fail to inspire the drive to outperform your opponent and over-clock your brain.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+
+Code FightClub isn't a chore that you have to sit down and do everyday.  With our high-pace challenges, you'll be driven to code harder and faster, the chore is getting out of your chair!
 
 ## Quote from You ##
+
   > A quote from a spokesperson in your company.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+
+Just open the website, sign up for an account, and start coding!
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+
+"It's cool that Code FightClub adds the competitive nature into solving algorithms!" - Anonymous
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+
+There's only rule in Code FightClub... This press-release is in total violation of that rule.

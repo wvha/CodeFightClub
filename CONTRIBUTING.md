@@ -22,18 +22,17 @@
    reviews is to help keep the codebase clean and of high quality and, equally
    as important, to help you grow as a programmer. If your code reviewer
    requests you make a change you don't understand, ask them why.
-1. Fix any issues raised by your code reviwer, and push your fixes as a single
+1. Fix any issues raised by your code reviewer, and push your fixes as a single
    new commit.
 1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
-## Detailed Workflow
 
 ### Fork the repo
 
-Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
+Use github’s interface to make a fork of the repo, then add the main repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/reactorcore/<NAME_OF_REPO>.git
+git remote add upstream https://github.com/codeFightClub/CodeFightClub.git
 ```
 
 ### Cut a namespaced feature branch from master
@@ -141,7 +140,7 @@ Thanks for contributing!
 ### Guidelines
 
 1. Uphold the current code standard:
-    - Keep your code [DRY][].
+    - Keep your code DRY.
     - Apply the [boy scout rule][].
     - Follow [STYLE-GUIDE.md](STYLE-GUIDE.md)
 1. Run the [tests][] before submitting a pull request.
@@ -168,13 +167,8 @@ no problem getting your changes merged in.
 
 
 <!-- Links -->
-[style guide]: https://github.com/reactorcore/style-guide
-[n-queens]: https://github.com/reactorcore/n-queens
-[Underbar]: https://github.com/reactorcore/underbar
 [curriculum workflow diagram]: http://i.imgur.com/p0e4tQK.png
 [cons of merge]: https://f.cloud.github.com/assets/1577682/1458274/1391ac28-435e-11e3-88b6-69c85029c978.png
-[Bookstrap]: https://github.com/reactorcore/bookstrap
-[Taser]: https://github.com/reactorcore/bookstrap
 [tools workflow diagram]: http://i.imgur.com/kzlrDj7.png
 [Git Flow]: http://nvie.com/posts/a-successful-git-branching-model/
 [GitHub Flow]: http://scottchacon.com/2011/08/31/github-flow.html
