@@ -280,3 +280,17 @@ button {
 #toyProblemForm div input {
   width: 50%;
 }
+
+/***********************/
+/***      Prompt     ***/
+/***********************/
+
+#promptViewContent {
+  flex-grow: 1;
+  width: 100%;
+}
+
+#promptViewButtons {
+  width: 100%;
+  margin: 0 0 15px 0;
+}

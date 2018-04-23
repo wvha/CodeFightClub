@@ -8,7 +8,8 @@ class AddToyProblems extends React.Component {
           title: '',
           body: '',
           code: '',
-          tests: ''
+          tests: '',
+          params: ''
         }
     }
 
@@ -17,7 +18,8 @@ class AddToyProblems extends React.Component {
             title: '',
             body: '',
             code: '',
-            tests: ''
+            tests: '',
+            params: ''
           };
       //toyProblem.code = `function ${toyProblem.code} () {\n\n};`;
       $.post('/admin/toyProblem', toyProblem)
@@ -43,12 +45,16 @@ class AddToyProblems extends React.Component {
             <div className="container" id="newToyProblem">
               <form className="container" id="toyProblemForm">
                 <div>
-                    <h5>Title</h5>
+                    <h5>Challenge Title</h5>
                     <input placeholder="Problem name" value={this.state.title} onChange={this.setter.call(this, 'title')}></input>
                 </div>
                 <div>
                     <h5>Function Name</h5>
                     <input placeholder="Expected function name" value={this.state.code} onChange={this.setter.call(this, 'code')}></input>
+                </div>
+                <div>
+                    <h5>Parameters</h5>
+                    <input placeholder="Expected function parameters as comma separated values" value={this.state.params} onChange={this.setter.call(this, 'params')}></input>
                 </div>
                 <div id="newPrompt">
                     <h5>Prompt</h5>

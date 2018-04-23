@@ -112,7 +112,7 @@ var databaseRoutes = function(app) {
     problem.title = req.body.title;
     problem.body = req.body.body;
     problem.funcName = req.body.code;
-    problem.initialCode = JSON.parse(req.body.initCode);
+    problem.params = req.body.params;
     problem.tests = JSON.parse(req.body.tests);
     console.log('---------------     ', typeof req.body.tests);
     console.log(problem.tests); //Ummmm... how do we save arrays to the database?
