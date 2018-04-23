@@ -16,10 +16,10 @@ class Leaderboard extends React.Component {
 
   render () {
     return (
-      <div className="container">
+      <div className="container column fullh fullw" id="leaderboard">
         {this.state.leaderboard.map((user, key) => {
           return (
-            <div className="user" key={key}> 
+            <div className="user-score fullw" key={key}> 
               <h3>{`${user.username} has a score of ${user.score}`}</h3>
             </div>
           )

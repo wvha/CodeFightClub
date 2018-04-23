@@ -8,8 +8,8 @@ import Leaderboard from './leaderboard.jsx'
 const Header = function(props) {
   return (
     <header id="header" className="container row">
-      <div id="leaderboard">
-      <button onClick={props.changeView('leaderboard')}>Leaderboard</button>
+      <div id="leaderboard-header">
+      <button onClick={props.changeView('leaderboard')}>Leader board</button>
       </div>
       <div id="logo">
         <img src="BrandonStinks.png" alt="BrandonStinks" height="90px" width="180px" />
