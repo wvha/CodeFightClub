@@ -110,7 +110,7 @@ var databaseRoutes = function(app) {
   //Update a user's score within the database
   app.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
-    User.update({"username": name}, {$inc: {"score": 10}}, function(err, result) {
+    User.update({"username": name}, {$inc: {"score": 1}}, function(err, result) {
       if (err) console.log(err);
       console.log(result);
     });
