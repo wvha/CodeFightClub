@@ -69,7 +69,7 @@ class App extends Component {
 
   render () {
     return (
-      <div className="container" id="main">
+      <div className="container fullh fullw column">
         <Header
           user={this.state.user}
           updateUser={this.setUser.bind(this)}

@@ -24,11 +24,11 @@ class Admin extends React.Component {
 
     render () {
         return (
-          <div className="container row" id="admin">
-            <div className="container" id="admin-buttons">
+          <div className="container row fullw fullh">
+            <div className="container fullh" id="admin-buttons">
                 <button type="button" onClick={()=>this.viewSetter('Add Toy Problem')}>Add Toy Problems</button>
             </div>
-            <div className="container" id="admin-body">
+            <div className="container fullh column" id="admin-body">
               <div id="admin-title">
                 <h1>{this.state.view}</h1>
               </div>

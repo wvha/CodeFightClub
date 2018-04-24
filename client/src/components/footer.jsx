@@ -4,7 +4,7 @@ import React from 'react';
 
 const Footer = function(props) {
   return (
-    <div className="container row" id="footer">
+    <div className="container row fullw bg-main" id="footer">
       <span>&#169; 2018</span>
     </div>
   );

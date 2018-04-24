@@ -7,7 +7,7 @@ import User from './user.jsx';
 
 const Header = function(props) {
   return (
-    <header id="header" className="container row">
+    <header id="header" className="container row fullw bg-main">
       <div id="leaderboard-header">
       <button onClick={props.changeView('leaderboard')}>Leader board</button>
       </div>

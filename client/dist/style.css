@@ -61,10 +61,13 @@ textarea, input {
 .fullh {
   height: 100%;
 }
-
+/* 
 #background {
   width: 100%;
   height: 100%;
+} */
+.bg-main {
+  background-color: #030303;
 }
 
 #app {
@@ -73,11 +76,11 @@ textarea, input {
   height: 100%;
 }
 
-#main {
+/* #main {
   height:100%;
   width: 100%;
   flex-direction: column;
-}
+} */
 
 button {
   background-color: #005DAA;
@@ -96,8 +99,6 @@ button {
 
 #header {
   height: 100px;
-  width: 100%;
-  background-color: #030303;
   margin-bottom: 15px;
   justify-content: space-between;
   align-content: space-between;
@@ -132,8 +133,6 @@ button {
 
 #body {
   height: calc(100% - 150px - 30px);
-  width: 100%;
-  background-color: #030303;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
@@ -148,20 +147,18 @@ button {
 .body {
   width: 45%;
   height: 95%;
-  flex-direction: column;
 }
 
 .body h1 {
   margin: 10px;
 }
 
-#prompt {
+/* #prompt {
   width: 100%;
   height: 100%;
-}
+} */
 
 .submit {
-  width: 100%;
   flex-grow: 1;
 }
 
@@ -177,8 +174,6 @@ button {
 
 #footer {
   height: 50px;
-  width: 100%;
-  background-color: #030303;
   margin-top: 15px;
 }
 
@@ -219,8 +214,6 @@ button {
 .modal form {
   width: 400px;
   height: 400px;
-  flex-direction: column;
-  /* align-content: center; */
   justify-content: center;
 }
 
@@ -233,21 +226,18 @@ button {
 /***      Admin      ***/
 /***********************/
 
-#admin {
+/* #admin {
   height: 100%;
   width: 100%;
-}
+} */
 
 #admin-buttons {
   width: 15%;
-  height: 100%;
   align-items: flex-start;
 }
 
 #admin-body {
-  height: 100%;
   width: 85%;
-  flex-direction: column;
   justify-content: space-around;
 }
 
@@ -271,31 +261,30 @@ button {
   align-content: space-around;
 }
 
-#newToyProblem, #toyProblemForm {
+/* #newToyProblem, #toyProblemForm {
   height: 100%;
   width: 100%;
   flex-direction: column;
-}
+} */
 
-#toyProblemForm div textarea {
-  width: 100%;
+.tp-text {
   height: calc(100% - 1.5rem);
   resize: none;
 }
 
-#toyProblemForm div {
+/* #toyProblemForm div {
   width: 100%;
-}
+} */
 
-#toyProblemForm #newPrompt {
+#newPrompt {
   height: calc((100%/8*4) - 30px);
 }
 
-#toyProblemForm #newTests {
+#newTests {
   height: calc((100%/8*2) - 30px);
 }
 
-#toyProblemForm div input {
+.halfw {
   width: 50%;
 }
 
@@ -310,14 +299,11 @@ button {
 
 #promptViewContent {
   flex-grow: 1;
-  width: 100%;
-  flex-direction: column;
   align-content: flex-start;
   justify-content: flex-start;
 }
 
 #promptViewButtons {
-  width: 100%;
   margin: 0 0 15px 0;
 }
 
