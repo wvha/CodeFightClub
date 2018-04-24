@@ -22,9 +22,8 @@ class Login extends Component {
     $.post('/login', this.state)
     .done((data) => {
       console.log('this login was a', data);
-      this.props.setUsername({ 
-        username: this.state.username,
-        isAdmin: true
+      this.props.setUsername({
+        username: this.state.username
       });
     });
   }
@@ -36,7 +35,7 @@ class Login extends Component {
       this.setState({ state });
     }
   }
- 
+
   render () {
     return (
       <span>

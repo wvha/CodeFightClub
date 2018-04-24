@@ -14,9 +14,10 @@ db.once('open', () => {
 const UserSchema = new mongoose.Schema({
   username: { type: String, unique: true },
   password: String,
-  email: String,
-  wins: Number,
-  losses: Number,
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
   score: {
     type: Number,
     default: 0

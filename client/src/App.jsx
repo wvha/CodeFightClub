@@ -17,28 +17,21 @@ class App extends Component {
     this.state = {
       user: {
         username: '',
-        isAdmin: true
+        isAdmin: false
       },
       view: 'prompt'
     };
   }
-  
+
   //sets the state of the username when a user is logged in
-  componentDidMount() {
+  componentWillMount() {
     $.get('/isLoggedIn', data => {
       console.log(data);
       if (data !== undefined) {
         this.setState({
           user: {
-            username: data,
-            isAdmin: true
-          }
-        });
-      } else {
-        this.setState({
-          user: {
-            username: '',
-            isAdmin: false
+            username: data.username,
+            isAdmin: data.isAdmin
           }
         });
       }
@@ -49,7 +42,7 @@ class App extends Component {
   setUser (user) {
     this.setState({ user: user});
   }
-  
+
   changeView (state) {
     return () => {
       this.setState({ view: state});

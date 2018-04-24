@@ -143,7 +143,7 @@ var databaseRoutes = function(app) {
         if (err) {
           console.log(err);
         }
-        res.send(data[0].username);
+        res.send(data[0]);
       });
     } else {
       res.send(undefined);
