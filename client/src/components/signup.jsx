@@ -51,7 +51,7 @@ class SignUp extends Component {
         >
         <div className="modal container">
             <h1>create your account</h1>
-            <form autoComplete="off" className="container">
+            <form autoComplete="off" className="container column">
               Username:
               <br/><input type="text" name="username" value={this.state.username} onChange={this.updateState('username')}/><br/>
               Email:

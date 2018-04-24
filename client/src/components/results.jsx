@@ -3,7 +3,7 @@ import React from 'react';
 
 const Results = ({results}) => {
     return (
-      <div className="container" id="promptViewContent">
+      <div className="container column" id="promptViewContent">
         <h1>Results</h1>
         {results.map((val, key) => {
           if (val.status === 'pass') {

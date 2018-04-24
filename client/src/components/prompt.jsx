@@ -97,7 +97,7 @@ class Prompt extends React.Component {
   renderButton() {
     if (this.state.view === 'prompt') {
       return (
-        <div className="container" id="promptViewContent">
+        <div className="container fullw column" id="promptViewContent">
           <h1 id="prompt-title">{this.state.prompt.title}</h1>
           <p id="prompt-body">{this.state.prompt.body}</p>
         </div>
@@ -111,19 +111,19 @@ class Prompt extends React.Component {
 
   render() {
     return (
-      <div className="container row" id="prompt">
-        <div className="body container">
+      <div className="container row fullh fullw">
+        <div className="body container column">
           <Challenge
           solution={this.state.prompt.code}
           solve={this.updateUserSolution.bind(this)}
           />
-          <div className="container submit">
-            { this.state.view === 'prompt' && this.props.isLoggedIn && !this.state.isComplete ? this.runCode() : this.joinQueue() }
+          <div className="container submit fullw">
+            { this.props.isLoggedIn && !this.state.isComplete ? this.runCode() : this.joinQueue() }
           </div>
         </div>
         <div></div>
-        <div className="body container" id="promptView">
-          {this.state.results.length === 0 ? null : <div className="container row" id="promptViewButtons">
+        <div className="body container column" id="promptView">
+          {this.state.results.length === 0 ? null : <div className="container row fullw" id="promptViewButtons">
             <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
             <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
           </div>}

@@ -49,7 +49,7 @@ class Login extends Component {
         >
         <div className="modal container">
           <h1>Login</h1>
-          <form autoComplete="off" className="container">
+          <form autoComplete="off" className="container column">
             Username:
             <br/><input type="text" name="username" onChange={this.onChange.call(this, 'username')}/><br/>
             Password:

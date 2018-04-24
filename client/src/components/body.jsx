@@ -5,7 +5,7 @@ import Leaderboard from './leaderboard.jsx';
 //direct child of App
 
 const Body = ({ view, isLoggedIn, username }) => (
-  <div className="container" id="body">
+  <div className="container fullw bg-main" id="body">
     { view === 'prompt' 
       ? <Prompt username={username} isLoggedIn={isLoggedIn} /> 
       : view === 'admin'
