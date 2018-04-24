@@ -14,7 +14,7 @@ class AddToyProblems extends React.Component {
         }
     }
 
-    submitToyProblem (toyProblem) { 
+    submitToyProblem (toyProblem) {
       let emptyState = { // on success clears the state of the input fields
             title: '',
             body: '',
@@ -35,7 +35,7 @@ class AddToyProblems extends React.Component {
     setter (prop) { //@param prop - sets the state of each of the input fields
       return (e) => {
         let state = {};
-        newState[prop] = e.target.value;
+        state[prop] = e.target.value;
         this.setState(state);
       }
     }
