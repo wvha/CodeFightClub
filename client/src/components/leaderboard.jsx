@@ -8,7 +8,7 @@ class Leaderboard extends React.Component {
     this.state = {
       leaderboard: []
     }
-  } 
+  }
 
   componentDidMount () {
     $.get("/leaderboard")
@@ -20,11 +20,11 @@ class Leaderboard extends React.Component {
       <div className="container column fullh fullw" id="leaderboard">
         {this.state.leaderboard.map((user, key) => {
           return (
-            <div className="user-score fullw" key={key}> 
-              <h3>{`${user.username} has a score of ${user.score}`}</h3>
+            <div className="user-score fullw" key={key}>
+              <h3>{`${key+1}: ${user.username} --- solved ${user.score} problems`}</h3>
             </div>
           )
-        })} 
+        })}
       </div>
     )
   }
@@ -32,5 +32,5 @@ class Leaderboard extends React.Component {
 
 
 export default Leaderboard;
-    
+
 

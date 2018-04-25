@@ -13,13 +13,11 @@ const Challenge = ({solution, solve}) => (
     showPrintMargin={true}
     showGutter={true}
     highlightActiveLine={true}
+    editorProps={{
+      $blockScrolling: true
+    }}
     setOptions={{
-      enableBasicAutocompletion: true,
-      enableLiveAutocompletion: false,
-      enableSnippets: false,
-      showLineNumbers: true,
-      tabSize: 2,
-      blockScrolling: Infinity
+      tabSize: 2
     }}
     onChange={(e) => solve(e)}
     value={solution}

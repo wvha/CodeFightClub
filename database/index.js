@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://kyle:kyle@ds127982.mlab.com:27982/codefightclub');
 
 const db = mongoose.connection;
 
@@ -14,9 +14,10 @@ db.once('open', () => {
 const UserSchema = new mongoose.Schema({
   username: { type: String, unique: true },
   password: String,
-  email: String,
-  wins: Number,
-  losses: Number,
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
   score: {
     type: Number,
     default: 0
