@@ -20,7 +20,7 @@ class App extends Component {
       // user
       user: {
         username: '',
-        isAdmin: false
+        isAdmin: true
       },
       // for chat
       messages: [],
