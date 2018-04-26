@@ -28,6 +28,11 @@ h5 {
   font-size: 1rem;
 }
 
+h7 {
+  font-size: 1rem;
+  color: red;
+}
+
 strong {
   font-size: 1.5em;
 }
@@ -268,7 +273,7 @@ button {
 } */
 
 .tp-text {
-  height: calc(100% - 3rem);
+  height: calc(100% - 4rem);
   resize: none;
 }
 
@@ -277,11 +282,11 @@ button {
 } */
 
 #newPrompt {
-  height: calc((100%/8*4) - 30px);
+  height: calc((100%/8*4) - 50px);
 }
 
 #newTests {
-  height: calc((100%/8*2) - 30px);
+  height: calc((100%/8*2) + 0px);
 }
 
 .halfw {
