@@ -4,7 +4,10 @@ console.log(socket);
 // pass in callback that gets run when recieving messages
 export const subscribeToSocket = (name, cb) => {
   // subscribe to messages
-  socket.on('message', (message) => cb(message));
+  socket.on('message', (message) => {
+    console.log('recieved message', message);
+    cb(message);
+  });
   // now tell server we want to subscribe
   socket.on('connect', (data) => {
     socket.emit('subscribeToMessage', 'name');

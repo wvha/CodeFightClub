@@ -34,8 +34,8 @@ class App extends Component {
   }
 
   //sets the state of the username when a user is logged in
-  componentDidMount() {
-    $.get('/isLoggedIn', data => {
+  componentWillMount() {
+    $.get('/isLoggedIn', function(data) {
       console.log(data);
       if (data !== undefined) {
         this.setState({
@@ -46,12 +46,15 @@ class App extends Component {
         });
         // TESTING SOCKET.IO
         subscribeToSocket(data.username, (message) => {
-          console.log('connected to socket');
+          console.log('message', message)
+          let messages = [...this.state.messages];
+          messages.push(message);
+          this.setState({messages});
         });
         // END TESTING SOCKET.IO
       }
       
-    });
+    }.bind(this));
   }
 
   //passed down into body and is setting state of user when user logs in or signs up
@@ -84,6 +87,7 @@ class App extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     console.log('submitting')
     sendMessage(this.state.userMessage);
       
@@ -92,10 +96,10 @@ class App extends Component {
 
   render () {
     // TESTING SOCKET.IO
-    const messages = this.state.messages.map(message => <li>message</li>);
+    const messages = this.state.messages.map(message => <li>{ message }</li>);
 
     return (
-      <div>
+      <div style={ {backgroundColor: 'black'} }>
         <ul className="messages">
           { messages }
         </ul>

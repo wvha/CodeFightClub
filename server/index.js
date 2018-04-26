@@ -9,7 +9,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-
 const app = express();
 const server = http.Server(app);
 const io = socket(server);
