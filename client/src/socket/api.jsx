@@ -19,3 +19,19 @@ export const sendMessage = (message) => {
   console.log('sending message', message)
   socket.emit('message', message);
 };
+
+// timer 
+const timerSocket = io('/timer');
+
+export const subscribeToTimerSocket = (cb) => {
+  timerSocket.on('test', () => {
+    console.log('time namespace works');
+  })
+
+  timerSocket.emit('startTimer');
+
+  timerSocket.on('countdown', (num) => {
+    console.log(num);
+    cb(num)
+  })
+}
