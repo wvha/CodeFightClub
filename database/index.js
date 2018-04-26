@@ -52,6 +52,16 @@ let findLeaderboard = (callback) => {
   .sort({'score': -1});
 }
 
+//Gets all toy problems, unsorted
+let findToyProblems = (callback) => {
+  ToyProblem.find((err, toyProblems) => {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(toyProblems);
+    }
+  });
+}
 
 // Database export
 module.exports.db = db;
@@ -64,3 +74,4 @@ module.exports.ToyProblem = ToyProblem;
 
 //User functions
 module.exports.findLeaderboard = findLeaderboard;
+module.exports.findToyProblems = findToyProblems;
