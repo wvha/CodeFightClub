@@ -10,6 +10,7 @@ const Header = function(props) {
     <header id="header" className="container row fullw bg-main">
       <div id="leaderboard-header">
       <button onClick={props.changeView('leaderboard')}>Scores</button>
+      <button onClick={props.changeView('problems')}>Problems</button>
       <button onClick={props.changeView('prompt')}>Lobby</button>
       </div>
       <div id="logo">
