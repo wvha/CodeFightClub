@@ -31,24 +31,41 @@ app.use(passport.session());
 
 app.set('port', (process.env.PORT || 3000));
 
-server.listen(app.get('port'), function() {
-  console.log('Server started on port:' + app.get('port'));
-});
 
 //Here are the routes we use
 require('./routes.js').passportRoutes(app, passport);
 require('./routes.js').challengeRoutes(app);
 require('./routes.js').databaseRoutes(app);
 
-
+let connections = [];
 // socket.io
-io.on('connection', (socket) => {
+io.on('connection', (client) => {
   console.log('socket connected');
-
-  socket.on('message', (data) => {
+  
+  client.on('message', (data) => {
     console.log('message', data);
-    socket.emit('message', data);
+    for (connection of connections) {
+      connection.emit('message', data)
+    }
   })
+  
+  client.on('subscribeToMessage', (data) => {
+    console.log('new subscriber', data);
+  })
+
+  connections.push(client);
+
+  client.on('disconnect', () => {
+    connections.splice(connections.indexOf(client), 1);
+    console.log('client disconnected');
+  })
+
+  client.emit('message', 'connected!')
 });
+
+server.listen(app.get('port'), function() {
+  console.log('Server started on port:' + app.get('port'));
+});
+
 
 module.exports = app;
