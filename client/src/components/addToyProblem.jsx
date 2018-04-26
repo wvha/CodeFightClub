@@ -40,6 +40,10 @@ class AddToyProblems extends React.Component {
       }
     }
 
+    someTests() {
+        return `Tests || Example [{"input": "2,3" , "expected": "5"}, {"input": "4, 4", "expected": "8"}]"`;
+    }
+
     render () {
         return (
             <div className="container fullh fullw column">
@@ -53,7 +57,7 @@ class AddToyProblems extends React.Component {
                     <input className="halfw" placeholder="Expected function name" value={this.state.code} onChange={this.setter.call(this, 'code')}></input>
                 </div>
                 <div className="fullw">
-                    <h5>Parameters</h5>
+                    <h5>Parameters || Example: value1, value2</h5>
                     <input className="halfw" placeholder="Expected function parameters as comma separated values" value={this.state.params} onChange={this.setter.call(this, 'params')}></input>
                 </div>
                 <div id="newPrompt" className="fullw">
@@ -61,7 +65,7 @@ class AddToyProblems extends React.Component {
                     <textarea placeholder="Instructions for user" value={this.state.body} onChange={this.setter.call(this, 'body')} className="tp-text fullw"></textarea>
                 </div>
                 <div id="newTests" className="fullw">
-                    <h5>Tests</h5>
+                    <h5>{this.someTests()}</h5>
                     <textarea
                     placeholder='Create tests as [{"input": "2,3" , "expected": "5"}, {"input": "4, 4", "expected": "8"}]'
                     onChange={this.setter.call(this, 'tests')}
