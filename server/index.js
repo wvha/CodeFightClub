@@ -1,5 +1,8 @@
 
 const express = require('express');
+const http = require('http');
+const socket = require('socket.io');
+
 const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -8,6 +11,8 @@ const passport = require('passport');
 
 
 const app = express();
+const server = http.Server(app);
+const io = socket(server);
 
 // Setup middleware
 app.use(bodyParser.json());
@@ -34,5 +39,17 @@ app.listen(app.get('port'), function() {
 require('./routes.js').passportRoutes(app, passport);
 require('./routes.js').challengeRoutes(app);
 require('./routes.js').databaseRoutes(app);
+
+// socket.io
+io.on('connection', (socket) => {
+  console.log('socket connected', socket);
+
+  // how to emit
+  socket.emit('event type', {jsonObject: 'any json compatable object'});
+
+  socket.on('event from client', (data) => {
+    console.log('data from client', data);
+  })
+});
 
 module.exports = app;
