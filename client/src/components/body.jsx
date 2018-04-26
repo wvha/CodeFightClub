@@ -2,6 +2,7 @@ import React from 'react';
 import Prompt from './prompt.jsx';
 import Admin from './admin.jsx';
 import Leaderboard from './leaderboard.jsx';
+import Problems from './problems.jsx';
 //direct child of App
 
 const Body = ({ view, isLoggedIn, username }) => (
@@ -10,7 +11,10 @@ const Body = ({ view, isLoggedIn, username }) => (
       ? <Prompt username={username} isLoggedIn={isLoggedIn} /> 
       : view === 'admin'
         ? <Admin /> 
-        : <Leaderboard />}
+        : view === 'leaderboard'
+        ? <Leaderboard />
+        : <Problems />
+      }
   </div>
 )
 
