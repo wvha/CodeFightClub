@@ -28,10 +28,10 @@ export const subscribeToTimerSocket = (cb) => {
     console.log('time namespace works');
   })
 
-  timerSocket.emit('startTimer');
+  timerSocket.emit('getDate');
 
-  timerSocket.on('countdown', (num) => {
-    console.log(num);
-    cb(num)
+  timerSocket.on('date',(date) => {
+    console.log(date);
+    cb(date);
   })
 }
