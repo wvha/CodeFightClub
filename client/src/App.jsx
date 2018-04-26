@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       user: {
         username: '',
-        isAdmin: false
+        isAdmin: true
       },
       view: 'prompt'
     };

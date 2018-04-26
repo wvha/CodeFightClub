@@ -11,7 +11,7 @@ class SignUp extends Component {
       showModalSignUp: false,
       username: '',
       email: '',
-      password: ''
+      password: '',
     }
   }
 
