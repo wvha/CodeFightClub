@@ -38,7 +38,6 @@ module.exports = (passport) => {
             console.log("Username taken...");
             return callback(null, false, 'username taken');
           }
-
           const saltRounds = 5;
           return bcrypt.genSaltAsync(saltRounds)
           .then ((salt) => {
@@ -46,7 +45,6 @@ module.exports = (passport) => {
             return bcrypt.hashAsync(password, salt)
             .then ((hash) => {
               console.log('hash: ', hash);
-
               var newUser = new User();
               newUser.username = username;
               newUser.password = hash;
@@ -64,14 +62,14 @@ module.exports = (passport) => {
   ));
 
   passport.use('local-login', new LocalStrategy(
-    // {
-    //   username: 'username',
-    //   password: 'password',
-    //   passReqToCallback: true,
-    // },
+    {
+      username: 'username',
+      password: 'password',
+      passReqToCallback: true,
+    },
     function(req, username, password, callback) {
       console.log('Inside passport local strat for login');
-      // process.nextTick(function() {
+      process.nextTick(function() {
         User.findOne({'username': username}, function(err, user) {
           if (err) {
             console.log("Some error within local-login...");
@@ -93,7 +91,7 @@ module.exports = (passport) => {
             })
           }
         });
-      // });
+      });
     }
   ));
 }
