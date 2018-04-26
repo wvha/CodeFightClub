@@ -8,7 +8,7 @@ import 'brace/mode/javascript';
 import Header from './components/header.jsx';
 import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
-import { subscribeToSocket, sendMessage } from './socket/api.jsx';
+import { subscribeToSocket, sendMessage, subscribeToTimerSocket} from './socket/api.jsx';
 
 Modal.setAppElement('#app');
 
@@ -23,13 +23,15 @@ class App extends Component {
       // TESTING SOCKET.IO
       messages: [],
       userMessage: '',
+      timer: ' ',
       // END TESTING SOCKET.IO
-      view: 'prompt'
+      view: 'prompt',
     };
 
     // TESTING SOCKET.IO
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateTimer = this.updateTimer.bind(this);
     // END TESTING SOCKET.IO
   }
 
@@ -51,6 +53,8 @@ class App extends Component {
           messages.push(message);
           this.setState({messages});
         });
+
+        subscribeToTimerSocket(this.updateTimer);
         // END TESTING SOCKET.IO
       }
       
@@ -92,6 +96,17 @@ class App extends Component {
     sendMessage(this.state.userMessage);
       
   }
+
+  updateTimer(date) {
+    let secondsTillNewGame = 60 - (new Date(date).getSeconds());
+    let timer = setInterval(() => {
+      this.setState({timer: secondsTillNewGame})
+      secondsTillNewGame--;
+      if (secondsTillNewGame < 0) {
+        clearInterval(timer);
+      } 
+    }, 1000)
+  }
   // END TESTING SOCKET.IO
 
   render () {
@@ -100,6 +115,7 @@ class App extends Component {
 
     return (
       <div style={ {backgroundColor: 'black'} }>
+      <p>Next Battle In: {this.state.timer}</p>
         <ul className="messages">
           { messages }
         </ul>
