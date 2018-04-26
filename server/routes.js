@@ -98,6 +98,17 @@ var databaseRoutes = function(app) {
     });
   });
 
+  //Get names of all toy problems in database
+  app.get('/problems', function(req, res) {
+    db.findToyProblems((toyProblems) => {
+      let problemList = [];
+      toyProblems.forEach(function(toyProblem) {
+        problemList.push(toyProblem.title);
+      });
+      res.json(problemList);
+    });
+  });
+
   //Get a specific toy problem from the database, using the funcName as a query.
   //NOTE: This isn't currently being used in the application.
   app.get('/challenge:name', (req, res) => {
