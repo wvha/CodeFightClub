@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
   password: String,
   isAdmin: {
     type: Boolean,
-    default: true
+    default: false
   },
   score: {
     type: Number,
