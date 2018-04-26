@@ -68,19 +68,8 @@ const ioTimer = io.of('/timer');
 ioTimer.on('connection', (interval) => {
   console.log('ioTimer connected');
   interval.emit('test')
-  interval.on('startTimer', () => {
-    let date = new Date();
-    let minute = date.getSeconds();
-    let countdown = 60 - minute;
-
-    let timer = setInterval(function() {
-      interval.emit('countdown', countdown)
-      countdown--;
-      if (countdown <= 0) {
-        clearInterval(timer);
-      } 
-    }, 1000)
-
+  interval.on('getDate', () => {
+    interval.emit('date', new Date())
   })
 })
 

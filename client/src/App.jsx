@@ -97,8 +97,15 @@ class App extends Component {
       
   }
 
-  updateTimer(num) {
-    this.setState({timer: num})
+  updateTimer(date) {
+    let secondsTillNewGame = 60 - (new Date(date).getSeconds());
+    let timer = setInterval(() => {
+      this.setState({timer: secondsTillNewGame})
+      secondsTillNewGame--;
+      if (secondsTillNewGame < 0) {
+        clearInterval(timer);
+      } 
+    }, 1000)
   }
   // END TESTING SOCKET.IO
 
