@@ -8,6 +8,7 @@ import 'brace/mode/javascript';
 import Header from './components/header.jsx';
 import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
+import { subscribeToSocket, sendMessage } from './socket/api.jsx';
 
 Modal.setAppElement('#app');
 
@@ -19,12 +20,21 @@ class App extends Component {
         username: '',
         isAdmin: false
       },
+      // TESTING SOCKET.IO
+      messages: [],
+      userMessage: '',
+      // END TESTING SOCKET.IO
       view: 'prompt'
     };
+
+    // TESTING SOCKET.IO
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    // END TESTING SOCKET.IO
   }
 
   //sets the state of the username when a user is logged in
-  componentWillMount() {
+  componentDidMount() {
     $.get('/isLoggedIn', data => {
       console.log(data);
       if (data !== undefined) {
@@ -34,7 +44,13 @@ class App extends Component {
             isAdmin: data.isAdmin
           }
         });
+        // TESTING SOCKET.IO
+        subscribeToSocket(data.username, (message) => {
+          console.log('connected to socket');
+        });
+        // END TESTING SOCKET.IO
       }
+      
     });
   }
 
@@ -60,7 +76,49 @@ class App extends Component {
     });
   }
 
+  // TESTING SOCKET.IO
+  handleInputChange(e) {
+    this.setState({
+      userMessage: e.target.value
+    })
+  }
+
+  handleSubmit(e) {
+    console.log('submitting')
+    sendMessage(this.state.userMessage);
+      
+  }
+  // END TESTING SOCKET.IO
+
   render () {
+    // TESTING SOCKET.IO
+    const messages = this.state.messages.map(message => <li>message</li>);
+
+    return (
+      <div>
+        <ul className="messages">
+          { messages }
+        </ul>
+        <form action="">
+          <input 
+            name="message"
+            type="text" 
+            className="m"
+            placeholder="send a message"
+            value={ this.state.userMessage }
+            onChange={ this.handleInputChange }
+          />
+          <button 
+            className="send-button"
+            onClick={ this.handleSubmit }  
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    )
+
+    // END TESTING SOCKET.IO
     return (
       <div className="container fullh fullw column">
         <Header
