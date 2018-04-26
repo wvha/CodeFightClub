@@ -63,7 +63,7 @@ let findToyProblems = (callback) => {
   });
 }
 
-// Database export
+// Database export  
 module.exports.db = db;
 
 //User collection export
