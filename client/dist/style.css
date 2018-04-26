@@ -268,7 +268,7 @@ button {
 } */
 
 .tp-text {
-  height: calc(100% - 1.5rem);
+  height: calc(100% - 3rem);
   resize: none;
 }
 
