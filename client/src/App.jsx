@@ -16,11 +16,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // user
       user: {
         username: '',
         isAdmin: false
       },
-      // TESTING SOCKET.IO
+      // for chat
       messages: [],
       userMessage: '',
       timer: ' ',
@@ -28,8 +29,7 @@ class App extends Component {
       view: 'prompt',
     };
 
-    // TESTING SOCKET.IO
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChangeChat = this.handleInputChangeChat.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateTimer = this.updateTimer.bind(this);
     // END TESTING SOCKET.IO
@@ -61,6 +61,14 @@ class App extends Component {
     }.bind(this));
   }
 
+  subscribeToSocketChat() {
+    subscribeToSocket(data.username, (message) => {
+      let messages = [...this.state.messages];
+      messages.push(message);
+      this.setState({messages});
+    });
+  }
+
   //passed down into body and is setting state of user when user logs in or signs up
   setUser (user) {
     this.setState({ user: user});
@@ -83,8 +91,7 @@ class App extends Component {
     });
   }
 
-  // TESTING SOCKET.IO
-  handleInputChange(e) {
+  handleInputChangeChat(e) {
     this.setState({
       userMessage: e.target.value
     })
@@ -126,7 +133,7 @@ class App extends Component {
             className="m"
             placeholder="send a message"
             value={ this.state.userMessage }
-            onChange={ this.handleInputChange }
+            onChange={ this.handleInputChangeChat }
           />
           <button 
             className="send-button"
@@ -142,16 +149,16 @@ class App extends Component {
     return (
       <div className="container fullh fullw column">
         <Header
-          user={this.state.user}
-          updateUser={this.setUser.bind(this)}
-          logout={this.logout.bind(this)}
-          changeView={this.changeView.bind(this)}
-          view={this.state.view}
+          user={ this.state.user }
+          updateUser={ this.setUser.bind(this) }
+          logout={ this.logout.bind(this) }
+          changeView={ this.changeView.bind(this) }
+          view={ this.state.view }
         />
         <Body
-          isLoggedIn={!!this.state.user.username}
-          view={this.state.view}
-          username={this.state.user.username}
+          isLoggedIn={ !!this.state.user.username }
+          view={ this.state.view }
+          username={ this.state.user.username }
         />
         <Footer
         />
