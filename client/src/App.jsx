@@ -37,8 +37,8 @@ class App extends Component {
   }
 
   //sets the state of the username when a user is logged in
-  componentWillMount() {
-    $.get('/isLoggedIn', function(data) {
+  componentDidMount() {
+    $.get('/isLoggedIn', data => {
       console.log(data);
       if (data !== undefined) {
         this.setState({
@@ -59,7 +59,7 @@ class App extends Component {
         // END TESTING SOCKET.IO
       }
       
-    }.bind(this));
+    });
   }
 
   subscribeToSocketChat() {
@@ -119,14 +119,14 @@ class App extends Component {
 
   render () {
     // TESTING ChatBox
-    return (
-      <ChatBox 
-        messages={ this.state.messages }
-        userMessage={ this.state.userMessage }
-        handleInputChange={ this.state.handleInputChangeChat }
-        handleSubmit={ this.state.handleSubmit }
-      />
-    )
+    // return (
+    //   <ChatBox 
+    //     messages={ this.state.messages }
+    //     userMessage={ this.state.userMessage }
+    //     handleInputChange={ this.state.handleInputChangeChat }
+    //     handleSubmit={ this.state.handleSubmit }
+    //   />
+    // )
 
     // END TESTING CHatbox
 
