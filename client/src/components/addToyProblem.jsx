@@ -64,7 +64,7 @@ class AddToyProblems extends React.Component {
         if (params === '') {
             invalid.push('parameters');
         }
-        if (invalid.length > 0) {
+        if (invalid.length > 1) {
             console.log(invalid);
             this.setState({invalidEntries:invalid});
             console.log(this.state.invalidEntries);
