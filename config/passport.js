@@ -1,5 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../database/index.js').User;
+var Promise = require('bluebird');
+var bcrypt = require('bcryptjs');
+
+Promise.promisifyAll(bcrypt);
 
 module.exports = (passport) => {
 
@@ -23,6 +27,7 @@ module.exports = (passport) => {
     },
     function(req, username, password, callback) {
       console.log('within local-signup of passport:  ');
+      console.log('password: ', password);
       process.nextTick(function() {
         User.findOne({'username': username}, function(err, user) {
           if (err) {
@@ -34,14 +39,24 @@ module.exports = (passport) => {
             return callback(null, false, 'username taken');
           }
 
-          var newUser = new User();
-          newUser.username = username;
-          newUser.password = password;
-          newUser.save(function(err) {
-            if (err) console.log('error in newUser.save ' + err);
-            console.log(newUser);
-            console.log("successful signup...");
-            return callback(null, newUser, 'successful signup');
+          const saltRounds = 5;
+          return bcrypt.genSaltAsync(saltRounds)
+          .then ((salt) => {
+            console.log('salt: ', salt);
+            return bcrypt.hashAsync(password, salt)
+            .then ((hash) => {
+              console.log('hash: ', hash);
+
+              var newUser = new User();
+              newUser.username = username;
+              newUser.password = hash;
+              newUser.save(function(err) {
+                if (err) console.log('error in newUser.save ' + err);
+                console.log(newUser);
+                console.log("successful signup...");
+                return callback(null, newUser, 'successful signup');
+              });
+            });
           });
         });
       });
@@ -49,14 +64,14 @@ module.exports = (passport) => {
   ));
 
   passport.use('local-login', new LocalStrategy(
-    {
-      username: 'username',
-      password: 'password',
-      passReqToCallback: true,
-    },
+    // {
+    //   username: 'username',
+    //   password: 'password',
+    //   passReqToCallback: true,
+    // },
     function(req, username, password, callback) {
       console.log('Inside passport local strat for login');
-      process.nextTick(function() {
+      // process.nextTick(function() {
         User.findOne({'username': username}, function(err, user) {
           if (err) {
             console.log("Some error within local-login...");
@@ -66,16 +81,19 @@ module.exports = (passport) => {
             console.log("Username not found...");
             return callback(null, false, 'user not found');
           }
-          if (user.password !== password) {
-            console.log(user);
-            console.log("incorrect password");
-            return callback(null, false, 'incorrect password');
+          if (user) {
+            return bcrypt.compareAsync(password, user.password)
+            .then((result) => {
+              if (result) {
+                console.log("successful login...");
+                return callback(null, user, 'success login');
+              } else {
+                return callback(null, false, 'incorrect password');
+              }
+            })
           }
-          console.log("successful login...");
-          return callback(null, user, 'success login');
         });
-      });
+      // });
     }
   ));
-
 }
