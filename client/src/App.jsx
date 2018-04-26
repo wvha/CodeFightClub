@@ -8,6 +8,7 @@ import 'brace/mode/javascript';
 import Header from './components/header.jsx';
 import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
+import { subscribeToSocket, sendMessage } from './socket/api.jsx';
 
 Modal.setAppElement('#app');
 
@@ -34,7 +35,16 @@ class App extends Component {
             isAdmin: data.isAdmin
           }
         });
+        subscribeToSocket(data.username, (err, message) => {
+          if (err) {
+            console.log('error connecting to socket', err);
+          } else {
+            console.log('connected to socket');
+
+          }
+        });
       }
+      
     });
   }
 
@@ -61,6 +71,10 @@ class App extends Component {
   }
 
   render () {
+    // testing socket.io
+
+
+    // testing socket.io
     return (
       <div className="container fullh fullw column">
         <Header

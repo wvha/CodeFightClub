@@ -31,7 +31,7 @@ app.use(passport.session());
 
 app.set('port', (process.env.PORT || 3000));
 
-app.listen(app.get('port'), function() {
+server.listen(app.get('port'), function() {
   console.log('Server started on port:' + app.get('port'));
 });
 
@@ -40,15 +40,14 @@ require('./routes.js').passportRoutes(app, passport);
 require('./routes.js').challengeRoutes(app);
 require('./routes.js').databaseRoutes(app);
 
+
 // socket.io
 io.on('connection', (socket) => {
-  console.log('socket connected', socket);
+  console.log('socket connected');
 
-  // how to emit
-  socket.emit('event type', {jsonObject: 'any json compatable object'});
-
-  socket.on('event from client', (data) => {
-    console.log('data from client', data);
+  socket.on('message', (data) => {
+    console.log('message', data);
+    socket.emit('message', data);
   })
 });
 
