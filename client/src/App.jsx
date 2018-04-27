@@ -26,6 +26,7 @@ class App extends Component {
       messages: [],
       userMessage: '',
       timer: ' ',
+      gameTimer: 5,
       // END TESTING SOCKET.IO
       view: 'prompt',
     };
@@ -108,16 +109,25 @@ class App extends Component {
   updateTimer(date) {
     let secondsTillNewGame = 60 - (new Date(date).getSeconds());
     let timer = setInterval(() => {
-      this.setState({timer: secondsTillNewGame})
+      this.setState({timer: secondsTillNewGame});
       secondsTillNewGame--;
       if (secondsTillNewGame < 0) {
         clearInterval(timer);
-      } 
+        this.updateGameTimer();
+        this.setState({view: 'prompt'})
+      }
     }, 1000)
   }
 
-  handleJoinFight() {
-
+  updateGameTimer() {
+    let secondsTillEndGame = this.state.gameTimer;
+    let gameTimer = setInterval(() => {
+      this.setState({gameTimer: secondsTillEndGame});
+      secondsTillEndGame--;
+      if (secondsTillEndGame < 0) {
+        clearInterval(gameTimer);
+      }
+    }, 1000)
   }
   // END TESTING SOCKET.IO
 
@@ -175,6 +185,7 @@ class App extends Component {
           changeView={this.changeView.bind(this)}
           view={this.state.view}
           timer={this.state.timer}
+          gameTimer={this.state.gameTimer}
         />
         <Body
           isLoggedIn={ !!this.state.user.username }

@@ -19,7 +19,7 @@ const Header = function(props) {
       </div>
         { !!props.user.username
           ? <div className="container row" id="user">
-              <Timer timer={props.timer} changeView={props.changeView} />
+              <Timer timer={props.timer} gameTimer={props.gameTimer} view={props.view} changeView={props.changeView} />
               <User user={props.user} logout={props.logout} view={props.view} changeView={props.changeView} />
             </div>
           : <div className="container row" id="user">
