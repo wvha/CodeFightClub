@@ -2,6 +2,7 @@ import React from 'react';
 import SignUp from './signup.jsx';
 import Login from './login.jsx';
 import User from './user.jsx';
+import Timer from './timer.jsx';
 //direct child of App
 
 
@@ -18,9 +19,7 @@ const Header = function(props) {
       </div>
         { !!props.user.username
           ? <div className="container row" id="user">
-              <span>Next Fight In: </span>
-              <button>{props.timer}</button>
-              <button onClick={props.changeView('waitingRoom')}>Join Fight</button>
+              <Timer timer={props.timer} changeView={props.changeView} />
               <User user={props.user} logout={props.logout} view={props.view} changeView={props.changeView} />
             </div>
           : <div className="container row" id="user">
