@@ -1,31 +1,63 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ChatBox = ({ messages }) => {
-  const messages = this.state.messages.map(message => <li>{ message }</li>);
+const ChatBox = ({ messages, userMessage, handleInputChange, handleSubmit }) => {
+
+
+  messages = messages.map(message => 
+    <div className="chat-message">
+      <p className="chat-contents">
+        <span className="chat-user">
+          { message.user }
+        </span>
+        <span className="chat-time">
+          5 minutes ago
+        </span>
+      </p>
+      <p className="chat-contents">
+        { message.contents }
+      </p>
+    </div>
+    );
 
   return (
-    <div style={ {backgroundColor: 'black'} }>
-      <ul className="messages">
-        { messages }
-      </ul>
-      <form action="">
-        <input 
-          name="message"
-          type="text" 
-          className="m"
-          placeholder="send a message"
-          value={ this.state.userMessage }
-          onChange={ this.handleInputChangeChat }
-        />
-        <button 
-          className="send-button"
-          onClick={ this.handleSubmit }  
+    <div className="chat-wrapper" >
+    <div className="chat-form">
+      <form 
+          className="chat-input"
+          action=""
         >
-          Send
-        </button>
-      </form>
+          <textarea 
+            name="message"
+            type="text" 
+            className="chat-input"
+            placeholder=""
+            value={ userMessage }
+            onChange={ handleInputChange }
+            className="chat-input"
+          />
+          <button 
+            className="chat-button"
+            onClick={ handleSubmit }  
+          >
+            Send
+          </button>
+        </form>
+      </div>
+      <div className="chat-spacer" />
+      <div className="chat-messages">
+        { messages }
+      </div>
     </div>
   )
 };
 
+ChatBox.propTypes = {
+  messages: PropTypes.array,
+  userMessage: PropTypes.string,
+  handleInputChange: PropTypes.func,
+  handleSubmit: PropTypes.func
+}
+
 export default ChatBox;
+
