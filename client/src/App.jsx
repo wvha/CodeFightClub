@@ -115,6 +115,10 @@ class App extends Component {
       } 
     }, 1000)
   }
+
+  handleJoinFight() {
+
+  }
   // END TESTING SOCKET.IO
 
   render () {
@@ -132,41 +136,45 @@ class App extends Component {
 
     // TESTING SOCKET.IO
     const messages = this.state.messages.map(message => <li>{ message }</li>);
-    
-    return (
-      <div style={ {backgroundColor: 'black'} }>
-      <p>Next Battle In: {this.state.timer}</p>
-        <ul className="messages">
-          { messages }
-        </ul>
-        <form action="">
-          <input 
-            name="message"
-            type="text" 
-            className="m"
-            placeholder="send a message"
-            value={ this.state.userMessage }
-            onChange={ this.handleInputChangeChat }
-          />
-          <button 
-            className="send-button"
-            onClick={ this.handleSubmit }  
-          >
-            Send
-          </button>
-        </form>
-      </div>
-    )
+
+    // return (
+    //   <div style={ {backgroundColor: 'black'} }>
+    //   <p>Next Fight In: {this.state.timer}</p>
+    //     <button>
+    //       Join Fight
+    //     </button>
+    //     <ul className="messages">
+    //       { messages }
+    //     </ul>
+    //     <form action="">
+    //       <input 
+    //         name="message"
+    //         type="text" 
+    //         className="m"
+    //         placeholder="send a message"
+    //         value={ this.state.userMessage }
+    //         onChange={ this.handleInputChange }
+    //       />
+    //       <button 
+    //         className="send-button"
+    //         onClick={ this.handleSubmit }  
+    //       >
+    //         Send
+    //       </button>
+    //     </form>
+    //   </div>
+    // )
 
     // END TESTING SOCKET.IO
     return (
       <div className="container fullh fullw column">
         <Header
-          user={ this.state.user }
-          updateUser={ this.setUser.bind(this) }
-          logout={ this.logout.bind(this) }
-          changeView={ this.changeView.bind(this) }
-          view={ this.state.view }
+          user={this.state.user}
+          updateUser={this.setUser.bind(this)}
+          logout={this.logout.bind(this)}
+          changeView={this.changeView.bind(this)}
+          view={this.state.view}
+          timer={this.state.timer}
         />
         <Body
           isLoggedIn={ !!this.state.user.username }

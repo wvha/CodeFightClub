@@ -17,8 +17,15 @@ const Header = function(props) {
         <img src="BrandonStinks.png" alt="BrandonStinks" height="90px" width="150px" />
       </div>
         { !!props.user.username
-          ? <div className="container row" id="user"><User user={props.user} logout={props.logout} view={props.view} changeView={props.changeView} /></div>
-          : <div className="container row" id="user"><SignUp setUsername={props.updateUser} /> <Login setUsername={props.updateUser} /></div> }
+          ? <div className="container row" id="user">
+              <span>Next Fight In: {props.timer}</span>
+              <button onClick={props.changeView('waitingRoom')}>Join Fight</button>
+              <User user={props.user} logout={props.logout} view={props.view} changeView={props.changeView} />
+            </div>
+          : <div className="container row" id="user">
+              <SignUp setUsername={props.updateUser} />
+              <Login setUsername={props.updateUser} />
+            </div> }
     </header>
   );
 }
