@@ -8,6 +8,7 @@ import 'brace/mode/javascript';
 import Header from './components/header.jsx';
 import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
+import ChatBox from './components/chatBox.jsx';
 import { subscribeToSocket, sendMessage, subscribeToTimerSocket} from './socket/api.jsx';
 
 Modal.setAppElement('#app');
@@ -117,9 +118,21 @@ class App extends Component {
   // END TESTING SOCKET.IO
 
   render () {
+    // TESTING ChatBox
+    return (
+      <ChatBox 
+        messages={ this.state.messages }
+        userMessage={ this.state.userMessage }
+        handleInputChange={ this.state.handleInputChangeChat }
+        handleSubmit={ this.state.handleSubmit }
+      />
+    )
+
+    // END TESTING CHatbox
+
     // TESTING SOCKET.IO
     const messages = this.state.messages.map(message => <li>{ message }</li>);
-
+    
     return (
       <div style={ {backgroundColor: 'black'} }>
       <p>Next Battle In: {this.state.timer}</p>
