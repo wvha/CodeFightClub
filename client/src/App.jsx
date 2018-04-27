@@ -114,8 +114,10 @@ class App extends Component {
       secondsTillNextGame--;
       if (secondsTillNextGame < 0) {
         clearInterval(timer);
-        this.updateGameTimer();
-        this.setState({view: 'prompt'})
+        if (this.state.view === 'waitingRoom') {
+          this.setState({view: 'gameRoom'})
+          this.updateGameTimer();
+        }
       }
     }, 1000)
   }
