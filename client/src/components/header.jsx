@@ -18,7 +18,8 @@ const Header = function(props) {
       </div>
         { !!props.user.username
           ? <div className="container row" id="user">
-              <span>Next Fight In: {props.timer}</span>
+              <span>Next Fight In: </span>
+              <button>{props.timer}</button>
               <button onClick={props.changeView('waitingRoom')}>Join Fight</button>
               <User user={props.user} logout={props.logout} view={props.view} changeView={props.changeView} />
             </div>
