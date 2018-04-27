@@ -4,6 +4,7 @@ import Admin from './admin.jsx';
 import Leaderboard from './leaderboard.jsx';
 import WaitingRoom from './waitingRoom.jsx';
 import Problems from './problems.jsx';
+import GameRoom from './gameRoom.jsx';
 //direct child of App
 
 const Body = ({ view, isLoggedIn, username }) => {
@@ -18,6 +19,8 @@ const Body = ({ view, isLoggedIn, username }) => {
     body = <WaitingRoom />
   } else if (view === 'problems') {
     body = <Problems />
+  } else if (view === 'gameRoom') {
+    body = <GameRoom />
   }
 
   return (
