@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ChatBox = ({ messages, userMessage, handleInputChange, handleSubmit }) => {
-
+const ChatBox = ({ messages, userMessage, handleSubmit, handleInputChange }) => {
 
   messages = messages.map(message => 
     <div className="chat-message">
@@ -11,7 +10,7 @@ const ChatBox = ({ messages, userMessage, handleInputChange, handleSubmit }) => 
           { message.user }
         </span>
         <span className="chat-time">
-          5 minutes ago
+          { message.time }
         </span>
       </p>
       <p className="chat-contents">
@@ -22,10 +21,10 @@ const ChatBox = ({ messages, userMessage, handleInputChange, handleSubmit }) => 
 
   return (
     <div className="chat-wrapper" >
-    <div className="chat-form">
-      <form 
-          className="chat-input"
-          action=""
+      <div className="chat-form">
+        <form 
+            className="chat-input"
+            action=""
         >
           <textarea 
             name="message"

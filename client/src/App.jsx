@@ -103,8 +103,11 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('submitting')
-    sendMessage(this.state.userMessage);
-      
+    sendMessage({
+      user: this.state.user.username,
+      time: new Date().getTime(),
+      contents: this.state.userMessage,
+    })
   }
 
   updateTimer(date) {
