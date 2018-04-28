@@ -113,7 +113,6 @@ class App extends Component {
     let timer = setInterval(() => {
       secondsTillNextGame--;
       this.setState({timerTillNextGame: secondsTillNextGame});
-      console.log(secondsTillNextGame)
       if (secondsTillNextGame <= -1) {
         clearInterval(timer);
         if (this.state.view === 'waitingRoom') {
