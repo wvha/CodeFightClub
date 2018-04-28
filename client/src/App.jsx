@@ -102,8 +102,11 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('submitting')
-    sendMessage(this.state.userMessage);
-      
+    sendMessage({
+      user: this.state.user.username,
+      time: new Date().getTime(),
+      contents: this.state.userMessage,
+    })
   }
 
   updateTimer(date) {
@@ -138,6 +141,7 @@ class App extends Component {
 
   render () {
     // TESTING ChatBox
+<<<<<<< 2338bebb1f0827eb0d4eb9bbbec695c52d06a234
     // return (
     //   <ChatBox 
     //     messages={ this.state.messages }
@@ -146,6 +150,16 @@ class App extends Component {
     //     handleSubmit={ this.state.handleSubmit }
     //   />
     // )
+=======
+    return (
+      <ChatBox 
+        messages={ this.state.messages }
+        userMessage={ this.state.userMessage }
+        handleInputChange={ this.handleInputChangeChat }
+        handleSubmit={ this.handleSubmit }
+      />
+    )
+>>>>>>> complete chat component
 
     // END TESTING CHatbox
 
