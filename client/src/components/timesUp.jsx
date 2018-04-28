@@ -15,8 +15,8 @@ class TimesUp extends Component {
           className="Modal container"
           overlayClassName="Overlay"
         >
-          GAME OVER
-          <br />
+          <span>GAME OVER</span>
+          <br /><br />
           <button onClick={this.props.changeView('waitingRoom')}>
             PLAY AGAIN
           </button>

@@ -118,6 +118,7 @@ class App extends Component {
           this.setState({view: 'gameRoom'})
           this.updateGameTimer();
         }
+        setTimeout(subscribeToTimerSocket(this.updateTimer), 1000);
       }
     }, 1000)
   }
@@ -129,6 +130,7 @@ class App extends Component {
       secondsTillEndGame--;
       if (secondsTillEndGame < 0) {
         clearInterval(gameTimer);
+        setTimeout(() => {this.setState({gameTimer: 5})}, 2000)
       }
     }, 1000)
   }
