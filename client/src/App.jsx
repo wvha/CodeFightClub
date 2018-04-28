@@ -141,7 +141,6 @@ class App extends Component {
 
   render () {
     // TESTING ChatBox
-<<<<<<< 2338bebb1f0827eb0d4eb9bbbec695c52d06a234
     // return (
     //   <ChatBox 
     //     messages={ this.state.messages }
@@ -150,16 +149,6 @@ class App extends Component {
     //     handleSubmit={ this.state.handleSubmit }
     //   />
     // )
-=======
-    return (
-      <ChatBox 
-        messages={ this.state.messages }
-        userMessage={ this.state.userMessage }
-        handleInputChange={ this.handleInputChangeChat }
-        handleSubmit={ this.handleSubmit }
-      />
-    )
->>>>>>> complete chat component
 
     // END TESTING CHatbox
 
