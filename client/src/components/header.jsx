@@ -3,6 +3,7 @@ import SignUp from './signup.jsx';
 import Login from './login.jsx';
 import User from './user.jsx';
 import Timer from './timer.jsx';
+import TimesUp from './timesUp.jsx';
 //direct child of App
 
 
@@ -25,6 +26,7 @@ const Header = function(props) {
                 view={props.view} 
                 changeView={props.changeView} />
               <User user={props.user} logout={props.logout} view={props.view} changeView={props.changeView} />
+              <TimesUp gameTimer={props.gameTimer} changeView={props.changeView}/>
             </div>
           : <div className="container row" id="user">
               <SignUp setUsername={props.updateUser} />
