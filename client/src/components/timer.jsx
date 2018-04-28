@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 
 const Timer = (props) => {
   let timer;
-  if (props.timerTillNextGame > 0 && props.view === 'waitingRoom') {
+  if (props.view === 'gameRoom') {
+    timer = (
+      <span className="container">
+        <span>Time Left: </span>
+        <button>{props.gameTimer}</button>
+      </span>
+    );
+  } else if (props.timerTillNextGame > 0 && props.view === 'waitingRoom') {
     timer = (
       <span className="container">
         <span>Next Fight In: </span>
@@ -17,14 +24,7 @@ const Timer = (props) => {
         <button onClick={props.changeView('waitingRoom')}>Join Fight</button>
       </span>
     );
-  } else {
-    timer = (
-      <span className="container">
-        <span>Time Left: </span>
-        <button>{props.gameTimer}</button>
-      </span>
-    );
-  }
+  } 
 
   return (
     <span className="container">
