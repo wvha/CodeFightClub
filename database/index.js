@@ -16,12 +16,16 @@ const UserSchema = new mongoose.Schema({
   password: String,
   isAdmin: {
     type: Boolean,
-    default: false
+    default: true
   },
   score: {
     type: Number,
     default: 0
-  }
+  },
+  entry: [{
+    type: Date,
+    default: Date.now,
+  }]
 });
 
 const ToyProblemSchema = new mongoose.Schema({
@@ -37,10 +41,23 @@ const ToyProblemSchema = new mongoose.Schema({
   ]
 });
 
-const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
-const User = mongoose.model('User', UserSchema);
+const ScoreboardSchema = new mongoose.Schema({
+  username: { type: String },
+  score: {
+    type: Number,
+    default: 1
+  },
+  entry: {
+    type: Date,
+    default: Date.now,
+  }
+});
 
-//Gets the top users based on score
+const User = mongoose.model('User', UserSchema);
+const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
+const Scoreboard = mongoose.model('Scoreboard', ScoreboardSchema);
+
+//Gets the top users based on score from User schema
 let findLeaderboard = (callback) => {
   User.find((err, users) => {
     if (err) {
@@ -63,11 +80,51 @@ let findToyProblems = (callback) => {
   });
 }
 
+//Logs each solved challenge for leaderboard
+let logPoints = (callback) => {
+  Scoreboard.find((err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(user);
+    }
+  });
+}
+
+//Gets top users based on score from ScoreboardSchema // still testing
+  let findScoreboard = (callback) => {
+    Scoreboard.find((err, users) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(users);
+      }
+    })
+    .sort({'score': -1});
+  }
+
+//Find scoreboard by day // THIS WORKS
+  let findScoreboardByDay = (callback) => {
+    let today = new Date();
+    today.setHours(0,0,0,0);
+    Scoreboard.aggregate( [
+      { $match: {entry: {$gt: new Date(today)} } },
+      { $group: { _id: '$username', count: {$sum: 1} } }
+    ], function(err, results) {
+      if (err) {
+        console.log('err in scoreboard aggregate');
+      } else {
+        callback(results);
+      }
+    });
+  }
+
 // Database export
 module.exports.db = db;
 
 //User collection export
 module.exports.User = User;
+module.exports.Scoreboard = Scoreboard;
 
 // Toy problem export
 module.exports.ToyProblem = ToyProblem;
@@ -75,3 +132,4 @@ module.exports.ToyProblem = ToyProblem;
 //User functions
 module.exports.findLeaderboard = findLeaderboard;
 module.exports.findToyProblems = findToyProblems;
+module.exports.findScoreboardByDay = findScoreboardByDay;

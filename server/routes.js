@@ -1,4 +1,5 @@
 const User = require('../database/index.js').User;
+const Scoreboard = require('../database/index.js').Scoreboard;
 const ToyProblem = require('../database/index.js').ToyProblem;
 const execute = require('../helpers/sandbox.js').execute;
 const Promise = require('bluebird');
@@ -91,12 +92,21 @@ var databaseRoutes = function(app) {
     });
   });
 
-  //Get leaderboard of users in databse
+  // Get leaderboard of users in databse
   app.get('/leaderboard', function(req, res) {
     db.findLeaderboard((users) => {
+      console.log(users);
       res.json(users);
     });
   });
+
+    //Get leaderboard by DAY
+    app.get('/leaderboard', function(req, res) {
+      db.findScoreboardByDay((users) => {
+        console.log(users);
+        res.json(users);
+      });
+    });
 
   //Get names of all toy problems in database
   app.get('/problems', function(req, res) {
@@ -121,9 +131,9 @@ var databaseRoutes = function(app) {
   //Update a user's score within the database
   app.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
-    User.update({"username": name}, {$inc: {"score": 1}}, function(err, result) {
+    User.update({"username": name}, { $inc: {"score": 1}, $push: {"entry": new Date()} }, function(err, result) {
       if (err) console.log(err);
-      console.log(result);
+      console.log('patch: ', result);
     });
     res.end('updated');
   });
@@ -160,6 +170,20 @@ var databaseRoutes = function(app) {
       res.send(undefined);
     }
   });
+
+  // Posts to scoreboard schema
+  app.post('/users:name', (req, res) => {
+    var name = req.params.name.slice(1);
+    var dbScoreboard = new Scoreboard({"username": name});
+    dbScoreboard.save((err) => {
+      if (err) {
+        console.log(err);
+        res.end("error updating scoreboard");
+      }
+      res.end('posted scoreboard log');
+    });
+  });
+
 
 };
 
