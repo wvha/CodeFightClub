@@ -101,7 +101,7 @@ var databaseRoutes = function(app) {
   });
 
     //Get leaderboard by DAY
-    app.get('/leaderboard', function(req, res) {
+    app.get('/leaderboardByDay', function(req, res) {
       db.findScoreboardByDay((users) => {
         console.log(users);
         res.json(users);
