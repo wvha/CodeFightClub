@@ -37,6 +37,18 @@ require('./routes.js').challengeRoutes(app);
 require('./routes.js').databaseRoutes(app);
 
 let connections = [];
+let waitingRoom = {};
+let gameRoom = {};
+let scoreboard = [];
+/*
+{
+  username: 'will',
+  finished: false,
+  finishTime: null,
+  finishPlace: null
+}
+
+*/
 // socket.io
 io.on('connection', (client) => {
   console.log('socket connected');
@@ -84,3 +96,67 @@ server.listen(app.get('port'), function() {
 
 
 module.exports = app;
+
+const ioGame = io.of('/game');
+
+// onclient side we need to do this whenever they enter waiting room
+ioGame.on('connection', (socket) => {
+  console.log('game socket connected');
+
+  let _username = null;
+
+  socket.on('joinWaitingRoom', ({ username }) => {
+    _username = username;
+    console.log('joinWaitingRoom', username);
+    waitingRoom[username] = { 
+      socket,
+      finished: false,
+      finishTime: null,
+      finishPlace: null
+    };
+    console.log('user added to waiting room', waitingRoom);
+  })
+  /// everything we only want to send to this person or listen to form this person here
+  const removeFromWaitingRoom = () => delete waitingRoom[_username];
+
+  socket.on('exitWaitingRoom', removeFromWaitingRoom); 
+  socket.on('disconnect', removeFromWaitingRoom);
+
+  socket.on('gameComplete', () => {
+    console.log('gameComplete', _username)
+    console.log('scoreboard on game complete', scoreboard);
+    // if it is good call scoreboardchanged with the result
+    scoreboardChange(_username);
+  })
+})
+
+/*
+
+
+
+
+*/
+const scoreboardChange = (user) => {
+  scoreboard.push(user);
+  console.log('emiting scoreboardChange', scoreboard);
+  ioGame.emit('scoreboardChange', scoreboard);
+}
+
+
+const startGame = () => {
+  // move waiting room to gameroom 
+  // reset
+  console.log('starting a new game startgame timer thing'); 
+  gameRoom = Object.assign({}, waitingRoom)
+  scoreboard = [];
+  waitingRoom = {};
+  // setTimeout(handleGameEnd, secondsTillNextGame() - 30) // send results one last time
+  setTimeout(startGame, secondsTillNextGame());
+}
+
+const secondsTillNextGame = () => 1000 * (59 - (new Date().getSeconds()));
+
+setTimeout(startGame, secondsTillNextGame);
+
+// update specific user on if their test passed
+

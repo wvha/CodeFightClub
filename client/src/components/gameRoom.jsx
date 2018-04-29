@@ -2,6 +2,8 @@ import React from 'react';
 import Challenge from './challenge.jsx';
 import $ from 'jquery';
 import Results from './results.jsx';
+import { subscribeToGameSocket, gameComplete, joinWaitingRoom } from '../socket/api.jsx';
+
 //direct child of body
 
 class Prompt extends React.Component {
@@ -13,6 +15,7 @@ class Prompt extends React.Component {
       view: "prompt",
       results: ""
     }
+    this.handleTestResponse = this.handleTestResponse.bind(this);
   }
 
   runCode () {
@@ -21,16 +24,20 @@ class Prompt extends React.Component {
     );
   }
 
-  testUserSolution (e) {
+  testUserSolution (e, ajax=true) {
     $.ajax({
-      method: 'POST',
-      url: '/challenge',
-      data: {
-        solution: this.state.prompt.code,
-        funcName: this.state.funcName,
-        tests: this.state.prompt.tests
-      }
-    }).done((res) => {
+    method: 'POST',
+    url: '/challenge',
+    data: {
+      solution: this.state.prompt.code,
+      funcName: this.state.funcName,
+      tests: this.state.prompt.tests
+    }
+  }).done(this.handleTestResponse);
+
+  }
+
+  handleTestResponse (res) {
       this.setState({
         results: JSON.parse(res),
         view: "results"
@@ -42,22 +49,35 @@ class Prompt extends React.Component {
           passing = false;
         }
       });
+      console.log('passing', passing);
       if (passing) {
         this.setState({ //updates the score of the user if all tests pass
           isComplete: true
         });
+
+        // this is where we tell the socket we pas
+        console.log('game complete')
+        gameComplete();
+
         $.ajax({
           method: 'PATCH',
           url: `/users:${this.props.username}`
         });
       }
-    });
-  }
+    }
 
   getPrompt () {
     $.get('/randomChallenge')
       .done( data => {
         let challenge = JSON.parse(data);
+        console.log(data);
+        challenge =                                                                              
+        // this is hardcoded challenge
+        {"_id":"5adeac2c3ddeb49ecc359bd3","title":"RETURN THIS","body":"Return this exact string: \"BrandonVcantHang\"","funcName":"returnThis","params":"","__v":0,"tests":[{"input":"","expected":"'BrandonVcantHang'","_id":"5adeac2c3ddeb49ecc359bd4"}]};
+        
+        
+        
+        
         let prompt = this.state.prompt;
         prompt.title = challenge.title;
         prompt.body = challenge.body;

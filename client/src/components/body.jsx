@@ -16,7 +16,7 @@ const Body = ({ view, isLoggedIn, username }) => {
   } else if (view === 'leaderboard') {
     body = <Leaderboard />;
   } else if (view === 'waitingRoom') {
-    body = <WaitingRoom />
+    body = <WaitingRoom username={ username }/>
   } else if (view === 'problems') {
     body = <Problems />
   } else if (view === 'gameRoom') {

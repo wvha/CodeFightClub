@@ -29,3 +29,26 @@ export const subscribeToTimerSocket = (cb) => {
 export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
+
+const gameSocket = io('/game');
+
+export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
+
+  gameSocket.on('connect', () => console.log('successfully subscribed'));
+
+  gameSocket.on('scoreboardChange', (data) => {
+    console.log('scoreboard changed', data);
+    onScoreboardChange(data);
+  });
+
+  gameSocket.on('gameStart', onGameStart);
+};
+
+export const gameComplete = () => {
+  console.log('emiting game complete')
+  gameSocket.emit('gameComplete');
+};
+
+export const joinWaitingRoom = (userInfo) => gameSocket.emit('joinWaitingRoom', userInfo);
+
+export const exitWaitingRoom = () => gameSocket.emit('exitWaitingRoom')

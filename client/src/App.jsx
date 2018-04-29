@@ -9,7 +9,13 @@ import Header from './components/header.jsx';
 import Body from './components/body.jsx';
 import Footer from './components/footer.jsx';
 import ChatBox from './components/chatBox.jsx';
-import { subscribeToSocket, sendMessage, subscribeToTimerSocket, getDateTimerSocket} from './socket/api.jsx';
+import { 
+  subscribeToSocket, 
+   sendMessage, 
+   subscribeToTimerSocket, 
+   getDateTimerSocket,
+   subscribeToGameSocket
+} from './socket/api.jsx';
 
 Modal.setAppElement('#app');
 
@@ -29,11 +35,14 @@ class App extends Component {
       gameTimer: 30,
       // END TESTING SOCKET.IO
       view: 'prompt',
+      scoreboard: []
     };
 
     this.handleInputChangeChat = this.handleInputChangeChat.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateTimer = this.updateTimer.bind(this);
+    this.onGameStart = this.onGameStart.bind(this);
+    this.onScoreboardChange = this.onScoreboardChange.bind(this);
     // END TESTING SOCKET.IO
   }
   
@@ -58,10 +67,20 @@ class App extends Component {
         
         getDateTimerSocket();
         subscribeToTimerSocket(this.updateTimer);
+        subscribeToGameSocket(this.onGameStart, this.onScoreboardChange);
         // END TESTING SOCKET.IO
       }
-      
     });
+  }
+
+  onGameStart() {
+    console.log('game started');
+  }
+
+  onScoreboardChange(scoreboard) {
+    console.log('old scoreboard', this.state.scoreboard);
+    console.log('setting new scoreboard state', scoreboard);
+    this.setState({ scoreboard })
   }
 
   subscribeToSocketChat() {
