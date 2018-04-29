@@ -27,7 +27,6 @@ module.exports = (passport) => {
     },
     function(req, username, password, callback) {
       console.log('within local-signup of passport:  ');
-      console.log('password: ', password);
       process.nextTick(function() {
         User.findOne({'username': username}, function(err, user) {
           if (err) {
@@ -41,10 +40,8 @@ module.exports = (passport) => {
           const saltRounds = 5;
           return bcrypt.genSaltAsync(saltRounds)
           .then ((salt) => {
-            console.log('salt: ', salt);
             return bcrypt.hashAsync(password, salt)
             .then ((hash) => {
-              console.log('hash: ', hash);
               var newUser = new User();
               newUser.username = username;
               newUser.password = hash;
