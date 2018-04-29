@@ -1,4 +1,6 @@
-const socket = io.connect();
+let ioclient = /*window.io ||*/ require('socket.io-client'); 
+
+const socket = ioclient.connect();
 console.log(socket);
 // subscribe to a Socket
 // pass in callback that gets run when recieving messages
@@ -18,7 +20,7 @@ export const sendMessage = (message) => {
 };
 
 // timer 
-const timerSocket = io('/timer');
+const timerSocket = ioclient('/timer');
 
 export const subscribeToTimerSocket = (cb) => {
   timerSocket.on('date',(date) => {
@@ -30,7 +32,7 @@ export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
 
-const gameSocket = io('/game');
+const gameSocket = ioclient('/game');
 
 export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
 

@@ -137,9 +137,16 @@ ioGame.on('connection', (socket) => {
 
 */
 const scoreboardChange = (user) => {
-  scoreboard.push(user);
-  console.log('emiting scoreboardChange', scoreboard);
-  ioGame.emit('scoreboardChange', scoreboard);
+  if (user !== undefined) {
+    scoreboard.push(user)
+  }
+  const unfinishedUsers = Object.keys(gameRoom).length - scoreboard.length;
+  const clientScoreboard = [...scoreboard];
+  for (let i = 0; i < unfinishedUsers; i++) {
+    clientScoreboard.push('unfinished');
+  }
+  console.log('emiting scoreboardChange', clientScoreboard);
+  ioGame.emit('scoreboardChange', clientScoreboard);
 }
 
 
@@ -151,10 +158,11 @@ const startGame = () => {
   scoreboard = [];
   waitingRoom = {};
   // setTimeout(handleGameEnd, secondsTillNextGame() - 30) // send results one last time
+  scoreboardChange();
   setTimeout(startGame, secondsTillNextGame());
 }
 
-const secondsTillNextGame = () => 1000 * (59 - (new Date().getSeconds()));
+const secondsTillNextGame = () => 1000 * (60 - (new Date().getSeconds()));
 
 setTimeout(startGame, secondsTillNextGame);
 

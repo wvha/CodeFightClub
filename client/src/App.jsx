@@ -17,6 +17,7 @@ import {
    subscribeToGameSocket
 } from './socket/api.jsx';
 
+
 Modal.setAppElement('#app');
 
 class App extends Component {
@@ -122,6 +123,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('submitting')
+    this.setState({userMessage: ''})
     sendMessage({
       user: this.state.user.username,
       time: new Date().getTime(),
@@ -219,6 +221,11 @@ class App extends Component {
           isLoggedIn={ !!this.state.user.username }
           view={ this.state.view }
           username={ this.state.user.username }
+          scoreboard={ this.state.scoreboard }
+          messages={ this.state.messages }
+          userMessage={ this.state.userMessage }
+          handleInputChangeChat={ this.handleInputChangeChat }
+          handleSubmitChat={ this.handleSubmit }
         />
         <Footer
         />

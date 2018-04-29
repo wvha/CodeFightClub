@@ -1,13 +1,13 @@
+// requires server to be running
 import { 
   subscribeToSocket, 
   sendMessage, 
-  subscribeToSocket, 
   getDateTimerSocket, 
   subscribeToGameSocket, 
   gameComplete, 
   joinWaitingRoom, 
   exitWaitingRoom 
-} from '../'
+} from '../socket/api.jsx'
 
 test('should update leaderboard when people finish', () => {
   let finished = 0;
@@ -18,7 +18,7 @@ test('should update leaderboard when people finish', () => {
   }
   
   subscribeToGameSocket(() => {}, onScoreboardChange);
-
+console.log('subscribed to game socket')
   finished++;
   gameComplete();
 
