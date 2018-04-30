@@ -21,7 +21,7 @@ class GameRoom extends React.Component {
 
   runCode () {
     return (
-      <button onClick={this.testUserSolution.bind(this)}><strong>Submit</strong></button>
+      <button className='submit-button' onClick={this.testUserSolution.bind(this)}><strong>Submit</strong></button>
     );
   }
 
@@ -105,7 +105,7 @@ class GameRoom extends React.Component {
   renderButton() {
     if (this.state.view === 'prompt') {
       return (
-        <div className="container fullw column" id="promptViewContent">
+        <div style={{'width': 'calc(100% - 10px)', 'background-color': '#19191A', height: 'calc(100% - 106px)', 'margin-left': '10px'}}className="container fullw column" id="promptViewContent">
           <h1 id="prompt-title">{this.state.prompt.title}</h1>
           <p id="prompt-body">{this.state.prompt.body}</p>
         </div>
@@ -134,22 +134,27 @@ class GameRoom extends React.Component {
 
   render() {
     return (
-      <div className="container row fullh fullw">
-        <div className="body container column">
+      <div style={{display: 'flex', 'align-items': 'stretch', height: '100%'}}>
+        <div style={{flex: 7, 'background-color': '#444444', height: '100%'}}>
           <Challenge
           solution={this.state.prompt.code}
           solve={this.updateUserSolution.bind(this)}
           />
-          <div className="container submit fullw">
-            {this.runCode()}   
+          <div className="">
+             
           </div>
         </div>
-        <div></div>
-        <div className="body container column" id="promptView">
-          <div className="container row fullw" id="promptViewButtons">
+        <div style={{flex: 7, height: '100%', 'margin-left': '10px'}} id="promptView">
+          <div className="" id="promptViewButtons" style={{flex: 7, 'background-color': '#444444', height: '90px', 'margin-left': '10px'}}>
+            {this.runCode()}  
             <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
-            <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
-            <button type="button" onClick={() => this.setState({view: 'scoreboard'})}>Scoreboard</button>
+            { this.state.results !== '' 
+              ? <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
+              : undefined
+            }
+            { this.props.scoreboard 
+              ? <button type="button" onClick={() => this.setState({view: 'scoreboard'})}>Scoreboard</button>
+              : undefined }
             <button type="button" onClick={() => this.setState({view: 'chat'})}>Chat</button>
           </div>
             {this.renderButton()}
