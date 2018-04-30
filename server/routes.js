@@ -98,14 +98,10 @@ var databaseRoutes = function(app) {
     });
   });
 
-  //Get names of all toy problems in database
+  //Get all toy problems in database
   app.get('/problems', function(req, res) {
     db.findToyProblems((toyProblems) => {
-      let problemList = [];
-      toyProblems.forEach(function(toyProblem) {
-        problemList.push(toyProblem.title);
-      });
-      res.json(problemList);
+      res.json(toyProblems);
     });
   });
 

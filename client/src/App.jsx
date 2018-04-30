@@ -19,7 +19,8 @@ class App extends Component {
         username: '',
         isAdmin: true
       },
-      view: 'prompt'
+      view: 'prompt',
+      problem: undefined
     };
   }
 
@@ -49,6 +50,10 @@ class App extends Component {
     }
   }
 
+  changeProblem (problem) {
+    this.setState({ view: 'prompt', problem: problem });
+  }
+
   logout () {
     $.get('/logout')
     .done((data) => {
@@ -74,6 +79,8 @@ class App extends Component {
           isLoggedIn={!!this.state.user.username}
           view={this.state.view}
           username={this.state.user.username}
+          changeProblem={this.changeProblem.bind(this)}
+          problem={this.state.problem}
         />
         <Footer
         />

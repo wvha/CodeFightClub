@@ -5,15 +5,15 @@ import Leaderboard from './leaderboard.jsx';
 import Problems from './problems.jsx';
 //direct child of App
 
-const Body = ({ view, isLoggedIn, username }) => (
+const Body = ({ view, isLoggedIn, username, changeProblem, problem }) => (
   <div className="container fullw bg-main" id="body">
     { view === 'prompt' 
-      ? <Prompt username={username} isLoggedIn={isLoggedIn} /> 
+      ? <Prompt username={username} isLoggedIn={isLoggedIn} problem={problem}/> 
       : view === 'admin'
         ? <Admin /> 
         : view === 'leaderboard'
         ? <Leaderboard />
-        : <Problems />
+        : <Problems changeProblem={changeProblem} />
       }
   </div>
 )
