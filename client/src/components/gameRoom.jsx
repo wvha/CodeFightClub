@@ -73,13 +73,7 @@ class GameRoom extends React.Component {
   getPrompt() {
     if (this.state.view === 'prompt') {
       this.setState({
-        prompt: {
-          title: "Compete Against Hackers Around the World!",
-          funcName: "",
-          body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
-          code: "var iAmAwesome = function() {\n\n};",
-          tests: ''
-        },
+        prompt: { "_id": "5adeac2c3ddeb49ecc359bd3", "title": "RETURN THIS", "body": "Return this exact string: \"BrandonVcantHang\"", "funcName": "returnThis", "params": "", "__v": 0, "tests": [{ "input": "", "expected": "'BrandonVcantHang'", "_id": "5adeac2c3ddeb49ecc359bd4" }] },
       })
     } else {
       $.get('/randomChallenge')
