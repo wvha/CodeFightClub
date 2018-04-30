@@ -20,3 +20,9 @@ test('timesUp should render properly', () => {
   const component = toJson(shallow(<TimesUp changeView={() => {}}/>));
   expect(component).toMatchSnapshot();
 })
+
+test('timesUp should render properly', () => {
+  const component = shallow(<TimesUp changeView={() => {}} gameTimer={5} view={'gameRoom'}/>);
+  console.log(component.find('ReactModal'));
+  expect(component.find('ReactModal').props().isOpen).toBe(false);
+})
