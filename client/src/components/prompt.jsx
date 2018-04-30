@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import Challenge from './challenge.jsx';
 import $ from 'jquery';
@@ -139,3 +140,4 @@ class Prompt extends React.Component {
 }
 
 export default Prompt;
+*/
