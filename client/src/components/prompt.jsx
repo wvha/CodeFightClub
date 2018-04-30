@@ -62,6 +62,10 @@ class Prompt extends React.Component {
           method: 'PATCH',
           url: `/users:${this.props.username}`
         });
+        $.ajax({
+          method: 'POST',
+          url: `/users:${this.props.username}`
+        });
       }
     });
   }
