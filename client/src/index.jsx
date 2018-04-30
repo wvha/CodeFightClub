@@ -14,7 +14,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
  /*
 **************************** CHAT BOX ****************************
 
-import ChatBox from './components/chatBox.jsx';
+import ChatBox from './components/chatBox.jsx'
 
 ReactDOM.render(
   <ChatBox

@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatBox from './chatBox.jsx';
+import ChatBox from '../components/chatBox.jsx';
 import renderer from 'react-test-renderer';
 import ReactTestUtils from 'react-dom/test-utils';
 import { shallow, mount, configure } from 'enzyme';

@@ -17,7 +17,7 @@ const ChatBox = ({ messages, userMessage, handleSubmit, handleInputChange }) => 
         { message.contents }
       </p>
     </div>
-    );
+  );
 
   return (
     <div className="chat-wrapper" >

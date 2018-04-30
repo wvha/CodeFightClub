@@ -7,20 +7,30 @@ import Problems from './problems.jsx';
 import GameRoom from './gameRoom.jsx';
 //direct child of App
 
-const Body = ({ view, isLoggedIn, username }) => {
+const Body = (props) => {
   let body;
+  const view = props.view;
   if (view === 'prompt') {
-    body = <Prompt username={username} isLoggedIn={isLoggedIn} />;
+    // hacky
+    body = <GameRoom username={props.username} isLoggedIn={props.isLoggedIn} />;
   } else if (view === 'admin') {
     body = <Admin />;
   } else if (view === 'leaderboard') {
     body = <Leaderboard />;
   } else if (view === 'waitingRoom') {
-    body = <WaitingRoom />
+    body = <WaitingRoom username={ props.username }/>
   } else if (view === 'problems') {
     body = <Problems />
   } else if (view === 'gameRoom') {
-    body = <GameRoom />
+    body = (
+      <GameRoom 
+        scoreboard={ props.scoreboard }
+        messages={ props.messages }
+        userMessageChat={ props.userMessageChat }
+        handleInputChangeChat={ props.handleInputChangeChat }
+        handleSubmitChat={ props.handleSubmitChat }
+      />
+     )
   }
 
   return (
@@ -29,6 +39,5 @@ const Body = ({ view, isLoggedIn, username }) => {
     </div>
   )
 }
-
 
 export default Body;
