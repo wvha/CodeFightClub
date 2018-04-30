@@ -100,9 +100,6 @@ var databaseRoutes = function(app) {
     });
   });
 
-<<<<<<< HEAD
-  //Get all toy problems in database
-=======
     //Get leaderboard by DAY
     app.get('/leaderboardByDay', function(req, res) {
       db.findScoreboardByDay((users) => {
@@ -112,7 +109,6 @@ var databaseRoutes = function(app) {
     });
 
   //Get names of all toy problems in database
->>>>>>> eedc474819bda86905568c80abb6409aaefc8472
   app.get('/problems', function(req, res) {
     db.findToyProblems((toyProblems) => {
       res.json(toyProblems);
