@@ -105,7 +105,7 @@ class GameRoom extends React.Component {
   renderButton() {
     if (this.state.view === 'prompt') {
       return (
-        <div className="container fullw column" id="promptViewContent">
+        <div style={{'width': 'calc(100% - 10px)', 'background-color': '#19191A', height: 'calc(100% - 106px)', 'margin-left': '10px'}}className="container fullw column" id="promptViewContent">
           <h1 id="prompt-title">{this.state.prompt.title}</h1>
           <p id="prompt-body">{this.state.prompt.body}</p>
         </div>
