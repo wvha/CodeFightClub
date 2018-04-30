@@ -99,6 +99,10 @@ button {
   font-size: .75rem;
 }
 
+.submit-button {
+  background-color: #3f2000;
+  border-color: #3f2000;
+}
 
 /***********************/
 /***     Header      ***/
@@ -136,7 +140,8 @@ button {
 button {
   height: 70px;
   min-width: 60px;
-  margin: auto 10px;
+  padding: 5px;
+  margin: 7px;
 }
 
 /***********************/

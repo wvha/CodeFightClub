@@ -57,7 +57,11 @@ const Body = (props) => {
     )
   }
 
-  return ({body})
+  return (
+    <div className="fullw" style={{height: 'calc(100% - 190px)'}}>
+      {body}
+    </div>
+  )
 }
 
 export default Body;

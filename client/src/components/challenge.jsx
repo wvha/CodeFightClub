@@ -21,6 +21,8 @@ const Challenge = ({solution, solve}) => (
     }}
     onChange={(e) => solve(e)}
     value={solution}
+    height="100%"
+    width="100%"
   />
 )
 
