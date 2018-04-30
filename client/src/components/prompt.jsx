@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import Challenge from './challenge.jsx';
 import $ from 'jquery';
@@ -60,6 +61,10 @@ class Prompt extends React.Component {
         });
         $.ajax({
           method: 'PATCH',
+          url: `/users:${this.props.username}`
+        });
+        $.ajax({
+          method: 'POST',
           url: `/users:${this.props.username}`
         });
       }
@@ -135,3 +140,4 @@ class Prompt extends React.Component {
 }
 
 export default Prompt;
+*/
