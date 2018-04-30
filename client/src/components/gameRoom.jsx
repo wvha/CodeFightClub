@@ -58,12 +58,15 @@ class GameRoom extends React.Component {
 
       // this is where we tell the socket we pas
       console.log('game complete')
-      gameComplete();
-
       $.ajax({
         method: 'PATCH',
         url: `/users:${this.props.username}`
       });
+      $.ajax({
+        method: 'POST',
+        url: `/users:${this.props.username}`
+      });
+      gameComplete();
     }
   }
 
