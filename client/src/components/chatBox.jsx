@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ChatBox = ({ messages, userMessage, handleSubmit, handleInputChange }) => {
-
+  console.log('usermessage', userMessage)
   messages = messages.map(message => 
     <div className="chat-message">
       <p className="chat-contents">

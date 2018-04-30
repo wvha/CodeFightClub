@@ -18,7 +18,7 @@ const Timer = (props) => {
     );
   } else if (props.timerTillNextGame >= 0) {
     timer = (
-      <span className="container">
+      <span className="container buffer-left">
         <span>Next Fight In: </span>
         <button>{props.timerTillNextGame}</button>
         <button onClick={props.changeView('waitingRoom')}>Join Fight</button>

@@ -16,7 +16,7 @@ const Header = function(props) {
       <button onClick={props.changeView('prompt')}>Lobby</button>
       </div>
       <div id="logo">
-        <img src="BrandonStinks.png" alt="BrandonStinks" height="90px" width="150px" />
+        <img className="logo" src="BrandonStinks.png" alt="BrandonStinks" height="110px" width="390px" />
       </div>
         { !!props.user.username
           ? <div className="container row" id="user">

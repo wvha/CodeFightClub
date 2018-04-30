@@ -134,22 +134,26 @@ class GameRoom extends React.Component {
 
   render() {
     return (
-      <div className="container row fullh fullw">
-        <div className="body container column">
+      <div style={{display: 'flex', 'align-items': 'stretch'}}>
+        <div style={{flex: 10}}>
           <Challenge
           solution={this.state.prompt.code}
           solve={this.updateUserSolution.bind(this)}
           />
-          <div className="container submit fullw">
+          <div className="">
             {this.runCode()}   
           </div>
         </div>
-        <div></div>
-        <div className="body container column" id="promptView">
-          <div className="container row fullw" id="promptViewButtons">
+        <div style={{flex: 7}} id="promptView">
+          <div className="" id="promptViewButtons">
             <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
-            <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
-            <button type="button" onClick={() => this.setState({view: 'scoreboard'})}>Scoreboard</button>
+            { this.state.results !== '' 
+              ? <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
+              : undefined
+            }
+            { this.props.scoreboard 
+              ? <button type="button" onClick={() => this.setState({view: 'scoreboard'})}>Scoreboard</button>
+              : undefined }
             <button type="button" onClick={() => this.setState({view: 'chat'})}>Chat</button>
           </div>
             {this.renderButton()}
