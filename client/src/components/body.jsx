@@ -15,8 +15,8 @@ const Body = (props) => {
     // hacky
     body = (
       <GameRoom 
-        username={props.username} 
-        isLoggedIn={props.isLoggedIn} 
+        username={ props.username } 
+        isLoggedIn={ props.isLoggedIn } 
         messages={ props.messages }  
         handleInputChangeChat={ props.handleInputChangeChat }
         handleSubmitChat={ props.handleSubmitChat }
@@ -48,6 +48,7 @@ const Body = (props) => {
   } else if (view === 'gameRoom') {
     body = (
       <GameRoom 
+        username={ props.username }
         scoreboard={ props.scoreboard }
         messages={ props.messages }
         userMessageChat={ props.userMessage }

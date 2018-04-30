@@ -105,7 +105,8 @@ let logPoints = (callback) => {
     today.setHours(0,0,0,0);
     Scoreboard.aggregate( [
       { $match: {entry: {$gt: new Date(today)} } },
-      { $group: { _id: '$username', count: {$sum: 1} } }
+      { $group: { _id: '$username', count: {$sum: 1} } },
+      { $sort: {count: -1} }
     ], function(err, results) {
       if (err) {
         console.log('err in scoreboard aggregate');
