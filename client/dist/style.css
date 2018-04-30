@@ -114,12 +114,13 @@ button:active {
 
 
 .submit-button {
-  background-color: #3f2000;
-  border-color: #3f2000;
+  background-color: #003300;
+  border-color: #003300;
+  box-shadow: 2px 2px #002600
 }
 
 .submit-button:hover {
-  background-color: #523619;
+  background-color: #004000;
 }
 /***********************/
 /***     Header      ***/

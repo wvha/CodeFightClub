@@ -21,7 +21,7 @@ const Timer = (props) => {
       <span className="container buffer-left">
         <span>Next Fight In: </span>
         <button>{props.timerTillNextGame}</button>
-        <button onClick={props.changeView('waitingRoom')}>Join Fight</button>
+        <button onClick={props.changeView('waitingRoom')} className="submit-button">Join Fight</button>
       </span>
     );
   } 
