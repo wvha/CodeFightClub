@@ -76,6 +76,7 @@ let findToyProblems = (callback) => {
   });
 }
 
+// Database export  
 //Logs each solved challenge for leaderboard
 let logPoints = (callback) => {
   Scoreboard.find((err, user) => {
