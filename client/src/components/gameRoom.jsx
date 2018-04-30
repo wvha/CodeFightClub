@@ -1,31 +1,22 @@
-/*
 import React from 'react';
 import Challenge from './challenge.jsx';
 import $ from 'jquery';
 import Results from './results.jsx';
+import { subscribeToGameSocket, gameComplete, joinWaitingRoom } from '../socket/api.jsx';
+import ChatBox from './chatBox.jsx';
+import Scoreboard from './scoreboard.jsx';
 //direct child of body
 
-class Prompt extends React.Component {
+class GameRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isComplete: false,
-      prompt: {
-        title: "Compete Against Hackers Around the World!",
-        funcName: "",
-        body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
-        code: "var iAmAwesome = function() {\n\n};",
-        tests: ''
-      },
+      prompt: {},
       view: "prompt",
       results: ""
     }
-  }
-
-  joinQueue () {
-    return (
-      <button onClick={this.getPrompt.bind(this)}><strong>{this.state.isComplete ? "Play Again" : "Join In!"}</strong></button>
-    );
+    this.handleTestResponse = this.handleTestResponse.bind(this);
   }
 
   runCode () {
@@ -36,14 +27,18 @@ class Prompt extends React.Component {
 
   testUserSolution (e) {
     $.ajax({
-      method: 'POST',
-      url: '/challenge',
-      data: {
-        solution: this.state.prompt.code,
-        funcName: this.state.funcName,
-        tests: this.state.prompt.tests
-      }
-    }).done((res) => {
+    method: 'POST',
+    url: '/challenge',
+    data: {
+      solution: this.state.prompt.code,
+      funcName: this.state.funcName,
+      tests: this.state.prompt.tests
+    }
+  }).done(this.handleTestResponse);
+
+  }
+
+  handleTestResponse (res) {
       this.setState({
         results: JSON.parse(res),
         view: "results"
@@ -55,26 +50,34 @@ class Prompt extends React.Component {
           passing = false;
         }
       });
+      console.log('passing', passing);
       if (passing) {
         this.setState({ //updates the score of the user if all tests pass
           isComplete: true
         });
+
+        // this is where we tell the socket we pas
+        console.log('game complete')
+        gameComplete();
+
         $.ajax({
           method: 'PATCH',
           url: `/users:${this.props.username}`
         });
-        $.ajax({
-          method: 'POST',
-          url: `/users:${this.props.username}`
-        });
       }
-    });
-  }
+    }
 
   getPrompt () {
     $.get('/randomChallenge')
       .done( data => {
         let challenge = JSON.parse(data);
+        challenge =                                                                              
+        // this is hardcoded challenge
+        {"_id":"5adeac2c3ddeb49ecc359bd3","title":"RETURN THIS","body":"Return this exact string: \"BrandonVcantHang\"","funcName":"returnThis","params":"","__v":0,"tests":[{"input":"","expected":"'BrandonVcantHang'","_id":"5adeac2c3ddeb49ecc359bd4"}]};
+        
+        
+        
+        
         let prompt = this.state.prompt;
         prompt.title = challenge.title;
         prompt.body = challenge.body;
@@ -111,7 +114,22 @@ class Prompt extends React.Component {
       return (
         <Results results={this.state.results}/>
       )
+    } else if (this.state.view === 'scoreboard') {
+      return <Scoreboard scoreboard={this.props.scoreboard}/>
+    } else if (this.state.view === 'chat') {
+      return (
+        <ChatBox 
+          messages={ this.props.messages }
+          userMessage={ this.props.userMessageChat }
+          handleInputChange={ this.props.handleInputChangeChat }
+          handleSubmit={ this.props.handleSubmitChat }
+        />
+      );
     }
+  }
+
+  componentWillMount() { 
+    this.getPrompt();
   }
 
   render() {
@@ -123,15 +141,17 @@ class Prompt extends React.Component {
           solve={this.updateUserSolution.bind(this)}
           />
           <div className="container submit fullw">
-            { this.props.isLoggedIn && !this.state.isComplete && !!this.state.prompt.funcName ? this.runCode() : this.joinQueue() }   
+            {this.runCode()}   
           </div>
         </div>
         <div></div>
         <div className="body container column" id="promptView">
-          {this.state.results.length === 0 ? null : <div className="container row fullw" id="promptViewButtons">
+          <div className="container row fullw" id="promptViewButtons">
             <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
             <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
-          </div>}
+            <button type="button" onClick={() => this.setState({view: 'scoreboard'})}>Scoreboard</button>
+            <button type="button" onClick={() => this.setState({view: 'chat'})}>Chat</button>
+          </div>
             {this.renderButton()}
         </div>
       </div>
@@ -139,5 +159,4 @@ class Prompt extends React.Component {
   }
 }
 
-export default Prompt;
-*/
+export default GameRoom;
