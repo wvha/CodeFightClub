@@ -19,8 +19,8 @@ function suffix(i) {
 const Scoreboard = ({ scoreboard = [] }) => {
   console.log(scoreboard);
   return (
-    <div>
-      {scoreboard.map((user, i) => <p>{ `${suffix(i)}. ${user}` }</p>) }
+    <div style={{'width': 'calc(100% - 10px)', 'background-color': '#19191A', height: 'calc(100% - 106px)', 'margin-left': '10px'}}className="container fullw column" id="promptViewContent">
+      {scoreboard.map((user, i) => <p>{ `${suffix(i+1)}. ${user}` }</p>) }
     </div>
   );
 
