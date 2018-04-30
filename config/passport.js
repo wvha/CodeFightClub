@@ -1,5 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../database/index.js').User;
+var Promise = require('bluebird');
+var bcrypt = require('bcryptjs');
+
+Promise.promisifyAll(bcrypt);
 
 module.exports = (passport) => {
 
@@ -33,15 +37,21 @@ module.exports = (passport) => {
             console.log("Username taken...");
             return callback(null, false, 'username taken');
           }
-
-          var newUser = new User();
-          newUser.username = username;
-          newUser.password = password;
-          newUser.save(function(err) {
-            if (err) console.log('error in newUser.save ' + err);
-            console.log(newUser);
-            console.log("successful signup...");
-            return callback(null, newUser, 'successful signup');
+          const saltRounds = 5;
+          return bcrypt.genSaltAsync(saltRounds)
+          .then ((salt) => {
+            return bcrypt.hashAsync(password, salt)
+            .then ((hash) => {
+              var newUser = new User();
+              newUser.username = username;
+              newUser.password = hash;
+              newUser.save(function(err) {
+                if (err) console.log('error in newUser.save ' + err);
+                console.log(newUser);
+                console.log("successful signup...");
+                return callback(null, newUser, 'successful signup');
+              });
+            });
           });
         });
       });
@@ -66,16 +76,19 @@ module.exports = (passport) => {
             console.log("Username not found...");
             return callback(null, false, 'user not found');
           }
-          if (user.password !== password) {
-            console.log(user);
-            console.log("incorrect password");
-            return callback(null, false, 'incorrect password');
+          if (user) {
+            return bcrypt.compareAsync(password, user.password)
+            .then((result) => {
+              if (result) {
+                console.log("successful login...");
+                return callback(null, user, 'success login');
+              } else {
+                return callback(null, false, 'incorrect password');
+              }
+            })
           }
-          console.log("successful login...");
-          return callback(null, user, 'success login');
         });
       });
     }
   ));
-
 }
