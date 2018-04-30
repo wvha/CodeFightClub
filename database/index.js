@@ -21,11 +21,7 @@ const UserSchema = new mongoose.Schema({
   score: {
     type: Number,
     default: 0
-  },
-  entry: [{
-    type: Date,
-    default: Date.now,
-  }]
+  }
 });
 
 const ToyProblemSchema = new mongoose.Schema({
