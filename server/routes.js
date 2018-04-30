@@ -171,7 +171,7 @@ var databaseRoutes = function(app) {
     }
   });
 
-  // Posts to scoreboard schema
+  //Posts to scoreboard schema
   app.post('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
     var dbScoreboard = new Scoreboard({"username": name});
