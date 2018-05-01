@@ -19,84 +19,99 @@ class GameRoom extends React.Component {
     this.handleTestResponse = this.handleTestResponse.bind(this);
   }
 
-  runCode () {
+  runCode() {
     return (
-      <button onClick={this.testUserSolution.bind(this)}><strong>Submit</strong></button>
+      <button className='submit-button' onClick={this.testUserSolution.bind(this)}><strong>Submit</strong></button>
     );
   }
 
-  testUserSolution (e) {
+  testUserSolution(e) {
     $.ajax({
-    method: 'POST',
-    url: '/challenge',
-    data: {
-      solution: this.state.prompt.code,
-      funcName: this.state.funcName,
-      tests: this.state.prompt.tests
-    }
-  }).done(this.handleTestResponse);
-
-  }
-
-  handleTestResponse (res) {
-      this.setState({
-        results: JSON.parse(res),
-        view: "results"
-      });
-      var array = JSON.parse(res);
-      var passing = true;
-      array.forEach((test) => {
-        if (test.status === 'fail') {
-          passing = false;
-        }
-      });
-      console.log('passing', passing);
-      if (passing) {
-        this.setState({ //updates the score of the user if all tests pass
-          isComplete: true
-        });
-
-        // this is where we tell the socket we pas
-        console.log('game complete')
-        gameComplete();
-
-        $.ajax({
-          method: 'PATCH',
-          url: `/users:${this.props.username}`
-        });
+      method: 'POST',
+      url: '/challenge',
+      data: {
+        solution: this.state.prompt.code,
+        funcName: this.state.funcName,
+        tests: this.state.prompt.tests
       }
-    }
+    }).done(this.handleTestResponse);
 
-  getPrompt () {
-    $.get('/randomChallenge')
-      .done( data => {
-        let challenge = JSON.parse(data);
-        challenge =                                                                              
-        // this is hardcoded challenge
-        {"_id":"5adeac2c3ddeb49ecc359bd3","title":"RETURN THIS","body":"Return this exact string: \"BrandonVcantHang\"","funcName":"returnThis","params":"","__v":0,"tests":[{"input":"","expected":"'BrandonVcantHang'","_id":"5adeac2c3ddeb49ecc359bd4"}]};
-        
-        
-        
-        
-        let prompt = this.state.prompt;
-        prompt.title = challenge.title;
-        prompt.body = challenge.body;
-        prompt.funcName = challenge.funcName;
-        prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
-        prompt.tests = challenge.tests;
-        this.setState({
-          view: 'prompt',
-          isComplete: false,
-          prompt: prompt,
-          results: ''
-        });
-      })
-      .fail( err => {
-        console.error(err);
-      })
   }
 
-  updateUserSolution (e) { //setting the property of the prompt object to setState
+  handleTestResponse(res) {
+    this.setState({
+      results: JSON.parse(res),
+      view: "results"
+    });
+    var array = JSON.parse(res);
+    var passing = true;
+    array.forEach((test) => {
+      if (test.status === 'fail') {
+        passing = false;
+      }
+    });
+    console.log('passing', passing);
+    if (passing) {
+      this.setState({ //updates the score of the user if all tests pass
+        isComplete: true
+      });
+
+      // this is where we tell the socket we pas
+      console.log('game complete')
+      $.ajax({
+        method: 'PATCH',
+        url: `/users:${this.props.username}`
+      });
+      $.ajax({
+        method: 'POST',
+        url: `/users:${this.props.username}`
+      });
+      gameComplete();
+    }
+  }
+
+  getPrompt() {
+    if (this.state.view === 'prompt') {
+      this.setState({
+        prompt: {
+          title: "Compete Against Hackers Around the World!",
+          funcName: "",
+          body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
+          code: "var iAmAwesome = function() {\n\n};",
+          tests: ''
+        },
+      })
+    } else {
+      $.get('/randomChallenge')
+        .done(data => {
+          let challenge = JSON.parse(data);
+          challenge =
+            // this is hardcoded challenge
+            { "_id": "5adeac2c3ddeb49ecc359bd3", "title": "RETURN THIS", "body": "Return this exact string: \"BrandonVcantHang\"", "funcName": "returnThis", "params": "", "__v": 0, "tests": [{ "input": "", "expected": "'BrandonVcantHang'", "_id": "5adeac2c3ddeb49ecc359bd4" }] };
+
+
+
+
+          let prompt = this.state.prompt;
+          prompt.title = challenge.title;
+          prompt.body = challenge.body;
+          prompt.funcName = challenge.funcName;
+          prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
+          prompt.tests = challenge.tests;
+          this.setState({
+            view: 'prompt',
+            isComplete: false,
+            prompt: prompt,
+            results: ''
+          });
+        })
+        .fail(err => {
+          console.error(err);
+        })
+    }
+  }
+
+  updateUserSolution(e) { //setting the property of the prompt object to setState
     let prompt = this.state.prompt;
     prompt.code = e;
     this.setState(prompt);
@@ -105,54 +120,59 @@ class GameRoom extends React.Component {
   renderButton() {
     if (this.state.view === 'prompt') {
       return (
-        <div className="container fullw column" id="promptViewContent">
+        <div style={{ 'width': 'calc(100% - 10px)', 'background-color': '#19191A', height: 'calc(100% - 106px)', 'margin-left': '10px', 'padding': '11px' }} className="container fullw column" id="promptViewContent">
           <h1 id="prompt-title">{this.state.prompt.title}</h1>
           <p id="prompt-body">{this.state.prompt.body}</p>
         </div>
       )
     } else if (this.state.view === 'results') {
       return (
-        <Results results={this.state.results}/>
+        <Results results={this.state.results} />
       )
     } else if (this.state.view === 'scoreboard') {
-      return <Scoreboard scoreboard={this.props.scoreboard}/>
+      return <Scoreboard scoreboard={this.props.scoreboard} />
     } else if (this.state.view === 'chat') {
       return (
-        <ChatBox 
-          messages={ this.props.messages }
-          userMessage={ this.props.userMessageChat }
-          handleInputChange={ this.props.handleInputChangeChat }
-          handleSubmit={ this.props.handleSubmitChat }
+        <ChatBox
+          messages={this.props.messages}
+          userMessage={this.props.userMessageChat}
+          handleInputChange={this.props.handleInputChangeChat}
+          handleSubmit={this.props.handleSubmitChat}
         />
       );
     }
   }
 
-  componentWillMount() { 
+  componentWillMount() {
     this.getPrompt();
   }
 
   render() {
     return (
-      <div className="container row fullh fullw">
-        <div className="body container column">
+      <div style={{ display: 'flex', 'align-items': 'stretch', height: '100%' }}>
+        <div style={{ flex: 7, 'background-color': '#444444', height: '100%' }}>
           <Challenge
-          solution={this.state.prompt.code}
-          solve={this.updateUserSolution.bind(this)}
+            solution={this.state.prompt.code}
+            solve={this.updateUserSolution.bind(this)}
           />
-          <div className="container submit fullw">
-            {this.runCode()}   
+          <div className="">
+
           </div>
         </div>
-        <div></div>
-        <div className="body container column" id="promptView">
-          <div className="container row fullw" id="promptViewButtons">
-            <button type="button" onClick={() => this.setState({view: 'prompt'})}>Prompt</button>
-            <button type="button" onClick={() => this.setState({view: 'results'})}>Results</button>
-            <button type="button" onClick={() => this.setState({view: 'scoreboard'})}>Scoreboard</button>
-            <button type="button" onClick={() => this.setState({view: 'chat'})}>Chat</button>
+        <div style={{ flex: 7, height: '100%', 'margin-left': '10px' }} id="promptView">
+          <div className="" id="promptViewButtons" style={{ flex: 7, 'background-color': '#444444', height: '90px', 'margin-left': '10px' }}>
+            {this.runCode()}
+            <button type="button" onClick={() => this.setState({ view: 'prompt' })}>Prompt</button>
+            {this.state.results !== ''
+              ? <button type="button" onClick={() => this.setState({ view: 'results' })}>Results</button>
+              : undefined
+            }
+            {this.props.scoreboard
+              ? <button type="button" onClick={() => this.setState({ view: 'scoreboard' })}>Scoreboard</button>
+              : undefined}
+            <button type="button" onClick={() => this.setState({ view: 'chat' })}>Chat</button>
           </div>
-            {this.renderButton()}
+          {this.renderButton()}
         </div>
       </div>
     )

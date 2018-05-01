@@ -10,31 +10,56 @@ import GameRoom from './gameRoom.jsx';
 const Body = (props) => {
   let body;
   const view = props.view;
+  
   if (view === 'prompt') {
     // hacky
-    body = <GameRoom username={props.username} isLoggedIn={props.isLoggedIn} />;
+    body = (
+      <GameRoom 
+        username={ props.username } 
+        isLoggedIn={ props.isLoggedIn } 
+        messages={ props.messages }  
+        handleInputChangeChat={ props.handleInputChangeChat }
+        handleSubmitChat={ props.handleSubmitChat }
+        userMessageChat={ props.userMessage }
+      />
+    );
+  
   } else if (view === 'admin') {
     body = <Admin />;
+  
   } else if (view === 'leaderboard') {
     body = <Leaderboard />;
+  
   } else if (view === 'waitingRoom') {
-    body = <WaitingRoom username={ props.username }/>
+    body = (
+      <WaitingRoom 
+        username={ props.username }
+        messages={ props.messages }
+        handleInputChangeChat={ props.handleInputChangeChat }
+        handleSubmitChat={ props.handleSubmitChat }
+        userMessageChat={ props.userMessage }
+      />
+    )
   } else if (view === 'problems') {
-    body = <Problems />
+    body = (
+      <Problems />
+    )
+  
   } else if (view === 'gameRoom') {
     body = (
       <GameRoom 
+        username={ props.username }
         scoreboard={ props.scoreboard }
         messages={ props.messages }
-        userMessageChat={ props.userMessageChat }
+        userMessageChat={ props.userMessage }
         handleInputChangeChat={ props.handleInputChangeChat }
         handleSubmitChat={ props.handleSubmitChat }
       />
-     )
+    )
   }
 
   return (
-    <div className="container fullw bg-main" id="body">
+    <div className="fullw" style={{height: 'calc(100% - 190px)'}}>
       {body}
     </div>
   )

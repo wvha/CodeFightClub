@@ -12,8 +12,7 @@
 html, body {
   height: 100vh;
   width: 100vw;
-  background-color: #010101;
-  background: url(technology1.png);
+  background-color:#333436;
   background-size: auto 100%;
   color: whitesmoke;
   font-family: Michroma;
@@ -51,6 +50,7 @@ textarea, input {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 98%;
 }
 
 .row {
@@ -74,7 +74,7 @@ textarea, input {
   height: 100%;
 } */
 .bg-main {
-  background-color: #030303;
+  background-color:#222222;
 }
 
 #app {
@@ -90,48 +90,76 @@ textarea, input {
 } */
 
 button {
-  background-color: #005DAA;
-  border-color: #005DAA;
-  border-radius: 5px;
-  box-shadow: 1px 1px #ffffff30;
+  background-color:			#400000;
+  border-color:	#400000;
+  border-radius: 11px;
+  border: none;
+  box-shadow: 2px 2px #2c0000;
   color: whitesmoke;
+  cursor: pointer;
   font-family: Michroma;
+  outline: none;
   font-size: .75rem;
 }
 
+button:hover {
+  background-color: #501717;
+}
 
+button:active {
+  box-shadow: 0px 0px black;
+  background-color: #380000;
+  transform: translateY(2px) translateX(2px);
+}
+
+
+.submit-button {
+  background-color: #003300;
+  border-color: #003300;
+  box-shadow: 2px 2px #002600
+}
+
+.submit-button:hover {
+  background-color: #004000;
+}
 /***********************/
 /***     Header      ***/
 /***********************/
 
 #header {
-  height: 100px;
+  height: 120px;
   margin-bottom: 15px;
   justify-content: space-between;
   align-content: space-between;
+  background-color:#1F1F20;
 }
 
-#leaderboard-header {
-  justify-content: flex-start;
-  align-content: flex-start;
+
+#user {
+  width:20%;
+  
 }
 
-#user, #leaderboard-header {
-  width: 50%;
+.buffer-left {
+  margin-left: 30px;
 }
 
 #logo, #user {
   line-height: 1em;
+  align-content: flex-start;
+  margin-left: 0px;
+  align-self: stretch;
 }
 
 #user {
   justify-content: flex-end;
 }
 
-#user button, #leaderboard-header button {
-  height: 60px;
-  width: 60px;
-  margin: auto 10px;
+button {
+  height: 70px;
+  min-width: 60px;
+  padding: 5px;
+  margin: 7px;
 }
 
 /***********************/

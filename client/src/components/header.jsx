@@ -10,13 +10,10 @@ import TimesUp from './timesUp.jsx';
 const Header = function(props) {
   return (
     <header id="header" className="container row fullw bg-main">
-      <div id="leaderboard-header">
-      <button onClick={props.changeView('leaderboard')}>Scores</button>
-      <button onClick={props.changeView('problems')}>Problems</button>
-      <button onClick={props.changeView('prompt')}>Lobby</button>
-      </div>
-      <div id="logo">
-        <img src="BrandonStinks.png" alt="BrandonStinks" height="90px" width="150px" />
+      <div id="logo" style={{marginLeft:`20px`}}>
+        <a href="#" onClick={props.changeView('prompt')} >
+        <img className="logo" src="BrandonStinks.png" alt="BrandonStinks" height="110px" width="390px" />
+        </a>
       </div>
         { !!props.user.username
           ? <div className="container row" id="user">
@@ -25,6 +22,14 @@ const Header = function(props) {
                 gameTimer={props.gameTimer} 
                 view={props.view} 
                 changeView={props.changeView} />
+
+      <div id="leaderboard-header">
+      <button className="button" onClick={props.changeView('leaderboard')}><span>Scores</span></button>
+      </div>
+      <div id="leaderboard-header">
+      <button className="button" onClick={props.changeView('problems')}><span>Problems</span></button>
+      </div>
+      
               <User user={props.user} logout={props.logout} view={props.view} changeView={props.changeView} />
               <TimesUp gameTimer={props.gameTimer} changeView={props.changeView} view ={props.view}/>
             </div>
