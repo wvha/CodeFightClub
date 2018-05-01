@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`timesUp should render properly 1`] = `
+<span>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="Modal container"
+    closeTimeoutMS={0}
+    contentLabel="SignUp Modal"
+    isOpen={false}
+    overlayClassName="Overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <span>
+      GAME OVER
+    </span>
+    <br />
+    <br />
+    <button>
+      PLAY AGAIN
+    </button>
+  </Modal>
+</span>
+`;
