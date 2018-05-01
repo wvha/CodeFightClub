@@ -90,11 +90,6 @@ server.listen(app.get('port'), function() {
 });
 // end timer
 
-server.listen(app.get('port'), function() {
-  console.log('Server started on port:' + app.get('port'));
-});
-
-
 module.exports = app;
 
 const ioGame = io.of('/game');
