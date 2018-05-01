@@ -1,4 +1,3 @@
-/*
 import React from 'react';
 import Challenge from './challenge.jsx';
 import $ from 'jquery';
@@ -19,6 +18,28 @@ class Prompt extends React.Component {
       },
       view: "prompt",
       results: ""
+    }
+
+    if (this.props.problem) {
+      
+      let p = this.props.problem;
+      let prompt = this.state.prompt;
+
+      console.log(p, prompt);
+
+      prompt.title = p.title;
+      prompt.body = p.body;
+      prompt.funcName = p.funcName;
+      prompt.code = `function ${p.funcName}(${p.params}) {\n\n}`;
+      prompt.tests = p.tests;
+      
+      this.setState({
+        view: 'prompt',
+        isComplete: false,
+        prompt: prompt,
+        results: ''
+      });
+
     }
   }
 
@@ -140,4 +161,3 @@ class Prompt extends React.Component {
 }
 
 export default Prompt;
-*/

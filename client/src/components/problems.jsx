@@ -21,7 +21,7 @@ class Problems extends React.Component {
         {this.state.problems.map((problem, key) => {
             return (
               <div className="user-score fullw" key={key}>
-                <h3>{`${key+1}: ${problem}`}</h3>
+                <h3 onClick={() => this.props.changeProblem(problem)}>{`${key+1}: ${problem.title}`}</h3>
               </div>
           )
         })}
