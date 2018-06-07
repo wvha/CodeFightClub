@@ -1,5 +1,5 @@
 # CodeFightClub
-Greenfield Project
+Legacy Project
 
 https://nameless-forest-79587.herokuapp.com/
 
