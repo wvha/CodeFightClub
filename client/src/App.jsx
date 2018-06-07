@@ -29,6 +29,7 @@ class App extends Component {
         username: '',
         isAdmin: true
       },
+      problem: undefined,
       // for chat
       messages: [],
       userMessage: '',
@@ -101,6 +102,10 @@ class App extends Component {
     return () => {
       this.setState({ view: state});
     }
+  }
+
+  changeProblem (problem) {
+    this.setState({ view: 'singleProblem', problem: problem });
   }
 
   logout () {
@@ -218,6 +223,8 @@ class App extends Component {
           gameTimer={this.state.gameTimer}
         />
         <Body
+          changeProblem={this.changeProblem.bind(this)}
+          problem={this.state.problem}
           isLoggedIn={ !!this.state.user.username }
           view={ this.state.view }
           username={ this.state.user.username }

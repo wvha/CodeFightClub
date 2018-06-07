@@ -1,11 +1,14 @@
 # CodeFightClub
-Greenfield Project
+Legacy Project
+
+https://nameless-forest-79587.herokuapp.com/
 
 ## Team
-
-  - __Product Owner__: [Kyle Shifflet](https://github.com/kshifflet707)
-  - __Scrum Master__: [Tanner B. Hess Webber](https://github.com/Tbhesswebber)
-  - __Development Team Members__: [Brandon Villiados](https://github.com/brandon-villiados)
+  
+  - William Ha
+  - Christina Yuen
+  - William Cory
+  - Samuel Rosenblum
 
 ## Table of Contents
 

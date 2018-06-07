@@ -58,7 +58,6 @@ class GameRoom extends React.Component {
 
       // this is where we tell the socket we pas
       console.log('game complete')
-      console.log('this.props is ', this.props);
       $.ajax({
         method: 'PATCH',
         url: `/users:${this.props.username}`
@@ -71,45 +70,33 @@ class GameRoom extends React.Component {
     }
   }
 
-  getPrompt() {
-    if (this.state.view === 'prompt') {
-      this.setState({
-        prompt: {
-          title: "Compete Against Hackers Around the World!",
-          funcName: "",
-          body: `Log in or sign up to start competing with developers around the world to find out who can solve toy problems the fastest! Check the leaderboards to see how you rank today!`,
-          code: "var iAmAwesome = function() {\n\n};",
-          tests: ''
-        },
+  getPrompt () {
+    $.get('/randomChallenge')
+      .done( data => {
+        let challenge = JSON.parse(data);
+        //challenge =                                                                              
+        // this is hardcoded challenge
+        //{"_id":"5adeac2c3ddeb49ecc359bd3","title":"RETURN THIS","body":"Return this exact string: \"BrandonVcantHang\"","funcName":"returnThis","params":"","__v":0,"tests":[{"input":"","expected":"'BrandonVcantHang'","_id":"5adeac2c3ddeb49ecc359bd4"}]};
+        
+        
+        
+        
+        let prompt = this.state.prompt;
+        prompt.title = challenge.title;
+        prompt.body = challenge.body;
+        prompt.funcName = challenge.funcName;
+        prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
+        prompt.tests = challenge.tests;
+        this.setState({
+          view: 'prompt',
+          isComplete: false,
+          prompt: prompt,
+          results: ''
+        });
       })
-    } else {
-      $.get('/randomChallenge')
-        .done(data => {
-          let challenge = JSON.parse(data);
-          challenge =
-            // this is hardcoded challenge
-            { "_id": "5adeac2c3ddeb49ecc359bd3", "title": "RETURN THIS", "body": "Return this exact string: \"BrandonVcantHang\"", "funcName": "returnThis", "params": "", "__v": 0, "tests": [{ "input": "", "expected": "'BrandonVcantHang'", "_id": "5adeac2c3ddeb49ecc359bd4" }] };
-
-
-
-
-          let prompt = this.state.prompt;
-          prompt.title = challenge.title;
-          prompt.body = challenge.body;
-          prompt.funcName = challenge.funcName;
-          prompt.code = `function ${challenge.funcName}(${challenge.params}) {\n\n}`;
-          prompt.tests = challenge.tests;
-          this.setState({
-            view: 'prompt',
-            isComplete: false,
-            prompt: prompt,
-            results: ''
-          });
-        })
-        .fail(err => {
-          console.error(err);
-        })
-    }
+      .fail( err => {
+        console.error(err);
+      })
   }
 
   updateUserSolution(e) { //setting the property of the prompt object to setState
@@ -121,7 +108,7 @@ class GameRoom extends React.Component {
   renderButton() {
     if (this.state.view === 'prompt') {
       return (
-        <div style={{ 'width': 'calc(100% - 10px)', 'background-color': '#19191A', height: 'calc(100% - 106px)', 'margin-left': '10px' }} className="container fullw column" id="promptViewContent">
+        <div style={{ 'width': 'calc(100% - 10px)', 'background-color': '#19191A', height: 'calc(100% - 106px)', 'margin-left': '10px', 'padding': '11px' }} className="container fullw column" id="promptViewContent">
           <h1 id="prompt-title">{this.state.prompt.title}</h1>
           <p id="prompt-body">{this.state.prompt.body}</p>
         </div>

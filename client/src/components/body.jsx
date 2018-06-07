@@ -22,6 +22,7 @@ const Body = (props) => {
         handleSubmitChat={ props.handleSubmitChat }
         userMessageChat={ props.userMessage }
       />
+
     );
   
   } else if (view === 'admin') {
@@ -42,7 +43,7 @@ const Body = (props) => {
     )
   } else if (view === 'problems') {
     body = (
-      <Problems />
+      <Problems changeProblem={props.changeProblem}/>
     )
   
   } else if (view === 'gameRoom') {
@@ -55,6 +56,10 @@ const Body = (props) => {
         handleInputChangeChat={ props.handleInputChangeChat }
         handleSubmitChat={ props.handleSubmitChat }
       />
+    )
+  } else if (view === 'singleProblem') {
+    body = (
+      <Prompt username={props.username} isLoggedIn={props.isLoggedIn} problem={props.problem}/>
     )
   }
 
